@@ -1,0 +1,80 @@
+<t t-name="website.terms-conditions">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty"><section class="s_title_split pt80 pb80 o_colored_level" data-snippet="s_title_split" data-name="Title Split">
+        <div class="container s_allow_columns">
+            <div class="row">
+                <div class="col-lg-6 o_colored_level">
+                    <h2 class="display-3-fs" style="font-weight: normal;">Terms &amp;amp; Conditions</h2>
+                </div>
+                <div class="col-lg-5 offset-lg-1 o_colored_level">
+                    <p><i>Last Updated: June 9, 2026</i></p><p>Summaflow LTD ("Summa Flow," "we," "us," or "our") is registered at Shop A, G/F, Koon Nam House, No. 14 Shing Wong Street, Hong Kong. These Terms govern your use of our software platform and AI project ledger tools (the "Service"). By accessing or using the Service, you agree to these Terms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="s_table_of_content pt24 pb24 o_cc o_cc1 o_colored_level" data-snippet="s_table_of_content" data-name="Table of Content">
+        <div class="container">
+            <div class="row s_nb_column_fixed">
+                <div class="col-lg-3 s_table_of_content_navbar_wrap s_table_of_content_navbar_sticky s_table_of_content_vertical_navbar d-print-none d-none d-lg-block o_not_editable o_cc o_cc1 o_colored_level" data-name="Navbar">
+                    <div class="s_table_of_content_navbar list-group o_no_link_popover" style="top: 76px; max-height: calc(-96px + 100vh);"><a href="#table_of_content_heading_1_1" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">1. Key Definitions</a><a href="#table_of_content_heading_1_2" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">2. Description of Service</a><a href="#table_of_content_heading_1_3" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">3.&amp;nbsp;Account Security &amp;amp; Connections</a><a href="#table_of_content_heading_1_4" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">4.&amp;nbsp;Acceptable Use</a><a href="#table_of_content_heading_1_5" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">5.&amp;nbsp;Data Processing &amp;amp; Ledger Retention</a><a href="#table_of_content_heading_1_6" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">6.&amp;nbsp;Intellectual Property</a><a href="#table_of_content_heading_1_7" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">7. Fees &amp;amp; Billing</a><a href="#table_of_content_heading_1_8" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">8. Disclaimers &amp;amp; Limitation of Liability</a><a href="#table_of_content_heading_1_9" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">9. Termination</a><a href="#table_of_content_heading_1_10" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">10. Governing Law</a><a href="#table_of_content_heading_1_11" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">11. Contact Us</a></div>
+                </div>
+                <div class="col-lg-9 s_table_of_content_main oe_structure oe_empty o_colored_level" data-name="Content">
+                    <section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_1" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">1. Key Definitions</span></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p><b>Connected Accounts:</b> Email (via OAuth 2.0) and WhatsApp accounts linked to the Service by you.</p><p><b>Raw Communication Data:</b> Unstructured emails, messages, and metadata passing through Connected Accounts before filtering.</p><p><b>Project Ledger:</b> The timestamped online workspace where AI-generated project updates and summaries are stored.</p><p><b>Ledger Entries:</b> Final summaries, action items, and milestone updates saved to a Project Ledger.&amp;nbsp;</p></div>
+                    </section>
+                    <section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns">
+                            <h2 id="table_of_content_heading_1_2" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">2. Description of Service</span></h2>
+                            <div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div>
+                            <p>Summa Flow uses AI (including Google Gemini API) to scan connected communication streams, filter out irrelevant messages, and generate structured event timelines directly inside your Project Ledger.&amp;nbsp;<br/><br/>
+                        </p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_3" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">3.&amp;nbsp;Account Security &amp;amp; Connections</span></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p><b>Account Responsibility:</b> You are responsible for maintaining account security and all activities under your credentials.</p><p><b>Authorization:</b> By connecting an email or WhatsApp account, you warrant that you own or manage the account, have authority to process its data, and have obtained necessary consents from third parties you communicate with.</p><p><b>Password Security:</b> We use secure OAuth tokens and APIs. We never view or store your passwords.</p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_4" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">4.&amp;nbsp;Acceptable Use</span></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p>You agree not to use the Service for unlawful purposes, bypass platform security or AI filtering, or monitor communications without proper legal consent.</p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_5" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">5.&amp;nbsp;Data Processing &amp;amp; Ledger Retention</span></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p><b>Ephemeral Processing:</b> Raw Communication Data is processed in temporary memory (RAM). Non-relevant data is immediately destroyed and never written to storage.</p><p><b>AI Model Isolation:</b> We <b>never</b> use your raw messages, metadata, or Ledger Entries to train public or third-party AI models.</p><p><b>Ledger Integrity:</b> Disconnecting an account stops future syncing and deletes OAuth tokens. However, previously generated Ledger Entries remain in shared project workspaces to preserve historical project records for team members.</p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_6" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">6.&amp;nbsp;Intellectual Property</span></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p>You retain full ownership of your raw communications and data. Summaflow LTD owns all platform architecture, software, UI design, and proprietary AI logic. We grant you a limited, non-exclusive, revocable license to use the Service during your subscription.</p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_7" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">7. Fees &amp;amp; Billing</span></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p>Paid subscriptions are billed according to your selected plan. All fees are non-refundable unless required by law. We will provide 30 days' notice prior to any price modifications.</p><p><br/></p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_8" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">8. Disclaimers &amp;amp; Limitation of Liability</span><br/></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p><b>AI Reliance:</b> Summa Flow is a productivity tool, not an official legal or financial record. You are responsible for verifying critical deadlines and project terms before making business decisions.</p><p><b>Third-Party Dependencies:</b> We rely on external APIs (Google, Microsoft, Meta) and are not liable for outages, sync delays, or service changes caused by these third-party providers.</p><p><b>Liability Cap:</b> To the maximum extent permitted by Hong Kong law, our total liability for any claim is capped at the total amount paid by you to Summaflow LTD in the 12 months preceding the claim.</p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_9" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">9. Termination</span><br/></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p>We reserve the right to suspend or terminate accounts that violate these Terms or fail to pay subscription fees. Upon termination, API access tokens are permanently deleted.</p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_10" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">10. Governing Law</span><br/></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p>These Terms are governed by the laws of Hong Kong. Any legal disputes shall be handled exclusively in Hong Kong courts.</p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_11" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">11. Contact Us</span><br/></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p><b>Summaflow LTD.</b></p><p>Shop A, G/F, Koon Nam House, No.14 Shing Wong Street, Hong Kong.</p><p>Email: sever@summaflow.com</p></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+    </t>
+</t>

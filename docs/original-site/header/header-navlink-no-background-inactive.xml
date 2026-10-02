@@ -1,0 +1,5 @@
+<data inherit_id="website.layout" active="False">
+    <xpath expr="//header" position="attributes">
+        <attribute name="t-attf-class" add="o_navlink_no_background" separator=" "/>
+    </xpath>
+</data>

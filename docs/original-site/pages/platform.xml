@@ -1,0 +1,189 @@
+<t t-name="website.platform">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty"><section class="s_numbers_list o_cc o_cc1 pt80 pb80 o_colored_level" data-snippet="s_numbers_list" data-name="Numbers list">
+        <div class="container">
+            <div class="row s_nb_column_fixed">
+                <div class="col-lg-5 pb32 o_colored_level">
+                    <h2 style="font-weight: normal;"><span style="font-size: 39px;">A <font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(66, 98, 174) 0%, rgb(100, 190, 181) 59%, rgb(83, 185, 115) 100%);">Practical AI Layer</font> for operations heavy teams.</span></h2>
+                    <p><br/>SummaFlow connects authorised work sources, detects project relevant updates, and creates a clean operational record your team can use in daily work.</p><p><br/></p><p><a href="/contactus" class="s_custom_snippet o_translate_inline btn btn-primary">&amp;nbsp;<span class="base-fs">Book a Demo</span></a></p>
+                </div>
+                <div class="col-12 col-lg-3 offset-lg-1 o_colored_level">
+                    <p>
+                        <span style="font-size: 22px;">Zero Manual Data Entry</span><br/></p>
+                    <div class="s_hr pt16 pb40" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <p>
+                        <span style="font-size: 22px;">Clear Action Items</span></p>
+                    <div class="s_hr pt16 pb40" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <p>
+                        <span style="font-size: 22px;">Instant Negotiation Trends</span></p>
+                    <div class="s_hr pt16 pb40" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 o_colored_level">
+                    <p>
+                        <span style="font-size: 22px;">100% Traceable​&amp;nbsp;</span><br/></p>
+                    <div class="s_hr pt16 pb40" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <p>
+                        <span style="font-size: 22px;">Privacy First</span></p>
+                    <div class="s_hr pt16 pb40" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <p>
+                        <span style="font-size: 22px;">Seamless Team Onboarding</span>
+                    <br/></p>
+                    <div class="s_hr pt16 pb40" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="s_text_bold pt112 pb112 o_colored_level o_three_quarter_height" data-snippet="s_text_bold" data-name="Text Bold" style="background-color: transparent; background-image: linear-gradient(90deg, rgb(66, 98, 174) 0%, rgb(100, 190, 181) 60%, rgb(83, 185, 115) 100%);">
+        <div class="s_allow_columns container"><h2 style="font-weight: normal;"><span style="font-size: 39px;"><font class="text-o-color-4">Built for teams that cannot afford to miss one update.</font></span></h2><p><br/></p><p><a href="/contactus" class="s_custom_snippet o_translate_inline btn btn-primary">&amp;nbsp;<span class="base-fs">Request Free Trial</span></a></p></div>
+    </section><section class="s_three_columns pt48 pb48 o_colored_level s_custom_snippet o_cc o_cc1" data-snippet="s_three_columns" data-name="Custom Three Columns">
+  <div class="container">
+    <div class="row align-items-stretch">
+      <div class="col-lg-4 pt16 pb16">
+        <div class="h-100 p-4 rounded-3" style="border: 1px solid #d9d9d9; background: #fff;">
+          <div class="text-start"><h1 class="h3"><span style="font-size: 29px; font-weight: normal;">Sourcing and Procurement Agents</span><br/></h1><br/><p style="text-align: left;">Track multi-supplier pricing revisions, MOQs, and compliance certificates across fragmented Email, WhatsApp, Line threads.</p></div>
+          <div class="text-center pt16">
+            &amp;nbsp;<br/></div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 pt16 pb16">
+        <div class="h-100 p-4 rounded-3" style="border: 1px solid #d9d9d9; background: #fff;">
+          <div class="text-start"><h1 class="h3"><span style="font-size: 28px; font-weight: normal;">Logistics Coordinators</span><br/></h1><br/><p style="text-align: left;">Auto-capture ETA changes, container status updates, and shipping hold notices across Emails, WhatsApp, Line groups.</p></div>
+          <div class="text-center pt16">
+            &amp;nbsp;<br/></div>
+        </div>
+      </div><div class="col-lg-4 pt16 pb16">
+        <div class="h-100 p-4 rounded-3" style="border: 1px solid #d9d9d9; background: #fff;">
+          <div class="text-start"><h1 class="h3"><span style="font-size: 28px; font-weight: normal;">Operations Directors, Team Leads</span><br/></h1><br/><p>Instantly audit project health and risk tags without requesting status updates or joining daily catch-up calls.</p></div>
+          <div class="text-center pt16"><br/></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><section class="s_features pb64 o_colored_level pt56" data-snippet="s_features" data-name="Features">
+        <div class="container">
+            <h2 class="h3-fs" style="text-align: center; font-weight: normal;"><span style="font-size: 39px;">Key <font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">Advantages</font> for Teams.</span></h2>
+            <div class="row">
+                <div class="col-lg-4 o_colored_level">
+                    <div class="s_hr pt-4 pb32" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <i class="fa fa-keyboard-o s_features_icon mb-3 rounded bg-o-color-3" role="img"/>
+                    <div class="overflow-hidden">
+                        <p><span style="font-size: 28px;">Zero Manual Data Entry</span></p>
+                        <p>Prices, quantities, and ETAs update automatically as conversations unfold.</p><p><br/></p>
+                    </div>
+                </div>
+                <div class="col-lg-4 o_colored_level">
+                    <div class="s_hr pt-4 pb32" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <i class="fa fa-arrows-alt s_features_icon mb-3 rounded bg-o-color-3" role="img"/>
+                    <div class="overflow-hidden">
+                        <p><span style="font-size: 28px;">100% Traceable</span><br/></p>
+                        <p>Click any extracted figure to view the original source message and timestamp.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 o_colored_level">
+                    <div class="s_hr pt-4 pb32" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <i class="fa fa-check-circle s_features_icon mb-3 rounded bg-o-color-3" role="img"/>
+                    <div class="overflow-hidden">
+                        <p><span style="font-size: 28px;">Privacy First</span></p>
+                        <p>Personal conversations and unrelated business stay completely untouched and unstored.</p>
+                    </div>
+                </div><div class="col-lg-4 o_colored_level">
+                    <div class="s_hr pt-4 pb32" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <i class="fa fa-bell s_features_icon mb-3 rounded bg-o-color-3" role="img"/>
+                    <div class="overflow-hidden">
+                        <p><span style="font-size: 28px;">Clear Action Items</span></p>
+                        <p>Highlights missing documents and open risks so you always know what to follow up on next.</p>
+                    </div>
+                </div><div class="col-lg-4 o_colored_level">
+                    <div class="s_hr pt-4 pb32" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <i class="fa fa-line-chart s_features_icon mb-3 rounded bg-o-color-3" role="img"/>
+                    <div class="overflow-hidden">
+                        <p><span style="font-size: 28px;">Instant Negotiation Trends</span><br/></p>
+                        <p>Tracks price changes, MOQ shifts, and quote revisions over time, making it easy to compare original quotes against final agreed terms.</p>
+                    </div>
+                </div><div class="col-lg-4 o_colored_level">
+                    <div class="s_hr pt-4 pb32" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <i class="fa fa-group s_features_icon mb-3 rounded bg-o-color-3" role="img"/>
+                    <div class="overflow-hidden">
+                        <p><span style="font-size: 28px;">Seamless Team Onboarding</span><br/></p>
+                        <p>Centralizes project knowledge into a single shared ledger so new team members or covering agents instantly catch up without reading through weeks of inbox threads.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><section class="s_title pt40 pb40 o_colored_level" data-vcss="001" data-snippet="s_title" data-name="Title">
+        <div class="container s_allow_columns"><h2 style="text-align: center; font-weight: normal;"><font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">Trust, Security &amp;amp; Control.</font></h2></div>
+    </section><section class="s_table_of_content pt24 pb24 o_cc o_cc1 o_colored_level" data-snippet="s_table_of_content" data-name="Table of Content">
+        <div class="container">
+            <div class="row s_nb_column_fixed">
+                <div class="col-lg-3 s_table_of_content_navbar_wrap s_table_of_content_navbar_sticky s_table_of_content_vertical_navbar d-print-none d-none d-lg-block o_not_editable o_cc o_cc1 o_colored_level" data-name="Navbar">
+                    <div class="s_table_of_content_navbar list-group o_no_link_popover" style="top: 76px; max-height: calc(-96px + 100vh);"><a href="#table_of_content_heading_1_1" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0 active">Security &amp;amp; Data Governance Infrastructure</a><a href="#table_of_content_heading_1_3" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">1. Ephemeral In-Memory Data Pipeline​</a><a href="#table_of_content_heading_1_2" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">2. Strict AI Model Isolation (Zero Model Training)</a><a href="#table_of_content_heading_1_4" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">3. Absolute Traceability &amp;amp; Deterministic Fact Extraction</a><a href="#table_of_content_heading_1_5" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">4. Granular Access &amp;amp; OAuth Security Frameworks</a><a href="#table_of_content_heading_1_6" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">5. Privacy Scrubbing &amp;amp; PDPO Compliance</a><a href="#table_of_content_heading_1_7" class="table_of_content_link list-group-item list-group-item-action py-2 border-0 rounded-0 table_of_content_link_depth_0">6. Encryption Standards &amp;amp; Infrastructure Security</a></div>
+                </div>
+                <div class="col-lg-9 s_table_of_content_main oe_structure oe_empty o_colored_level" data-name="Content">
+                    <section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_1" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">Security &amp;amp; Data Governance Infrastructure</span></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p>SummaFlow is engineered from the ground up for operations-heavy teams handling high-value commercial communications, confidential supplier pricing, and proprietary logistics data. Our zero-trust architecture ensures complete isolation, total transparency, and enterprise-grade protection at every layer of the platform.</p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_3" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">1. Ephemeral In-Memory Data Pipeline​</span></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p><b>RAM-Only Processing:</b> Raw communication data pulled from your connected email inboxes and WhatsApp channels is processed strictly within volatile memory (RAM).</p><p><b>Instant Data Destruction:</b> If incoming text is determined to be non-relevant or personal, it is immediately purged from short-term memory. Unrelated messages are never written to physical hard drives, production databases, or server logs.</p><p><b>Ledger Commitment:</b> Only explicit, verified facts (quotes, ETAs, MOQs, compliance records) extracted by the AI engine are permanently saved to your workspace's Project Ledger.</p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_2" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">2. Strict AI Model Isolation (Zero Model Training)</span><br/></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p><b>No Public LLM Training:</b> SummaFlow explicitly guarantees that your raw message copy, metadata, extracted facts, and generated ledgers will <b>never</b> be used to train, retrain, or fine-tune public, proprietary, or third-party Machine Learning / LLM models.</p><p><b>Workspace Enclosure:</b> Your commercial intelligence remains strictly isolated within your private enterprise environment.</p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_4" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">3. Absolute Traceability &amp;amp; Deterministic Fact Extraction</span><br/></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p><b>Zero Guesswork:</b> The platform utilizes strict, predefined data schemas (guardrails) during AI extraction, preventing the synthesis or hallucination of unbacked facts.</p><p><b>1-Click Auditability:</b> Every extracted record in the Project Ledger stays permanently anchored to its original sender, channel, timestamp, and source message link for instant manual verification.</p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_5" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">4. Granular Access &amp;amp; OAuth Security Frameworks</span><br/></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p><b>Password-Free Connections:</b> SummaFlow integrates with Google Workspace and Microsoft 365 using standard OAuth 2.0 protocol frameworks. We never request, view, or store your actual email or messaging account passwords.</p><p><b>Admin-Controlled Access &amp;amp; Instant Revocation:</b> Company super-admins maintain strict control over user creation and access levels. Any connected communication channel can be revoked or disconnected instantly from your workspace settings, purging all associated access tokens.</p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_6" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">5. Privacy Scrubbing &amp;amp; PDPO Compliance</span><br/></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p><b>Automated PII Sanitization:</b> Integrated Personally Identifiable Information (PII) scrubbers automatically identify and redact sensitive personal data prior to processing.</p><p><b>Regional Regulatory Alignment:</b> Our architecture operates in strict alignment with regional and international data protection standards, including the Hong Kong Personal Data (Privacy) Ordinance (PDPO) Data Protection Principles (DPP1).</p><p><br/></p></div>
+                    </section><section class="s_text_block pt0 pb64 o_colored_level" data-snippet="s_text_block" data-name="Section">
+                        <div class="container s_allow_columns"><h2 id="table_of_content_heading_1_7" class="h3-fs" style="font-weight: normal;"><span style="font-size: 28px;">6. Encryption Standards &amp;amp; Infrastructure Security</span><br/></h2><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div><p><b>Data in Transit:</b> All traffic between your connected communication channels, SummaFlow servers, and end-user browsers is encrypted using industry-standard TLS 1.3 / HTTPS protocols.</p><p><b>Data at Rest:</b> All stored Project Ledger entries, workspace credentials, and databases are encrypted using AES-256 bit encryption.</p><p><b>Cloud Hosting:</b> Platform infrastructure is hosted on SOC 2 Type II certified cloud facilities with automated threat detection and multi-zone backup redundancy.</p></div>
+                    </section>
+                    
+                </div>
+            </div>
+        </div>
+    </section><section class="s_text_bold pt112 pb112 o_colored_level s_custom_snippet o_three_quarter_height" data-snippet="s_text_bold" style="background-color: transparent; background-image: linear-gradient(135deg, rgb(66, 98, 174) 0%, rgb(100, 190, 181) 54%, rgb(83, 185, 115) 100%);" data-name="Custom Custom Text Bold">
+        <div class="s_allow_columns container"><h2 style="font-weight: normal;"><span class="h2-fs"><font class="text-o-color-4">Ready to Eliminate Manual Trade Tracking?</font></span></h2><p><span class="h5-fs"><font class="text-o-color-4">Connect your Emails, WhatsApp and Line channels in minutes. No workflow changes, no manual data entry, and zero supplier onboarding required.</font></span></p><p><br/></p><p><br/></p><p><a href="/contactus" class="s_custom_snippet o_translate_inline btn btn-primary">&amp;nbsp;<span class="base-fs">Request Free Trial</span></a></p></div>
+    </section>
+    
+    
+
+</div>
+    </t>
+</t>

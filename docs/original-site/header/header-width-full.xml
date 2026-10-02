@@ -1,0 +1,5 @@
+<data>
+    <xpath expr="//t[@t-set='header_content_width']" position="attributes">
+        <attribute name="t-valuef">container-fluid</attribute>
+    </xpath>
+</data>

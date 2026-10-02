@@ -1,0 +1,99 @@
+<t t-name="website.company">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty"><section class="s_discovery o_colored_level bg-white pb72 o_three_quarter_height pt112" data-snippet="s_discovery" data-name="Discovery">
+        <div style="text-align: center;" class="container"><h1 style="font-weight: normal;">Bringing <font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">Truth, Transparency,</font> <font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">and</font> <font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">Control</font> <font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">to</font> <font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">Global Trade Operations.</font></h1><p style="text-align: center;"><br/></p><img src="/web/image/1113-b0e38f0d/Screenshot%202026-08-27%20at%201.33.06%E2%80%AFPM.webp" alt="" data-attachment-id="1112" class="img img-fluid o_we_custom_image" data-format-mimetype="image/webp" data-resize-width="512" data-original-id="1112" data-original-src="/web/image/1112-2fb58aa7/Screenshot%202026-08-27%20at%201.33.06%E2%80%AFPM.png" data-mimetype-before-conversion="image/png" data-mimetype="image/webp" loading="lazy"/></div>
+    </section><section class="s_title_split o_colored_level pt0 pb40 o_three_quarter_height" data-snippet="s_title_split" data-name="Title Split">
+        <div class="s_allow_columns container">
+            <div class="row">
+                <div class="col-lg-6 o_colored_level">
+                    <p style="font-weight: normal;"><span class="h2-fs">Born from a Search to <font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">Fix Industry-Wide Data Chaos.</font></span><br/></p>
+                </div><div class="col-lg-5 offset-lg-1 o_colored_level">
+                    <p><span class="h5-fs">Cross-border trade relies on email, WhatsApp, and Line for speed, but these informal channels create massive data chaos. Critical price revisions, changed MOQs, revised ETAs, and compliance files constantly get trapped in unread message threads.</span></p><p><span class="h5-fs">Traditional ERPs and supplier portals fail to solve this because they force vendors to fill out rigid manual forms or log into external portals, a friction point suppliers consistently resist.</span></p>
+                </div>
+                
+            </div>
+        </div>
+    </section><section class="s_title_split pt48 pb32 o_colored_level o_three_quarter_height" data-snippet="s_title_split" data-name="Title Split">
+        <div class="s_allow_columns container">
+            <div class="row">
+                <div class="col-lg-6 o_colored_level">
+                    <p style="font-weight: normal;"><span class="h2-fs">The <font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">SummaFlow Breakthrough.</font></span><br/></p>
+                </div><div class="col-lg-5 offset-lg-1 o_colored_level">
+                    <p><span class="h5-fs">Realising trade behavior wouldn't change, we built SummaFlow as a zero-touch layer behind your existing channels. It automatically converts unstructured emails and messages into live, auditable project ledgers and real-time change alerts, delivering complete operational control with zero supplier onboarding.</span></p><p><br/></p>
+                </div>
+                
+            </div>
+        </div>
+    </section><section class="s_key_benefits pb48 o_colored_level pt0 o_three_quarter_height" data-snippet="s_key_benefits" data-name="Key benefits">
+        
+        <div class="container">
+            <p class="lead">
+                &amp;nbsp;<br/></p>
+            <h2 class="display-3-fs" style="font-weight: normal; text-align: center;"><span class="h2-fs">Core Engineering &amp;amp; Operating Principles</span></h2>
+            <div class="row">
+                <div class="col-lg-4 pt48 pb24 o_colored_level">
+                    <span class="display-3-fs text-o-color-1"><font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">1</font></span>
+                    <div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <h3 class="h4-fs" style="font-weight: normal;"><span style="font-size: 22px;">Zero Vendor Onboarding</span></h3>
+                    <p>Your suppliers and logistics partners never need to install new software, adjust workflows, or log into external portals.</p>
+                </div>
+                <div class="col-lg-4 pt48 pb24 o_colored_level">
+                    <span class="display-3-fs text-o-color-1"><font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">2</font></span>
+                    <div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <h3 class="h4-fs" style="font-weight: normal;"><span style="font-size: 22px;">100% Deterministic Accuracy</span></h3>
+                    <p>Zero AI guesswork. Every extracted quote, line item, and status tag links directly back to its original source message and timestamp.</p>
+                </div>
+                <div class="col-lg-4 pt48 pb24 o_colored_level">
+                    <span class="display-3-fs text-o-color-1"><font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">3</font></span>
+                    <div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <h3 class="h4-fs" style="font-weight: normal;"><span style="font-size: 22px;">Privacy-First Architecture</span></h3>
+                    <p>Transient RAM-only processing ensures personal messages and non-project communications are dropped instantly and never saved.</p>
+                </div><div class="col-lg-4 pt48 pb24 o_colored_level"><span class="display-3-fs"><font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">4</font></span><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/></div><h3 class="h4-fs" style="font-weight: normal;"><span style="font-size: 22px;">Proactive Risk Prevention</span></h3>
+                    <p>Stop reacting to delayed shipments. Surface freight shifts, quote revisions, MOQ updates, and missing compliance files as chats happen.</p>
+                </div><div class="col-lg-4 pt48 pb24 o_colored_level"><span class="display-3-fs"><font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">5</font></span><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <h3 class="h4-fs" style="font-weight: normal;"><span style="font-size: 22px;">Strict AI Model Isolation</span></h3>
+                    <p>Your proprietary trade data, quotes, and communications are fully isolated and <b>never</b> used to train public or third-party AI models..</p>
+                </div><div class="col-lg-4 pt48 pb24 o_colored_level"><span class="display-3-fs"><font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">6</font></span><div class="s_hr pt8 pb24" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <h3 class="h4-fs" style="font-weight: normal;"><span style="font-size: 22px;">Enterprise-Grade Encryption</span></h3>
+                    <p>Built on a zero-trust architecture featuring &amp;nbsp;OAuth 2.0 access, TLS 1.3 in transit, and AES-256 bit encryption at rest.</p>
+                </div>
+            </div>
+        </div>
+    </section><section class="s_title_split o_colored_level pb0 pt56 o_three_quarter_height" data-snippet="s_title_split" data-name="Title Split">
+        <div class="s_allow_columns container">
+            <div class="row">
+                <div class="col-lg-6 o_colored_level">
+                    <p style="font-weight: normal;"><span class="h2-fs"><font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">Global Hub &amp;amp; Regional Compliance.</font></span><br/></p>
+                </div><div class="col-lg-5 offset-lg-1 o_colored_level">
+                    <p><span style="font-size: 22px;">Strategic Operational Base</span></p><p><span style="font-size: 17px;">Headquartered in Hong Kong—at the center of Asia's primary global sourcing networks, supply chains, and freight routing hubs.</span></p><p><br/></p><p><span style="font-size: 22px;">Regional Regulatory Alignment</span></p><p><span style="font-size: 16px;">Designed from the ground up to comply with regional privacy laws, including the Hong Kong PDPO (Personal Data Privacy Ordinanc</span><span class="h5-fs">e).</span></p><p><br/></p><p><span style="font-size: 22px;">Global Footprint</span></p><p><span style="font-size: 16px;">Built to empower global sourcing agencies, freight forwarders, 3PL providers, and regional trade hubs operating across cross-border trade lanes.</span></p>
+                </div>
+                
+            </div>
+        </div>
+    </section><section class="s_title_split pt80 pb80 o_colored_level o_three_quarter_height" data-snippet="s_title_split" data-name="Title Split">
+        <div class="s_allow_columns container">
+            <div class="row">
+                <div class="col-lg-6 o_colored_level">
+                    <p style="font-weight: normal;"><span class="h2-fs"><font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">Enterprise Trust &amp;amp; Security.&amp;nbsp;</font></span></p>
+                </div><div class="col-lg-5 offset-lg-1 o_colored_level">
+                    <p><span style="font-size: 22px;">Strict AI Model Isolation:&amp;nbsp;</span></p><p><span style="font-size: 16px;">Your raw message data, quotes, and ledgers are never used to train, retrain, or fine-tune public or third-party AI models</span><span style="font-size: 18px;">.</span></p><p><span style="font-size: 22px;">OAuth 2.0 Access:&amp;nbsp;</span></p><p><span style="font-size: 16px;">Secure integration with Google Workspace and Microsoft 365 without ever viewing or storing your email account passwords.</span></p><p><span style="font-size: 22px;">Enterprise-Grade Encryption:</span></p><p><span style="font-size: 16px;">Full TLS 1.3 encryption in transit and AES-256 bit encryption at rest for all workspace ledgers.</span></p>
+                </div>
+                
+            </div>
+        </div>
+    </section><section class="s_text_bold pt112 pb112 o_colored_level s_custom_snippet o_three_quarter_height" data-snippet="s_text_bold" style="background-color: transparent; background-image: linear-gradient(135deg, rgb(66, 98, 174) 0%, rgb(100, 190, 181) 54%, rgb(83, 185, 115) 100%);" data-name="Custom Custom Text Bold">
+        <div class="s_allow_columns container"><h2 style="font-weight: normal;"><span class="h2-fs"><font class="text-o-color-4">Ready to Bring Clarity to Your Trade Operations?</font></span><br/></h2><p><span class="h5-fs"><font class="text-o-color-4">Connect your Emails, WhatsApp and Line channels in minutes. No workflow changes, no manual data entry, and zero supplier onboarding required.</font></span></p><p><br/></p><p><br/></p><p><a href="/contactus" class="s_custom_snippet o_translate_inline btn btn-primary">&amp;nbsp;<span class="base-fs">Request Free Trial</span></a></p></div>
+    </section></div>
+    </t>
+</t>
