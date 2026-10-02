@@ -1,0 +1,9 @@
+// SummaFlow website styles.
+//
+// Phase 0 — harmless load marker only. NO visible redesign.
+// Verify after test import via DevTools console:
+//   getComputedStyle(document.documentElement).getPropertyValue('--sf-module-loaded')
+// Expected: "1"
+:root {
+    --sf-module-loaded: 1;
+}
