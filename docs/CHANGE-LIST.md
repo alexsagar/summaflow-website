@@ -270,3 +270,34 @@ Potential future tools:
 - Lenis
 
 Only introduce them when their value is clear.
+
+---
+
+# Phase 0 — Module Foundation
+
+## IMPLEMENTED (local only; not yet imported into Odoo)
+
+- Created minimal valid `website_summaflow` module (manifest, `__init__.py`).
+- Established asset directory structure (scss/js/img/icons, views/pages, views/components, data) with `.gitkeep`.
+- Added harmless frontend load marker: `--sf-module-loaded: 1` in `static/src/scss/summaflow.scss` (no visible redesign), loaded via `web.assets_frontend`.
+- Added Windows build/package pipeline: `scripts/build.ps1`, `scripts/validate.ps1`, npm scripts.
+- Generates `release/website_summaflow.zip` (module dir as top-level, forward-slash entries).
+- Created valid `package.json`; wrote `README.md`.
+
+## QA — VERIFIED (test database)
+
+Smoke test on the neutralized test database `sumflow-redesign-test.odoo.com`:
+
+- Imported `website_summaflow` via Apps > Import Module — succeeded.
+- Website remained visually unchanged after installation.
+- Frontend SCSS asset loaded successfully.
+- Browser verification:
+  `getComputedStyle(document.documentElement).getPropertyValue('--sf-module-loaded').trim()`
+  returned `'1'`.
+- No new console errors observed.
+- Production not touched.
+
+Pipeline verified end to end: local -> ZIP -> Odoo Online -> browser.
+
+`website_summaflow` remains installed on the test database. Future redesign
+work updates this same module (import updated ZIP = module upgrade).

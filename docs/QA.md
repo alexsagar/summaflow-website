@@ -236,6 +236,31 @@ Before production release verify:
 
 ---
 
+# Phase 0 Smoke Test — VERIFIED
+
+Date recorded: 2026-10-02.
+
+- Test database: `sumflow-redesign-test.odoo.com`
+- Module: `website_summaflow`
+- Apps > Import Module: succeeded.
+- Website visually unchanged after installation.
+- Frontend SCSS asset loaded.
+- Browser check `getComputedStyle(document.documentElement).getPropertyValue('--sf-module-loaded').trim()` returned `'1'`.
+- No new console errors.
+- Production not touched.
+
+`website_summaflow` remains installed on the test database; future redesign
+work updates this same module.
+
+---
+
+# Test Database Rollback
+
+For an imported module, uninstall it from Apps if rollback is required.
+After uninstall, reinstalling requires importing the ZIP again.
+
+---
+
 # Rollback
 
 Before production installation:

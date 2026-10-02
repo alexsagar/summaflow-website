@@ -1,0 +1,11 @@
+{
+  "name": "summaflow-website",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SummaFlow website redesign — frontend customization module (website_summaflow) for Odoo Online SaaS 19.4 Enterprise.",
+  "license": "UNLICENSED",
+  "scripts": {
+    "validate": "powershell -ExecutionPolicy Bypass -File scripts/validate.ps1",
+    "build": "powershell -ExecutionPolicy Bypass -File scripts/build.ps1"
+  }
+}
