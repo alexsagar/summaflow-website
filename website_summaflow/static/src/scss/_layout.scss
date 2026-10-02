@@ -1,0 +1,50 @@
+// SummaFlow layout primitives — opt-in only (.sf-* classes).
+// No overrides of Odoo .container / .row / section.
+
+.sf-container {
+    width: 100%;
+    max-width: var(--sf-container);
+    margin-inline: auto;
+    padding-inline: var(--sf-gutter);
+}
+
+.sf-container--narrow { max-width: var(--sf-container-narrow); }
+.sf-container--wide { max-width: var(--sf-container-wide); }
+
+.sf-section {
+    padding-block: var(--sf-section-y);
+}
+
+.sf-section--compact {
+    padding-block: calc(var(--sf-section-y) * 0.55);
+}
+
+.sf-section--subtle {
+    background: var(--sf-bg-subtle);
+}
+
+// Vertical stack with consistent rhythm.
+.sf-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sf-space-5);
+}
+
+// Horizontal group that wraps gracefully.
+.sf-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sf-space-4);
+}
+
+// Responsive auto-fit grid; cards reflow without media queries.
+.sf-grid {
+    display: grid;
+    gap: var(--sf-space-5);
+    // NOTE: do NOT use min()/max() here. Odoo's Sass compiler evaluates them as
+    // Sass functions and errors on mixed units ("Incompatible units: '%' and
+    // 'px'"). Plain minmax(260px, 1fr) needs no mixed-unit math; the container
+    // keeps >=260px of inner width at all target breakpoints (320px and up).
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}

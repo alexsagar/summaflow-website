@@ -1,0 +1,30 @@
+// SummaFlow utility + accessibility primitives — opt-in only (.sf-*).
+
+// Screen-reader-only text.
+.sf-visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+// Reusable brand gradient as text fill (opt-in).
+.sf-text-gradient {
+    background: var(--sf-gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+// Opt-in focus treatment for project interactive elements that are not
+// .sf-button (reuses the same ring). Does NOT disable native focus globally.
+.sf-focus-ring:focus-visible {
+    outline: none;
+    box-shadow: var(--sf-focus-ring);
+    border-radius: var(--sf-radius-sm);
+}
+
+.sf-muted { color: var(--sf-text-muted); }

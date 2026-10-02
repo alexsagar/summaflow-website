@@ -1,0 +1,19 @@
+// SummaFlow responsive + motion foundation.
+//
+// Most primitives are fluid (clamp / auto-fit) and need no media queries.
+// This file holds only cross-cutting adjustments, all scoped to .sf-* so
+// existing Odoo content is never affected.
+
+// Reduced-motion: neutralize transitions on project primitives only.
+// Scoped to .sf-* on purpose — no global `* { }` reset that could break Odoo.
+@media (prefers-reduced-motion: reduce) {
+    .sf-button,
+    .sf-focus-ring {
+        transition: none;
+    }
+}
+
+// Tighten the vertical stack rhythm on small viewports.
+@media (max-width: 480px) {
+    .sf-stack { gap: var(--sf-space-4); }
+}

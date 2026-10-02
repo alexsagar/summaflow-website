@@ -31,7 +31,11 @@ $validate = Join-Path $PSScriptRoot 'validate.ps1'
 
 if (-not (Test-Path $modDir)) { throw "Module directory not found: $modDir" }
 
-# 1. Validate source prerequisites first (does not touch the existing artifact).
+# 1. Validate source prerequisites first. Back up and remove any stale artifact
+#    so this pre-build pass checks SOURCE only; the ZIP is validated after build
+#    (a stale ZIP predates new source files and would false-fail structurally).
+if (Test-Path $bakPath) { Remove-Item $bakPath -Force }
+if (Test-Path $zipPath) { Move-Item $zipPath $bakPath -Force }
 Write-Host "Validating source prerequisites...`n" -ForegroundColor Cyan
 & $validate
 if ($LASTEXITCODE -ne 0) { throw "Source validation failed; build aborted (existing artifact untouched)." }
@@ -78,9 +82,8 @@ try {
     }
 } finally { $zip.Dispose() }
 
-# 4. Swap into release/, backing up any previous good artifact first.
-if (Test-Path $bakPath) { Remove-Item $bakPath -Force }
-if (Test-Path $zipPath) { Move-Item $zipPath $bakPath -Force }
+# 4. Swap the freshly built zip into release/. Any previous good artifact was
+#    already moved to $bakPath in step 1 and is kept for restore-on-failure.
 Move-Item $tmpZip $zipPath -Force
 Remove-Item $stage -Recurse -Force
 
