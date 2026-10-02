@@ -1,0 +1,212 @@
+<t name="Homepage" t-name="website.homepage">
+    <t t-call="website.layout" pagename.f="homepage">
+        <div id="wrap" class="oe_structure oe_empty" data-contains-ai-content="true"><section class="s_banner o_cc o_cc1 pt56 pb56 o_colored_level" data-snippet="s_banner" data-name="Banner">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 pt8 o_colored_level pb8">
+        <h1 class="display-4"><span style="background: linear-gradient(90deg, #4262AE, #64BEB5, #53B973); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;">One Workspace</span> for scattered project signals.</h1>
+        <p class="lead"><br/></p><p><span class="h5-fs">Turn unstructured email, WhatsApp, and Line messages into live, chronological trade ledgers. SummaFlow captures pricing, milestones, and supplier approvals while <b>flagging critical ETA shifts, quote revisions, and compliance changes as chats happen.</b></span></p>
+        <div class="pt16">
+          <a class="me-2 btn btn-primary" href="/contactus"><font style="color: rgb(255, 255, 255) !important;">&amp;nbsp;Request Free Trial</font></a>&amp;nbsp;<a class="btn btn-secondary" href="/contactus">Watch Demo</a>
+        </div>
+      </div>
+      <div class="pt8 pb8 text-center o_colored_level col-lg-6">
+        <img src="/html_editor/image_shape/website.s_image_text_device_perspective/html_builder/devices/iphone_3d_portrait_02.svg?c5=o-color-5" class="img-fluid mx-auto o_rotate_loop" alt="Business growth illustration" style="max-width: 54%;" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+</section><section class="s_text_block pt24 pb24 o_colored_level" data-snippet="s_text_block" data-name="Text Block">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="mx-auto text-center o_colored_level col-lg-10">
+        <h2 style="font-weight: normal;">Turn scattered trade conversations into</h2><h2 style="font-weight: normal;"><span style="background: linear-gradient(90deg, #4262AE, #64BEB5, #53B973); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;">Auditable Project Control.</span></h2>
+      </div>
+    </div>
+  </div>
+</section><section class="s_three_columns o_colored_level bg-white s_custom_snippet pt0 pb56" data-snippet="s_three_columns" data-name="Custom Three Columns">
+  <div class="container">
+    <div class="row align-items-stretch">
+      
+      
+      <div class="pb16 col-lg-6 pt32">
+        <div class="h-100 p-4 rounded-3" style="border: 1px solid transparent; background: linear-gradient(#fff, #fff) padding-box, linear-gradient(90deg, #4262ae 35.577%, #64beb5 75.481%, #53b973 100%) border-box;">
+          <div class="text-start"><p><span style="font-size: 14px;"><strong>Challenge</strong></span></p>
+  <h1 style="font-size: 22px; font-weight: 500; margin: 0; text-align: left; width: 100%;"><br/></h1><h2 style="font-weight: normal;"><span style="font-size: 28px;">Hidden Operational Friction</span></h2><p><br/></p>
+  <p><b>Information Trapped in Chat Threads:</b> Critical project changes, client instructions, and vendor updates stay buried inside isolated WhatsApp chats and personal email inboxes.</p><p><b>Loss of Important Context:</b> Key decisions and agreements vanish the second a conversation ends, leaving your team out of the loop and guessing what's next.</p><p><b>Wasted Time Hunting Messages:</b> Without a single shared record, managers waste hours digging through old messages whenever a delivery dispute or mistake happens.</p><p><b>Unnoticed Scope &amp;amp; Price Shifts:</b> Critical changes to freight rates, MOQs, or shipping dates get buried in unread messages, leading to surprise charges at the port.</p><h1 class="h3"><br/></h1></div>
+          <div class="text-center pt16"/>
+        </div>
+      </div><div class="col-lg-6 pt32 pb16">
+        <div class="h-100 p-4 rounded-3" style="border: 1px solid transparent; background: linear-gradient(#fff, #fff) padding-box, linear-gradient(90deg, #4262ae 35.577%, #64beb5 75.481%, #53b973 100%) border-box;">
+          <div class="text-start"><p><span style="font-size: 14px; font-weight: bolder;">Solution</span></p>
+  <h1 style="font-size: 22px; font-weight: 500; margin: 0; text-align: left; width: 100%;"><br/></h1><h2 style="font-weight: normal;"><span style="font-size: 28px;">Complete Visibility into Every Project</span><br/></h2><p><br/></p>
+  <p><b>One Single Timeline:</b> SummaFlow automatically pulls updates from your emails and WhatsApp chats into one organized, up-to-date project timeline.</p><p><b>Catch Delays Early:</b> Automatically spots price changes, missed dates, and open questions before they turn into costly mistakes.</p><p><b>100% Verifiable:</b> Every update links directly back to the original message, sender, and timestamp so you always have proof.</p><p><b>Instant Change Notifications:</b> Get flagged immediately when a supplier or carrier shifts a quote, pushes back an ETA, or attaches a revised compliance file mid-conversation.</p></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section><section class="s_text_bold pt112 pb112 o_colored_level s_custom_snippet o_three_quarter_height" data-snippet="s_text_bold" style="background-color: transparent; background-image: linear-gradient(135deg, rgb(66, 98, 174) 0%, rgb(100, 190, 181) 54%, rgb(83, 185, 115) 100%);" data-name="Custom Text Bold">
+        <div class="s_allow_columns container"><h2 style="font-weight: normal;"><span class="h2-fs"><font class="text-o-color-4">Ready to Eliminate Manual Trade Tracking?</font></span></h2><p><span class="h5-fs"><font class="text-o-color-4">Connect your Emails, WhatsApp and Line channels in minutes. No workflow changes, no manual data entry, and zero supplier onboarding required.</font></span></p><p><br/></p><p><br/></p><p><a href="/contactus" class="s_custom_snippet o_translate_inline btn btn-primary">&amp;nbsp;<span class="base-fs">Request Free Trial</span></a></p></div>
+    </section><section class="s_title pb40 o_colored_level pt72" data-vcss="001" data-snippet="s_title" data-name="Title">
+        <div class="s_allow_columns container">
+            <h2 class="display-3-fs" style="text-align: center; font-weight: normal;"><span style="font-size: 39px;">Purpose-built for <font class="text-gradient" style="background-image: linear-gradient(135deg, rgb(47, 128, 237) 0%, rgb(178, 255, 218) 100%);">Every Operations Role</font></span></h2>
+        </div>
+    </section><section class="s_three_columns pt48 pb48 o_colored_level bg-white s_custom_snippet" data-snippet="s_three_columns" data-name="Custom Three Columns">
+  <div class="container">
+    <div class="row align-items-stretch">
+      <div class="col-lg-4 pt16 pb16">
+        <div class="h-100 p-4 rounded-3" style="border: 1px solid #d9d9d9; background: #fff;">
+          <div class="text-start"><h1 class="h3" style="font-weight: normal;"><span style="font-size: 28px;">Instant Consensus Verification</span></h1><br/><p style="text-align: left;">Eliminates manual audits for verifying client approvals, contracts, or vendor commitments.</p></div>
+          <div class="text-center pt16">
+            &amp;nbsp;<br/></div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 pt16 pb16">
+        <div class="h-100 p-4 rounded-3" style="border: 1px solid #d9d9d9; background: #fff;">
+          <div class="text-start"><h1 class="h3" style="font-weight: normal;"><span style="font-size: 28px;">Proactive Anomaly Detection</span><br/></h1><br/><p>Isolates shifting production timelines, altered material specs, and dimension discrepancies.</p></div>
+          <div class="text-center pt16">
+            &amp;nbsp;<br/></div>
+        </div>
+      </div><div class="col-lg-4 pt16 pb16">
+        <div class="h-100 p-4 rounded-3" style="border: 1px solid #d9d9d9; background: #fff;">
+          <div class="text-start"><h1 class="h3" style="font-weight: normal;"><span style="font-size: 28px;">Airtight Source Traceability</span><br/></h1><br/><p style="text-align: left;">Anchors summaries and action items back to the original sender, channel, and precise timestamp.</p></div>
+          <div class="text-center pt16"><br/></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><section class="s_text_block pt48 pb48 o_colored_level s_custom_snippet" data-snippet="s_text_block" data-name="Comparison Table -1">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 o_colored_level">
+        <div class="text-center pb48">
+          <h2 class="display-4"><span class="h2-fs">Traditional Operational Workflow vs. <font class="text-gradient" style="background-image: repeating-linear-gradient(90deg, rgb(66, 98, 174) 0%, rgb(100, 190, 181) 58%, rgb(83, 185, 115) 100%);">SummaFlow Intelligence</font></span></h2>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped align-middle text-start">
+            
+            <tbody><tr style="height: 46px;">
+                <th style="vertical-align: top; text-align: left;" class="o_table_header">Operational Workflow</th>
+                <th style="vertical-align: top; text-align: left;" class="o_table_header">Traditional Manual Method</th>
+                <th style="vertical-align: top; text-align: left; background:#f2f2f2;" class="o_table_header"><u>With SummaFlow</u></th>
+              </tr>
+              <tr style="height: 87.1055px;">
+                <td style="vertical-align: top; text-align: left;"><strong>Data Extraction &amp;amp; Tracking</strong></td>
+                <td style="vertical-align: top; text-align: left;">Hours spent copying quotes, ETAs, and MOQs into manual Excel tracking sheets.</td>
+                <td style="vertical-align: top; text-align: left; background:#f2f2f2;"><span style="font-size: 22px;">✓ </span><strong>Zero</strong> <strong>Manual</strong> <strong>Entry<br/></strong>Facts are automatically extracted into structured ledgers as conversations happen.</td>
+              </tr>
+              <tr style="height: 88px;">
+                <td style="vertical-align: top; text-align: left;"><strong>Verification &amp;amp; Auditing</strong></td>
+                <td style="vertical-align: top; text-align: left;">Digging through 50+ email threads and WhatsApp groups to verify a single price update.</td>
+                <td style="vertical-align: top; text-align: left; background:#f2f2f2;"><span style="font-size: 22px;">✓</span><strong><span style="font-size: 22px;"> </span>1</strong>-<strong>Click</strong> <strong>Traceability</strong>&amp;nbsp;<br/>Every extracted figure links directly back to the original source message and timestamp.</td>
+              </tr>
+              <tr style="height: 88px;">
+                <td style="vertical-align: top; text-align: left;"><strong>Privacy &amp;amp; Security</strong></td>
+                <td style="vertical-align: top; text-align: left;">Pasting sensitive client or supplier communications into unsecure, third-party AI tools.</td>
+                <td style="vertical-align: top; text-align: left; background:#f2f2f2;"><span style="font-size: 22px;">✓</span><strong><span style="font-size: 22px;">&amp;nbsp;</span>Ephemeral</strong> <strong>RAM</strong> <strong>Processing<br/></strong>Raw text is scanned transiently; non-relevant messages are dropped and never saved.</td>
+              </tr>
+              <tr style="height: 88px;">
+                <td style="vertical-align: top; text-align: left;"><strong>Risk &amp;amp; Exception Alerts</strong></td>
+                <td style="vertical-align: top; text-align: left;">Missing supplier holds, compliance document gaps, or margin shifts buried deep in inbox threads.</td>
+                <td style="vertical-align: top; text-align: left; background:#f2f2f2;"><span style="font-size: 22px;">✓&amp;nbsp;</span><strong>Automated</strong> <strong>Risk</strong> <strong>Isolation</strong>:&amp;nbsp;<br/>Surfaces shipment holds, document gaps, and margin shifts before delays occur.</td>
+              </tr>
+              <tr style="height: 88px;">
+                <td style="vertical-align: top; text-align: left;"><strong>Team Handover &amp;amp; Context</strong></td>
+                <td style="vertical-align: top; text-align: left;">Hours spent briefing covering agents or forwarding endless message chains during shift handovers.</td>
+                <td style="vertical-align: top; text-align: left; background:#f2f2f2;"><span style="font-size: 22px;">✓&amp;nbsp;</span><strong>Shared</strong> <strong>Live</strong> <strong>Ledger<br/></strong>Centralized project timelines allow anyone on the team to get full context in seconds.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><section class="s_features pt88 pb48 o_colored_level" data-snippet="s_features" data-name="Features">
+        <div class="container">
+            <h2 class="h3-fs" style="text-align: center; font-weight: normal;"><span style="background: linear-gradient(90deg, #4262AE, #64BEB5, #53B973); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;" class="h2-fs">Trust, Security &amp;amp; Control.</span></h2>
+            <div class="row">
+                <div class="o_colored_level col-lg-3">
+                    <div class="s_hr pb32 pt56" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>&amp;nbsp;
+                    </div>
+                    <i class="fa fa-send s_features_icon mb-3 bg-o-color-3 text-o-color-5 rounded" role="img"/>
+                    <div class="overflow-hidden">
+                        <h1 class="h3" style="font-weight: normal;"><span style="font-size: 22px;">Ephemeral In-Memory Scanning</span><br/></h1>
+                        <p>Raw email and WhatsApp text is evaluated transiently in volatile memory (RAM) and immediately destroyed. Non-relevant messages are never saved to physical disk or databases.</p><p>.</p>
+                    </div>
+                </div>
+                <div class="o_colored_level col-lg-3">
+                    <div class="s_hr pb32 pt56" data-snippet="s_hr" data-name="Separator">
+                        <hr class="mx-auto w-100"/>
+                    </div>
+                    <i class="fa fa-user-plus s_features_icon mb-3 bg-o-color-3 text-o-color-5 rounded" role="img"/>
+                    <div class="overflow-hidden">
+                        <h1 class="h3"><span style="font-weight: normal; font-size: 22px;">Granular OAuth &amp;amp; 1-Click Revocation</span><br/></h1>
+                        <p>Access operates strictly through standard provider permissions (Google Workspace, Microsoft 365). You maintain total control and can disconnect any integration instantly from your settings.</p>
+                    </div>
+                </div>
+                <div class="o_colored_level col-lg-3">
+                    <div class="s_hr pb32 pt56" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <i class="fa fa-database s_features_icon mb-3 bg-o-color-3 text-o-color-5 rounded" role="img"/>
+                    <div class="overflow-hidden">
+                        <h1 class="h3"><span style="font-weight: normal; font-size: 22px;">Absolute Traceability &amp;amp; Zero Hallucinations</span><br/></h1>
+                        <p>SummaFlow never invents data. Every extracted figure, ETA, and price revision remains permanently anchored to its exact source timestamp, channel, and sender for 1-click verification.</p>
+                    </div>
+                </div><div class="col-lg-3 o_colored_level">
+                    <div class="s_hr pb32 pt56" data-snippet="s_hr" data-name="Separator">
+                        <hr class="w-100 mx-auto"/>
+                    </div>
+                    <i class="fa fa-check-square s_features_icon mb-3 bg-o-color-3 text-o-color-5 rounded" role="img"/>
+                    <div class="overflow-hidden">
+                        <h1 class="h3"><span style="font-weight: normal; font-size: 22px;">Privacy Scrubbing &amp;amp; PDPO Compliance</span><br/></h1>
+                        <p>Automated PII (Personally Identifiable Information) scrubbers sanitise sensitive personal details prior to processing, strictly conforming to regional privacy laws including the Hong Kong PDPO.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><section class="s_call_to_action o_cc o_colored_level pb104 pt40 o_cc1 o_three_quarter_height" data-snippet="s_call_to_action" data-name="Call to Action" style="background-color: transparent; background-image: linear-gradient(90deg, rgb(66, 98, 174) 0%, rgb(100, 190, 181) 57%, rgb(83, 185, 115) 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="o_colored_level col-lg-9">
+                    <h2 style="font-weight: normal;"><span class="text-o-color-5"><font class="text-o-color-4">Integrates in minutes. Zero data-entry required.</font></span><br/></h2>
+                    <p class="lead"><br/></p><div data-name="Accordion" class="s_accordion" data-snippet="s_accordion">
+        <div id="myCollapse1787720184344" class="accordion o_custom_icons o_icons_plus_to_minus accordion-flush">
+            <div class="accordion-item position-relative z-1 bg-white" data-name="Accordion Item">
+                <button type="button" class="accordion-header accordion-button gap-2 bg-transparent h6-fs fw-bold text-decoration-none text-reset transition-none collapsed justify-content-between" data-bs-toggle="collapse" aria-expanded="false" id="myCollapseBtn1787720184346" data-bs-target="#myCollapseTab1787720184345" aria-controls="myCollapseTab1787720184345"><span class="flex-grow-1"><p><span style="font-size: 14px;">How do you extract action items from WhatsApp and Emails&amp;nbsp;without changing our team's communication workflows?</span></p></span><span class="o_custom_icons_wrap position-relative d-block flex-shrink-0 overflow-hidden"><br/></span></button>
+                <div class="accordion-collapse collapse" data-bs-parent="#myCollapse1787720184344" role="region" id="myCollapseTab1787720184345" aria-labelledby="myCollapseBtn1787720184346">
+                    <div class="accordion-body">
+                        <p>SummaFlow works as a zero-install integration that connects directly to Gmail, Outlook, and WhatsApp Business API. Your team continues communicating normally on their preferred messaging apps. Our AI background parser automatically processes background text, routes conversational updates to the correct project workspace, and converts unstructured chat data into structured, action-oriented project logs without requiring manual data entry or team onboarding.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item position-relative z-1 bg-white" data-name="Accordion Item">
+                <button type="button" class="accordion-header accordion-button gap-2 bg-transparent h6-fs fw-bold text-decoration-none text-reset transition-none justify-content-between collapsed" data-bs-toggle="collapse" aria-expanded="false" id="myCollapseBtn1787720184348" data-bs-target="#myCollapseTab1787720184347" aria-controls="myCollapseTab1787720184347"><span class="flex-grow-1"><p><span style="font-size: 14px;">What is the technical onboarding timeline for&amp;nbsp;operations teams?</span></p></span><span class="o_custom_icons_wrap position-relative d-block flex-shrink-0 overflow-hidden"><br/></span></button>
+                <div class="accordion-collapse collapse" data-bs-parent="#myCollapse1787720184344" role="region" id="myCollapseTab1787720184347" aria-labelledby="myCollapseBtn1787720184348">
+                    <div class="accordion-body">
+                        <p>The complete technical onboarding timeline for SummaFlow is under two minutes. Workspace administrators simply authorise their communications infrastructure using industry-standard, secure OAuth protocols for Microsoft 365, Google Workspace,&amp;nbsp; WhatsApp and Line channels. There is no custom codebase integration, local software deployment, or technical overhead required to go live.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item position-relative z-1 bg-white" data-name="Accordion Item">
+                <button type="button" class="accordion-header accordion-button gap-2 bg-transparent h6-fs fw-bold text-decoration-none text-reset transition-none justify-content-between collapsed" data-bs-toggle="collapse" aria-expanded="false" id="myCollapseBtn1787720184350" data-bs-target="#myCollapseTab1787720184349" aria-controls="myCollapseTab1787720184349"><span class="flex-grow-1"><p><span style="font-size: 14px;">What is the mechanism behind SummaFlow’s zero-hallucination project timeline?</span></p></span><span class="o_custom_icons_wrap position-relative d-block flex-shrink-0 overflow-hidden"><br/></span></button>
+                <div class="accordion-collapse collapse" data-bs-parent="#myCollapse1787720184344" role="region" id="myCollapseTab1787720184349" aria-labelledby="myCollapseBtn1787720184350">
+                    <div class="accordion-body">
+                        <p>We eliminate AI hallucinations by using a deterministic, source-anchored data-extraction model. Every summarized decision, risk, and next step generated by SummaFlow features a secure, unalterable backlink pointing directly to the exact source email or chat timestamp. If a team member or auditor needs to verify a timeline entry, they click the link to inspect the original text, ensuring absolute operational data integrity and verification.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                </div>
+                <div class="o_colored_level col-lg-3">
+                    <p style="text-align: right;">
+                        <a class="me-2 btn btn-primary" href="/contactus"><font style="color: rgb(255, 255, 255) !important;">&amp;nbsp;Request Free Trial&amp;nbsp;</font></a></p>
+                </div>
+            </div>
+        </div>
+    </section></div>
+    </t>
+</t>
