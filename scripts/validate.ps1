@@ -57,6 +57,53 @@ if (Test-Path $manifest) {
     }
 }
 
+# Odoo Online SaaS forbids local @import/@use between custom SCSS files:
+#   "Local import '...' is forbidden for security reasons."
+# Every SummaFlow SCSS file must be declared explicitly in the manifest bundle.
+$scssFiles = @()
+$scssDirAll = Join-Path $modDir 'static\src\scss'
+if (Test-Path $scssDirAll) { $scssFiles = Get-ChildItem $scssDirAll -Recurse -File -Filter *.scss }
+
+foreach ($f in $scssFiles) {
+    $body = Get-Content $f.FullName -Raw
+    # Match @import / @use whose target is a local path (not an absolute URL).
+    $localImp = [regex]::Matches($body, "@(import|use)\s+['""](?!https?:|url\()[^'""]+['""]")
+    Check ($localImp.Count -eq 0) "no local @import/@use in SCSS: $($f.Name) ($($localImp.Count) found)"
+
+    # Odoo's Sass compiler evaluates bare min()/max() as Sass functions and
+    # errors on mixed units: "Incompatible units: '%' and 'px'". Flag any
+    # min(...)/max(...) call whose arguments contain BOTH a % and a px value.
+    # (clamp(), calc(), and single-unit min/max are left alone on purpose.)
+    foreach ($mm in [regex]::Matches($body, "(?<![\w-])(?:min|max)\(([^()]*)\)")) {
+        $args0 = $mm.Groups[1].Value
+        $bad = ($args0 -match '\d\s*%') -and ($args0 -match '\d\s*px')
+        Check (-not $bad) "no mixed %/px units in Sass min()/max(): $($f.Name) -> '$($mm.Value)'"
+    }
+}
+
+# Every SummaFlow SCSS file intended for deployment must be declared explicitly
+# in web.assets_frontend, each file must exist, and the bundle order must be the
+# Odoo-compatible dependency order.
+if (Test-Path $manifest) {
+    $mraw = Get-Content $manifest -Raw
+    $declared = @([regex]::Matches($mraw, "'($Module/static/src/scss/[^']+\.scss)'") | ForEach-Object { $_.Groups[1].Value })
+
+    foreach ($f in $scssFiles) {
+        $rel = "$Module/" + ($f.FullName.Substring($modDir.Length + 1) -replace '\\', '/')
+        Check ($declared -contains $rel) "SCSS file declared explicitly in manifest: $rel"
+    }
+    foreach ($d in $declared) {
+        $disk = $d -replace "^$Module/", '' -replace '/', '\'
+        Check (Test-Path (Join-Path $modDir $disk)) "manifest-declared SCSS exists on disk: $d"
+    }
+
+    $expected = @('_tokens','_typography','_layout','_buttons','_utilities','_responsive','summaflow') |
+        ForEach-Object { "$Module/static/src/scss/$_.scss" }
+    $orderOk = ($declared.Count -eq $expected.Count)
+    if ($orderOk) { for ($i = 0; $i -lt $expected.Count; $i++) { if ($declared[$i] -ne $expected[$i]) { $orderOk = $false } } }
+    Check $orderOk "manifest SCSS bundle order == tokens,typography,layout,buttons,utilities,responsive,summaflow"
+}
+
 # XML well-formedness (only if XML exists)
 $xml = Get-ChildItem $modDir -Recurse -Filter *.xml -ErrorAction SilentlyContinue
 if ($xml) {
@@ -108,12 +155,29 @@ if (-not (Test-Path $zip)) {
         }
         Check (-not $forbidden) "ZIP excludes .gitkeep/.git/.agents/.claude/docs/node_modules/.env/secrets ($(@($forbidden).Count) found)"
 
-        # Required files, each present exactly once
-        foreach ($req in @(
-            "$Module/__manifest__.py",
-            "$Module/__init__.py",
-            "$Module/static/src/scss/summaflow.scss"
-        )) {
+        # Required files, derived from the module structure (NOT hardcoded).
+        # Always: manifest + __init__. Plus every asset path declared in the
+        # manifest. Plus every .scss on disk under static/src/scss so SCSS
+        # partials imported by the entry file are guaranteed to ship (the
+        # manifest lists only the entry; Odoo compiles the bundle together).
+        $required = [System.Collections.Generic.List[string]]::new()
+        $required.Add("$Module/__manifest__.py")
+        $required.Add("$Module/__init__.py")
+
+        if (Test-Path $manifest) {
+            foreach ($ref in [regex]::Matches((Get-Content $manifest -Raw), "'($Module/[^']+\.(scss|css|js|xml))'")) {
+                $required.Add($ref.Groups[1].Value)
+            }
+        }
+        $scssDir = Join-Path $modDir 'static\src\scss'
+        if (Test-Path $scssDir) {
+            Get-ChildItem $scssDir -Recurse -File -Filter *.scss | ForEach-Object {
+                $rel = $_.FullName.Substring($modDir.Length + 1) -replace '\\', '/'
+                $required.Add("$Module/$rel")
+            }
+        }
+
+        foreach ($req in ($required | Sort-Object -Unique)) {
             $n = @($names | Where-Object { $_ -eq $req }).Count
             Check ($n -eq 1) "ZIP contains exactly once: $req (count=$n)"
         }

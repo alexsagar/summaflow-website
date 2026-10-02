@@ -301,3 +301,34 @@ Pipeline verified end to end: local -> ZIP -> Odoo Online -> browser.
 
 `website_summaflow` remains installed on the test database. Future redesign
 work updates this same module (import updated ZIP = module upgrade).
+
+---
+
+# Phase 1 — Global Frontend Foundation
+
+## IMPLEMENTED (local only; not yet imported into Odoo)
+
+- Refactored SCSS into partials `_tokens`, `_typography`, `_layout`,
+  `_buttons`, `_utilities`, `_responsive` + `summaflow.scss` (marker).
+- Odoo Online SaaS forbids local SCSS `@import`
+  ("Local import '...' is forbidden for security reasons"); all 7 files are
+  listed explicitly in `web.assets_frontend` in dependency order, no local
+  `@import`/`@use`. (Cross-file refs are CSS custom properties, runtime-resolved.)
+- Added `--sf-*` design tokens (color, typography, spacing, containers,
+  radii, shadows, focus, transitions) and opt-in `.sf-*` primitives
+  (typography, layout, buttons, a11y utilities). See docs/DESIGN-SYSTEM.md.
+- Retained `--sf-module-loaded: 1` marker.
+- Bumped module version `1.0.0` → `1.1.0`.
+- Made `validate.ps1` structure-aware: ZIP required-files derived from the
+  manifest + all on-disk SCSS partials (no longer hardcodes 3 files);
+  added on-disk `@import` partial-resolution check. Safety checks unchanged.
+- `build.ps1`: pre-build pass now backs up + removes the stale ZIP so it
+  validates source only; ZIP validated post-build; restore-on-failure kept.
+
+Values are INITIAL implementation tokens, not final approved brand values.
+No current markup uses `.sf-*`, so no visible change is expected on import.
+
+## QA — PENDING
+
+Not yet imported. Visual-safety expectation: existing pages render identically
+because no markup references the new classes.

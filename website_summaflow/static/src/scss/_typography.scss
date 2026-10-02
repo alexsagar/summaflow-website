@@ -1,0 +1,58 @@
+// SummaFlow typography primitives — opt-in only (.sf-* classes).
+// Applied to NOTHING in Phase 1. No bare h1/h2/p/a selectors.
+
+.sf-display {
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-display);
+    line-height: var(--sf-lh-tight);
+    font-weight: var(--sf-weight-bold);
+    letter-spacing: -0.02em;
+}
+
+.sf-heading-xl {
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-xl);
+    line-height: var(--sf-lh-tight);
+    font-weight: var(--sf-weight-bold);
+    letter-spacing: -0.015em;
+}
+
+.sf-heading-lg {
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-lg);
+    line-height: var(--sf-lh-snug);
+    font-weight: var(--sf-weight-semibold);
+}
+
+.sf-heading-md {
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-md);
+    line-height: var(--sf-lh-snug);
+    font-weight: var(--sf-weight-semibold);
+}
+
+.sf-body-lg {
+    font-family: var(--sf-font-body);
+    font-size: var(--sf-text-lg);
+    line-height: var(--sf-lh-body);
+}
+
+.sf-body {
+    font-family: var(--sf-font-body);
+    font-size: var(--sf-text-base);
+    line-height: var(--sf-lh-body);
+}
+
+.sf-body-sm {
+    font-family: var(--sf-font-body);
+    font-size: var(--sf-text-sm);
+    line-height: var(--sf-lh-body);
+}
+
+.sf-eyebrow {
+    font-size: var(--sf-text-xs);
+    font-weight: var(--sf-weight-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sf-text-muted);
+}

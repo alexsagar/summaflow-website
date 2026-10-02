@@ -12,9 +12,11 @@ Frontend-only customization module for the SummaFlow website running on
 Odoo Online SaaS (Enterprise). Contains SCSS, browser-side JavaScript,
 QWeb/XML, and static assets. No server-side Python logic.
 
-Phase 0: minimal valid module. The only shipped style is a harmless
-CSS custom property (--sf-module-loaded) used to confirm the frontend
-asset bundle loaded. No visible redesign.
+Phase 1: global frontend foundation. Ships the SummaFlow design-system
+layer as --sf-* CSS custom properties and opt-in .sf-* primitives
+(typography, layout, buttons, utilities). No current markup uses these
+classes, so there is no visible redesign yet. Retains the harmless
+--sf-module-loaded marker for load verification.
 """,
     'author': "SummaFlow",
     'website': "https://summaflow.com",
@@ -22,12 +24,22 @@ asset bundle loaded. No visible redesign.
     # Short 2-3 part semantic version on purpose. The saas~19.4 module loader
     # prefixes the current Odoo SaaS series automatically; do NOT hard-code
     # 19.0 / 19.4 here.
-    'version': '1.0.0',
+    'version': '1.1.0',
     'license': 'LGPL-3',
     'depends': ['website'],
     'data': [],
+    # Odoo Online SaaS forbids local @import between custom SCSS files, so
+    # every file is listed explicitly here (no wildcards) in dependency order.
+    # Values are CSS custom properties resolved at runtime, so order is not
+    # strictly required, but tokens are bundled first by convention.
     'assets': {
         'web.assets_frontend': [
+            'website_summaflow/static/src/scss/_tokens.scss',
+            'website_summaflow/static/src/scss/_typography.scss',
+            'website_summaflow/static/src/scss/_layout.scss',
+            'website_summaflow/static/src/scss/_buttons.scss',
+            'website_summaflow/static/src/scss/_utilities.scss',
+            'website_summaflow/static/src/scss/_responsive.scss',
             'website_summaflow/static/src/scss/summaflow.scss',
         ],
     },

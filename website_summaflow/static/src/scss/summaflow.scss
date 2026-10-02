@@ -1,7 +1,19 @@
-// SummaFlow website styles.
+// SummaFlow website styles — Phase 1 global frontend foundation.
 //
-// Phase 0 — harmless load marker only. NO visible redesign.
-// Verify after test import via DevTools console:
+// Odoo Online SaaS FORBIDS local @import between custom SCSS files
+// ("Local import ... is forbidden for security reasons"). Every partial is
+// therefore listed explicitly in __manifest__.py web.assets_frontend, in
+// dependency order, and this file adds NO @import / @use of local files.
+//
+// This entry file carries only the harmless load marker. Partials (_tokens,
+// _typography, _layout, _buttons, _utilities, _responsive) are bundled by the
+// manifest and loaded before this file.
+//
+// VISUAL SAFETY: the foundation defines --sf-* custom properties and opt-in
+// .sf-* classes ONLY. No current markup uses these classes, so importing this
+// module produces no visible change.
+//
+// Verify load after import (DevTools console):
 //   getComputedStyle(document.documentElement).getPropertyValue('--sf-module-loaded')
 // Expected: "1"
 :root {

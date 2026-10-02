@@ -365,6 +365,62 @@ The desired result should remain clearly SummaFlow.
 
 ---
 
+# Phase 1 — Implemented Foundation
+
+Status: INITIAL IMPLEMENTATION TOKENS (not final approved brand values).
+
+Shipped in `website_summaflow/static/src/scss/` as CSS custom properties
+(`--sf-*`) and opt-in classes (`.sf-*`). No existing markup uses these classes,
+so importing Phase 1 produces no visible change. Values are grounded in colors
+observed in `docs/original-site/` snapshots and are provisional.
+
+## SCSS architecture
+
+Odoo Online SaaS forbids local SCSS `@import` between custom files, so all 7
+files are listed explicitly in `web.assets_frontend`, in order:
+`_tokens` → `_typography` → `_layout` → `_buttons` → `_utilities` →
+`_responsive` → `summaflow`. No local `@import`/`@use`. Cross-file references are
+CSS custom properties resolved at runtime, so order is not strictly required.
+`summaflow.scss` carries only the `--sf-module-loaded` marker.
+
+## Tokens (initial)
+
+Color: `--sf-bg` `#ffffff`, `--sf-bg-subtle` `#f6f8fa`, `--sf-surface` `#ffffff`,
+`--sf-text` `#1a2230`, `--sf-text-muted` `#5a6473`, `--sf-border` `#d9dee5`,
+`--sf-primary` `#2f80ed`, `--sf-primary-ink` `#4262ae`, `--sf-secondary` `#64beb5`,
+`--sf-accent` `#53b973`, `--sf-focus` `#2f80ed`,
+`--sf-gradient-brand` (`90deg #4262ae → #64beb5 → #53b973`).
+
+Typography: `--sf-font-body`/`--sf-font-heading` (both `inherit` in Phase 1 — no
+new font imposed); sizes `--sf-text-xs|sm|base|lg`; fluid headings
+`--sf-h-md|lg|xl` and `--sf-display` (clamp); line-heights
+`--sf-lh-tight|snug|body`; weights `--sf-weight-regular|medium|semibold|bold`.
+
+Spacing: `--sf-space-1..9` (0.25rem → 6rem) + fluid `--sf-section-y`.
+
+Containers: `--sf-container` 1240px, `--sf-container-narrow` 720px,
+`--sf-container-wide` 1440px, fluid `--sf-gutter`.
+
+Primitives: `--sf-border-width`, `--sf-radius-sm|radius|lg`,
+`--sf-shadow-sm|shadow`, `--sf-focus-ring`, `--sf-transition|transition-slow`.
+
+Marker: `--sf-module-loaded: 1` retained for load verification.
+
+## Primitives (opt-in classes)
+
+- Layout: `.sf-container` (`--narrow`, `--wide`), `.sf-section` (`--compact`,
+  `--subtle`), `.sf-stack`, `.sf-cluster`, `.sf-grid` (auto-fit, no media query).
+- Typography: `.sf-display`, `.sf-heading-xl|lg|md`, `.sf-body-lg|body|sm`,
+  `.sf-eyebrow`.
+- Buttons: `.sf-button` + `--primary|--secondary|--ghost`; states default/hover/
+  active/`:focus-visible`/disabled (`[disabled]`, `[aria-disabled="true"]`);
+  44px min touch target. Does not touch Odoo `.btn`.
+- Utilities/a11y: `.sf-visually-hidden`, `.sf-text-gradient`, `.sf-focus-ring`,
+  `.sf-muted`. `@media (prefers-reduced-motion: reduce)` neutralizes transitions
+  on `.sf-*` only (no global reset).
+
+---
+
 # Design Approval Rule
 
 Once a section has been approved, agents should not casually redesign it while working on another section.

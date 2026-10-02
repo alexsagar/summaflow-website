@@ -1,0 +1,57 @@
+// SummaFlow button primitives — opt-in only (.sf-button*).
+// Does NOT touch Odoo .btn. Apply to markup in a later phase.
+
+.sf-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sf-space-2);
+    min-height: 44px; // accessible touch target
+    padding: var(--sf-space-3) var(--sf-space-5);
+    border: var(--sf-border-width) solid transparent;
+    border-radius: var(--sf-radius);
+    font-family: var(--sf-font-body);
+    font-size: var(--sf-text-base);
+    font-weight: var(--sf-weight-semibold);
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--sf-transition),
+                border-color var(--sf-transition),
+                color var(--sf-transition),
+                box-shadow var(--sf-transition);
+}
+
+.sf-button:focus-visible {
+    outline: none;
+    box-shadow: var(--sf-focus-ring);
+}
+
+.sf-button[disabled],
+.sf-button[aria-disabled="true"] {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.sf-button--primary {
+    background: var(--sf-primary);
+    color: #ffffff;
+}
+.sf-button--primary:hover { background: var(--sf-primary-ink); }
+.sf-button--primary:active { background: var(--sf-primary-ink); }
+
+.sf-button--secondary {
+    background: var(--sf-surface);
+    color: var(--sf-text);
+    border-color: var(--sf-border);
+}
+.sf-button--secondary:hover { border-color: var(--sf-text-muted); }
+.sf-button--secondary:active { background: var(--sf-bg-subtle); }
+
+.sf-button--ghost {
+    background: transparent;
+    color: var(--sf-primary);
+}
+.sf-button--ghost:hover { background: rgba(47, 128, 237, 0.08); }
+.sf-button--ghost:active { background: rgba(47, 128, 237, 0.14); }
