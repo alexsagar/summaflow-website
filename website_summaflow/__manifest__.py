@@ -28,6 +28,7 @@ classes, so there is no visible redesign yet. Retains the harmless
     'license': 'LGPL-3',
     'depends': ['website'],
     'data': [
+        'views/header.xml',
         'views/footer.xml',
     ],
     # Odoo Online SaaS forbids local @import between custom SCSS files, so
@@ -44,6 +45,7 @@ classes, so there is no visible redesign yet. Retains the harmless
             'website_summaflow/static/src/scss/_responsive.scss',
             'website_summaflow/static/src/scss/_operations-roles.scss',
             'website_summaflow/static/src/scss/_operations-roles-viz.scss',
+            'website_summaflow/static/src/scss/_header.scss',
             'website_summaflow/static/src/scss/_footer.scss',
             'website_summaflow/static/src/scss/summaflow.scss',
             'website_summaflow/static/src/js/operations_roles_viz.js',

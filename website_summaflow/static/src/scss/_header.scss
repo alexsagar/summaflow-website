@@ -1,0 +1,286 @@
+// SummaFlow header — compact segmented product navbar.
+//
+// Scoped entirely under .sf-header / .sf-mobile-nav so nothing here can reach
+// the footer, the hero, or the Operations Role cards. The base .sf-button in
+// _buttons.scss is blue; the header restates the approved black/white button
+// language locally, exactly as _footer.scss does, so the two read as one
+// system. No gradient, no animated fill, no decorative shadow: the brand
+// gradient lives only in the logo asset.
+//
+// No local @import / @use (forbidden on Odoo Online SaaS): this file is listed
+// explicitly in web.assets_frontend.
+
+.sf-header {
+    --sf-header-h: 62px;
+    position: relative;
+    z-index: 1030;
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e6eaef;
+}
+
+.sf-header__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--sf-space-4);
+    min-height: var(--sf-header-h);
+    padding: 0 var(--sf-space-4);
+}
+
+// --- Brand ----------------------------------------------------------------
+.sf-header__brand {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.sf-header__brand img {
+    display: block;
+    width: auto;        // never distort the real logo asset
+    height: 34px;
+    max-width: 155px;
+    object-fit: contain;
+}
+
+// --- Group dividers -------------------------------------------------------
+// Between major groups only, never between individual nav links.
+.sf-header__divider {
+    width: 1px;
+    height: 24px;
+    flex: 0 0 1px;
+    background-color: #e6eaef;
+}
+
+// --- Main navigation ------------------------------------------------------
+.sf-header__nav {
+    display: flex;
+    align-items: center;
+    gap: var(--sf-space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sf-header__nav-link {
+    display: inline-block;
+    padding: 0.25rem 0;
+    border-bottom: 2px solid transparent;
+    color: #111111;
+    font-size: 0.9375rem; // 15px
+    font-weight: 400;
+    line-height: 1.4;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.sf-header__nav-link:hover,
+.sf-header__nav-link:focus {
+    color: #000000;
+    border-bottom-color: #000000;
+    text-decoration: none;
+}
+
+.sf-header__nav-link[aria-current="page"] {
+    color: #000000;
+    border-bottom-color: #000000;
+}
+
+.sf-header__spacer {
+    flex: 1 1 auto;
+    min-width: var(--sf-space-4);
+}
+
+// --- Social utility area --------------------------------------------------
+.sf-header__social {
+    display: flex;
+    align-items: center;
+    gap: var(--sf-space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sf-header__social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    color: #111111;
+    font-size: 1.0625rem; // 17px glyph
+    line-height: 1;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out;
+}
+
+.sf-header__social a:hover,
+.sf-header__social a:focus {
+    color: #000000;
+}
+
+// --- Actions: Sign In + Request a Free Trial, a matched pair --------------
+.sf-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sf-space-2);
+    flex-shrink: 0;
+}
+
+.sf-header .sf-button,
+.sf-mobile-nav .sf-button {
+    min-height: 0; // the approved button is 32px tall, not 44px
+    padding: 0.3rem 0.9rem;
+    border: 1px solid transparent;
+    border-radius: 0.5rem; // 8px
+    font-size: 0.875rem;   // 14px
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+.sf-header .sf-button--primary,
+.sf-header .sf-button--primary:hover,
+.sf-header .sf-button--primary:focus,
+.sf-header .sf-button--primary:active,
+.sf-mobile-nav .sf-button--primary,
+.sf-mobile-nav .sf-button--primary:hover,
+.sf-mobile-nav .sf-button--primary:focus,
+.sf-mobile-nav .sf-button--primary:active {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.sf-header .sf-button--secondary,
+.sf-mobile-nav .sf-button--secondary {
+    background-color: #ffffff;
+    border-color: #111111;
+    color: #000000;
+}
+
+.sf-header .sf-button--secondary:hover,
+.sf-header .sf-button--secondary:focus,
+.sf-header .sf-button--secondary:active,
+.sf-mobile-nav .sf-button--secondary:hover,
+.sf-mobile-nav .sf-button--secondary:focus,
+.sf-mobile-nav .sf-button--secondary:active {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+// --- Mobile trigger -------------------------------------------------------
+.sf-header__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sf-space-2);
+    min-height: 40px;
+    padding: 0.35rem 0.75rem;
+    background-color: #ffffff;
+    border: 1px solid #111111;
+    border-radius: 0.5rem;
+    color: #000000;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.sf-header__toggle:hover,
+.sf-header__toggle:focus {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+// --- Mobile panel ---------------------------------------------------------
+.sf-mobile-nav {
+    // Two properties rather than one mixed-unit min(): Odoo's Sass evaluates
+    // min() and rejects mixed units (vw with px).
+    width: 360px;
+    max-width: 88vw;
+    background-color: #ffffff;
+}
+
+.sf-mobile-nav .offcanvas-header {
+    border-bottom: 1px solid #e6eaef;
+}
+
+.sf-mobile-nav__list {
+    margin: 0 0 var(--sf-space-5);
+    padding: 0;
+    list-style: none;
+}
+
+.sf-mobile-nav__list a {
+    display: block;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f2f5;
+    color: #111111;
+    font-size: 1rem;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.sf-mobile-nav__list a:hover,
+.sf-mobile-nav__list a:focus {
+    color: #000000;
+}
+
+.sf-mobile-nav__actions {
+    display: grid;
+    gap: var(--sf-space-2);
+    margin-bottom: var(--sf-space-5);
+}
+
+.sf-mobile-nav__actions .sf-button {
+    width: 100%;
+    min-height: 44px; // touch target on mobile
+}
+
+.sf-mobile-nav__social {
+    display: flex;
+    align-items: center;
+    gap: var(--sf-space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sf-mobile-nav__social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: #111111;
+    font-size: 1.125rem;
+    text-decoration: none;
+}
+
+// --- Focus visibility -----------------------------------------------------
+.sf-header a:focus-visible,
+.sf-header button:focus-visible,
+.sf-mobile-nav a:focus-visible,
+.sf-mobile-nav button:focus-visible {
+    outline: 2px solid #000000;
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+// --- Responsive -----------------------------------------------------------
+// Tablet / small desktop: tighten horizontal rhythm before dropping to mobile.
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .sf-header__nav { gap: var(--sf-space-4); }
+    .sf-header__bar { gap: var(--sf-space-3); }
+    .sf-header__social { gap: var(--sf-space-2); }
+    // "Request a Free Trial" is a long label: trim the button padding only in
+    // this narrow desktop band so nothing wraps.
+    .sf-header .sf-button { padding: 0.3rem 0.7rem; }
+}
+
+@media (min-width: 1200px) {
+    .sf-header__bar { padding: 0 var(--sf-space-5); }
+    .sf-header__nav { gap: var(--sf-space-6); }
+}
