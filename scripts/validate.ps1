@@ -70,14 +70,18 @@ foreach ($f in $scssFiles) {
     $localImp = [regex]::Matches($body, "@(import|use)\s+['""](?!https?:|url\()[^'""]+['""]")
     Check ($localImp.Count -eq 0) "no local @import/@use in SCSS: $($f.Name) ($($localImp.Count) found)"
 
-    # Odoo's Sass compiler evaluates bare min()/max() as Sass functions and
-    # errors on mixed units: "Incompatible units: '%' and 'px'". Flag any
-    # min(...)/max(...) call whose arguments contain BOTH a % and a px value.
-    # (clamp(), calc(), and single-unit min/max are left alone on purpose.)
-    foreach ($mm in [regex]::Matches($body, "(?<![\w-])(?:min|max)\(([^()]*)\)")) {
-        $args0 = $mm.Groups[1].Value
-        $bad = ($args0 -match '\d\s*%') -and ($args0 -match '\d\s*px')
-        Check (-not $bad) "no mixed %/px units in Sass min()/max(): $($f.Name) -> '$($mm.Value)'"
+    # ODOO ONLINE COMPATIBILITY GUARD (not a general CSS rule): Odoo's Sass
+    # compiler evaluates clamp()/min()/max() and errors on mixed units
+    # ("Incompatible units: 'vw' and 'rem'", "'%' and 'px'"). Conservative
+    # project rule: any clamp()/min()/max() argument list may contain at most
+    # ONE CSS unit family. minmax() is exempt (negative lookbehind). calc() and
+    # single-unit clamp/min/max are allowed.
+    $unitRe = '(?i)\d\s*(rem|em|vmin|vmax|vw|vh|px|%|ch|ex|pt|pc|cm|mm|in|q)(?![\w%])'
+    foreach ($mm in [regex]::Matches($body, "(?<![\w-])(clamp|min|max)\(([^()]*)\)")) {
+        $fn    = $mm.Groups[1].Value
+        $inner = $mm.Groups[2].Value
+        $units = @([regex]::Matches($inner, $unitRe) | ForEach-Object { $_.Groups[1].Value.ToLower() } | Sort-Object -Unique)
+        Check ($units.Count -le 1) "Odoo-safe single unit family in $fn(): $($f.Name) -> '$($mm.Value)' (units: $($units -join ','))"
     }
 }
 
@@ -97,11 +101,49 @@ if (Test-Path $manifest) {
         Check (Test-Path (Join-Path $modDir $disk)) "manifest-declared SCSS exists on disk: $d"
     }
 
-    $expected = @('_tokens','_typography','_layout','_buttons','_utilities','_responsive','summaflow') |
+    # Foundation partials load first, then section-specific partials, then the
+    # summaflow.scss entry (marker) LAST. Section partials sit between
+    # '_responsive' and 'summaflow'; order among them is not significant (refs
+    # are runtime CSS custom properties), so only the fixed endpoints are
+    # enforced strictly.
+    $head = @('_tokens','_typography','_layout','_buttons','_utilities','_responsive') |
         ForEach-Object { "$Module/static/src/scss/$_.scss" }
-    $orderOk = ($declared.Count -eq $expected.Count)
-    if ($orderOk) { for ($i = 0; $i -lt $expected.Count; $i++) { if ($declared[$i] -ne $expected[$i]) { $orderOk = $false } } }
-    Check $orderOk "manifest SCSS bundle order == tokens,typography,layout,buttons,utilities,responsive,summaflow"
+    $entry = "$Module/static/src/scss/summaflow.scss"
+    $orderOk = ($declared.Count -ge ($head.Count + 1))
+    if ($orderOk) {
+        for ($i = 0; $i -lt $head.Count; $i++) { if ($declared[$i] -ne $head[$i]) { $orderOk = $false } }
+        if ($declared[-1] -ne $entry) { $orderOk = $false }
+    }
+    Check $orderOk "manifest SCSS order: foundation first (tokens..responsive), summaflow.scss last"
+}
+
+# --- Frontend JS checks ------------------------------------------------------
+# Every module JS file must be declared explicitly in the manifest, be
+# syntactically valid, and be self-contained: no imports, no network access,
+# no external URLs (Odoo Online frontend; no third-party dependencies).
+$jsDir = Join-Path $modDir 'static\src\js'
+$jsFiles = @()
+if (Test-Path $jsDir) { $jsFiles = @(Get-ChildItem $jsDir -Recurse -File -Filter *.js) }
+if ($jsFiles.Count -eq 0) {
+    Write-Host "  [SKIP] no JS files" -ForegroundColor DarkGray
+} else {
+    $mjs = if (Test-Path $manifest) { Get-Content $manifest -Raw } else { '' }
+    $node = Get-Command node -ErrorAction SilentlyContinue
+    foreach ($f in $jsFiles) {
+        $rel = "$Module/" + ($f.FullName.Substring($modDir.Length + 1) -replace '\\', '/')
+        Check ($mjs -match [regex]::Escape("'$rel'")) "JS file declared explicitly in manifest: $rel"
+
+        $src = Get-Content $f.FullName -Raw
+        $net = [regex]::Matches($src, '(?im)\bfetch\s*\(|XMLHttpRequest|WebSocket|sendBeacon|EventSource|\bimport\s*\(|^\s*import\s|^\s*export\s|\brequire\s*\(|https?://|<script')
+        Check ($net.Count -eq 0) "JS has no imports/network/external URLs: $($f.Name) ($($net.Count) found)"
+
+        if ($node) {
+            & node --check $f.FullName
+            Check ($LASTEXITCODE -eq 0) "JS syntax valid (node --check): $($f.Name)"
+        } else {
+            Write-Host "  [SKIP] node not found; JS syntax not checked: $($f.Name)" -ForegroundColor DarkGray
+        }
+    }
 }
 
 # XML well-formedness (only if XML exists)

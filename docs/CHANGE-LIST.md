@@ -116,6 +116,40 @@ Every Operations Role
 
 with deliberate typography rather than accidental wrapping.
 
+#### IMPLEMENTED — v1.2.0 (local only; not yet imported)
+
+Module ships section-scoped CSS `.sf-op-roles` in
+`static/src/scss/_operations-roles.scss` (no new visuals, no JS). Fixes:
+calmer fluid `padding-block` (replaces `pt72`/`pb40`), heading on the
+`--sf-h-xl` scale (not inline `39px`), intentional two-line break via
+`.sf-op-roles__accent` (`display:block`). Heading uses the canonical SummaFlow
+brand-heading gradient `--sf-gradient-heading` (`90deg #4262AE → #64BEB5 →
+#53B973`), recovered from the original branded headings (deep blue→teal→green,
+wordmark direction), not the pale blue→mint accent gradient.
+
+No Website Builder or DB edit required. The CSS targets the existing database
+markup directly via the unique selector `section.s_title.pt72.pb40` (verified 1
+match on the homepage) and its inner `.text-gradient` accent. Importing/updating
+the module ZIP + hard refresh applies the fix. `.sf-op-roles*` classes are kept
+as a future reusable alias. Role-card section below is unchanged (out of scope).
+
+Two `!important` uses, both because the section carries inline Website Builder
+styles that otherwise win over the sheet: heading `font-size` (inline
+`font-size:39px` on the span) and accent `background-image` (inline gradient on
+the `<font>`). Section padding and the line break need no `!important` (compound
+selector beats Odoo's single-class `.pt72`/`.pb40`; no inline `display`).
+
+#### PROTOTYPE (test database only) — animated role cards
+
+Approved for testing only. `static/src/js/operations_roles_viz.js` appends one
+decorative SVG stage to each of the three role cards (Consensus, Anomaly,
+Traceability) after the unique title section; `_operations-roles-viz.scss`
+gives near-square cards (3 cols ≤ ~424px desktop, 2 cols tablet, 1 col mobile)
+and the 6s scene timelines. Uses the canonical heading gradient stops only.
+Idempotent; inactive in Website Builder edit mode (removes its own nodes if
+edit mode starts) so nothing is saved into the page arch. Off-screen scenes
+pause; `prefers-reduced-motion` shows a static final state.
+
 ### Workflow Comparison
 
 - Keep the core comparison concept.

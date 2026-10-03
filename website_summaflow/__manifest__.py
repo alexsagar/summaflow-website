@@ -24,7 +24,7 @@ classes, so there is no visible redesign yet. Retains the harmless
     # Short 2-3 part semantic version on purpose. The saas~19.4 module loader
     # prefixes the current Odoo SaaS series automatically; do NOT hard-code
     # 19.0 / 19.4 here.
-    'version': '1.1.0',
+    'version': '1.2.0',
     'license': 'LGPL-3',
     'depends': ['website'],
     'data': [],
@@ -40,7 +40,10 @@ classes, so there is no visible redesign yet. Retains the harmless
             'website_summaflow/static/src/scss/_buttons.scss',
             'website_summaflow/static/src/scss/_utilities.scss',
             'website_summaflow/static/src/scss/_responsive.scss',
+            'website_summaflow/static/src/scss/_operations-roles.scss',
+            'website_summaflow/static/src/scss/_operations-roles-viz.scss',
             'website_summaflow/static/src/scss/summaflow.scss',
+            'website_summaflow/static/src/js/operations_roles_viz.js',
         ],
     },
     'installable': True,

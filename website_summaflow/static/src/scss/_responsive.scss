@@ -17,3 +17,27 @@
 @media (max-width: 480px) {
     .sf-stack { gap: var(--sf-space-4); }
 }
+
+// Stepped responsive scale for fluid tokens. Odoo Sass rejects mixed-unit
+// clamp() (rem+vw), so we bump single-unit (rem) token values at project
+// breakpoints instead. Two steps only — no fluid math, no mixed units.
+@media (min-width: 48rem) {
+    :root {
+        --sf-h-md: 1.4rem;
+        --sf-h-lg: 1.9rem;
+        --sf-h-xl: 2.5rem;
+        --sf-display: 3.25rem;
+        --sf-section-y: 6.5rem;
+        --sf-gutter: 1.5rem;
+    }
+}
+@media (min-width: 75rem) {
+    :root {
+        --sf-h-md: 1.625rem;
+        --sf-h-lg: 2.25rem;
+        --sf-h-xl: 3rem;
+        --sf-display: 4rem;
+        --sf-section-y: 9rem;
+        --sf-gutter: 2rem;
+    }
+}
