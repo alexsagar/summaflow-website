@@ -22,13 +22,24 @@
     --sf-accent: #53b973;    // green-blue accent
     --sf-focus: #2f80ed;
 
-    --sf-gradient-brand: linear-gradient(90deg, #4262ae 0%, #64beb5 60%, #53b973 100%);
-    // Canonical SummaFlow brand-heading gradient, recovered exactly from the
-    // original branded headings ("One Workspace", "Auditable Project Control",
-    // "Trust, Security & Control" — homepage.xml:7,22,127). Deep blue -> teal
-    // -> green, matching the SummaFlow wordmark. Same colors as --sf-gradient-
-    // brand. Do not substitute the pale blue->mint accent gradient.
-    --sf-gradient-heading: linear-gradient(90deg, #4262AE, #64BEB5, #53B973);
+    // THE canonical SummaFlow brand gradient — one definition, taken from the
+    // logo itself. Recovered by sampling the live brand asset
+    // (https://www.summaflow.com/web/image/website/1/logo/SUMMAFLOW, 156x156
+    // WebP) pixel by pixel: the mark spans x=11..144, the colour is constant
+    // down every column (top and bottom of x=78 both read #63BDB6), so the
+    // gradient is purely horizontal (90deg), and left edge / mid / right edge
+    // measure #326BB3 / #63BDB6 / #50BA74.
+    //
+    // This REPLACES the earlier #4262AE / #64BEB5 / #53B973 values, which were
+    // read off branded headings in the original markup and are measurably not
+    // the logo's colours. Every brand-gradient token below now aliases this
+    // one; do not re-introduce a second set of stops.
+    --sf-gradient-brand: linear-gradient(90deg, #326BB3 0%, #63BDB6 50%, #50BA74 100%);
+
+    // Aliases kept so existing call sites keep working. They are deliberately
+    // not separate definitions.
+    --sf-gradient-heading: var(--sf-gradient-brand);
+    --sf-gradient-logo: var(--sf-gradient-brand);
 
     // --- Typography -------------------------------------------------------
     // Inherit the site's font stack by default; do not impose a new face.

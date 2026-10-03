@@ -24,10 +24,12 @@ classes, so there is no visible redesign yet. Retains the harmless
     # Short 2-3 part semantic version on purpose. The saas~19.4 module loader
     # prefixes the current Odoo SaaS series automatically; do NOT hard-code
     # 19.0 / 19.4 here.
-    'version': '1.2.0',
+    'version': '1.3.0',
     'license': 'LGPL-3',
     'depends': ['website'],
-    'data': [],
+    'data': [
+        'views/footer.xml',
+    ],
     # Odoo Online SaaS forbids local @import between custom SCSS files, so
     # every file is listed explicitly here (no wildcards) in dependency order.
     # Values are CSS custom properties resolved at runtime, so order is not
@@ -42,6 +44,7 @@ classes, so there is no visible redesign yet. Retains the harmless
             'website_summaflow/static/src/scss/_responsive.scss',
             'website_summaflow/static/src/scss/_operations-roles.scss',
             'website_summaflow/static/src/scss/_operations-roles-viz.scss',
+            'website_summaflow/static/src/scss/_footer.scss',
             'website_summaflow/static/src/scss/summaflow.scss',
             'website_summaflow/static/src/js/operations_roles_viz.js',
         ],

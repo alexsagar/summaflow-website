@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+      SummaFlow footer - compact wide editorial composition.
+
+      Source-controlled and self-applying: inherits website.layout and replaces
+      BOTH footer nodes, at high priority so this definition wins on import
+      without any manual Website Builder step.
+
+        1. //div[@id='footer']                   -> the SummaFlow footer panel
+        2. //div[hasclass('o_footer_copyright')] -> the single SummaFlow legal row
+
+      (2) is why an earlier iteration still showed a legacy
+      "Copyright (c) SummaFlow" strip: in website.layout the copyright block is
+      a SIBLING of #footer inside <footer id="bottom">, not a child of it, so
+      replacing #footer alone left it rendering underneath. It is replaced
+      structurally rather than hidden with CSS.
+
+      Composition (two dense rows, then the brand signature):
+
+        row 1   brand + CTAs | EXPLORE | COMPANY | STAY UPDATED
+        row 2   contact details | EXPLORE AI SUMMARY | social icons
+        row 3   oversized SummaFlow wordmark, full-bleed, nearly full width
+
+      Both divs keep t-ignore="true" so the Website Builder never treats this
+      footer as editable content and never persists a divergent copy into the
+      database arch.
+
+      The Odoo newsletter form (s_newsletter_subscribe_form / js_subscribe /
+      data-list-id="1", plus the js_subscribed_wrap success node) is preserved
+      verbatim so its real subscribe behaviour keeps working; only its
+      presentation and state styling change.
+
+      CTA controls are plain anchors carrying the header's button language
+      (.sf-button plus the primary / secondary modifier, styled in _footer.scss
+      from the live header's Bootstrap .btn values). The earlier gradient
+      fill was removed on client instruction: no gradient, no animated fill, no
+      extra span, and no JavaScript. Non-void elements are written with
+      explicit closing tags on purpose: a self-closed <span/> would be parsed
+      by HTML as an open tag and would swallow its siblings.
+    -->
+    <template id="summaflow_footer" inherit_id="website.layout"
+              name="SummaFlow Footer" priority="99">
+
+        <!-- 1. Main footer panel -->
+        <xpath expr="//div[@id='footer']" position="replace">
+            <div id="footer" t-ignore="true" t-if="not no_footer" class="sf-footer">
+                <div class="sf-footer__panel">
+
+                    <!-- Row 1: brand lead, two nav groups, newsletter -->
+                    <div class="sf-footer__top">
+                        <div class="sf-footer__lead">
+                            <div class="sf-footer__logotype">SummaFlow</div>
+                            <div class="sf-footer__ctas">
+                                <a class="sf-button sf-button--primary"
+                                   href="https://app.summaflow.com/login">
+                                    Sign In
+                                </a>
+                                <a class="sf-button sf-button--secondary"
+                                   href="mailto:info@summaflow.com">
+                                    Contact
+                                </a>
+                            </div>
+                        </div>
+
+                        <nav class="sf-footer__navgroup" aria-label="Explore">
+                            <h3 class="sf-footer__head">Explore</h3>
+                            <ul class="sf-footer__list">
+                                <li><a href="/platform">Platform</a></li>
+                                <li><a href="/solutions">Solutions</a></li>
+                                <li><a href="/security">Security</a></li>
+                            </ul>
+                        </nav>
+
+                        <nav class="sf-footer__navgroup" aria-label="Company">
+                            <h3 class="sf-footer__head">Company</h3>
+                            <ul class="sf-footer__list">
+                                <li><a href="/company">Company</a></li>
+                                <li><a href="/blog">Resources</a></li>
+                            </ul>
+                        </nav>
+
+                        <div class="sf-footer__news">
+                            <h3 class="sf-footer__head">Stay updated</h3>
+                            <p class="sf-footer__news-copy">A weekly roundup of news and insights on the world of LLMs.</p>
+                            <div data-vxml="001" data-name="Newsletter"
+                                 class="s_newsletter_subscribe_form s_newsletter_list js_subscribe sf-footer__form"
+                                 data-snippet="s_newsletter_subscribe_form" data-list-id="1">
+                                <div class="js_subscribed_wrap d-none sf-footer__news-done">
+                                    <p>
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                        <span>Thanks for registering.</span>
+                                    </p>
+                                </div>
+                                <div class="js_subscribe_wrap">
+                                    <div class="input-group sf-footer__field">
+                                        <input type="email" name="email" aria-label="Email address"
+                                               placeholder="Email address"
+                                               class="s_newsletter_subscribe_form_input js_subscribe_value form-control"/>
+                                        <a role="button" href="#"
+                                           class="js_subscribe_btn o_submit o_translate_inline btn sf-button sf-button--primary">
+                                            Subscribe
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: contact details, AI providers, social icons -->
+                    <div class="sf-footer__meta">
+                        <div class="sf-footer__details">
+                            <ul class="sf-footer__contact">
+                                <li><a href="mailto:info@summaflow.com">info@summaflow.com</a></li>
+                                <li>
+                                    <span class="sf-footer__contact-key">WhatsApp</span>
+                                    <a href="tel:+85292209701"><span class="o_force_ltr">+852 9220 9701</span></a>
+                                </li>
+                            </ul>
+                            <p class="sf-footer__address">GF, Koon Nam House, 12-14 Shing Wong Street, Hong Kong</p>
+                        </div>
+
+                        <!--
+                          Explore AI Summary: the four AI assistants a summary can
+                          be opened in. Marks are the official monochrome brand
+                          glyphs, stored locally under static/src/icons/ai/ and
+                          served from the module (no CDN, no remote URL). Icons
+                          only: provider names are carried by alt/title.
+                        -->
+                        <div class="sf-footer__ai">
+                            <h3 class="sf-footer__head">Explore AI Summary</h3>
+                            <ul class="sf-footer__ai-marks">
+                                <li>
+                                    <a href="https://chatgpt.com/?q=Explain%20SummaFlow%20and%20what%20it%20does.%20Focus%20on%20how%20it%20helps%20operations%20teams%20with%20information%20verification%2C%20proactive%20anomaly%20detection%2C%20source%20traceability%2C%20AI-assisted%20summaries%2C%20and%20workflow%20intelligence.%20Use%20https%3A%2F%2Fsummaflow.com%20as%20the%20primary%20source%20and%20do%20not%20invent%20features%20that%20are%20not%20documented%20on%20the%20website."
+                                       target="_blank" rel="noopener noreferrer"
+                                       title="Ask ChatGPT about SummaFlow" aria-label="Ask ChatGPT about SummaFlow">
+                                        <img src="/website_summaflow/static/src/icons/ai/openai.svg"
+                                             alt="ChatGPT" width="30" height="30"/>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://claude.ai/new?q=Explain%20SummaFlow%20and%20what%20it%20does.%20Focus%20on%20how%20it%20helps%20operations%20teams%20with%20information%20verification%2C%20proactive%20anomaly%20detection%2C%20source%20traceability%2C%20AI-assisted%20summaries%2C%20and%20workflow%20intelligence.%20Use%20https%3A%2F%2Fsummaflow.com%20as%20the%20primary%20source%20and%20do%20not%20invent%20features%20that%20are%20not%20documented%20on%20the%20website."
+                                       target="_blank" rel="noopener noreferrer"
+                                       title="Ask Claude about SummaFlow" aria-label="Ask Claude about SummaFlow">
+                                        <img src="/website_summaflow/static/src/icons/ai/claude.svg"
+                                             alt="Claude" width="30" height="30"/>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.perplexity.ai/search?q=Explain%20SummaFlow%20and%20what%20it%20does.%20Focus%20on%20how%20it%20helps%20operations%20teams%20with%20information%20verification%2C%20proactive%20anomaly%20detection%2C%20source%20traceability%2C%20AI-assisted%20summaries%2C%20and%20workflow%20intelligence.%20Use%20https%3A%2F%2Fsummaflow.com%20as%20the%20primary%20source%20and%20do%20not%20invent%20features%20that%20are%20not%20documented%20on%20the%20website."
+                                       target="_blank" rel="noopener noreferrer"
+                                       title="Ask Perplexity about SummaFlow" aria-label="Ask Perplexity about SummaFlow">
+                                        <img src="/website_summaflow/static/src/icons/ai/perplexity.svg"
+                                             alt="Perplexity" width="30" height="30"/>
+                                    </a>
+                                </li>
+                                <li>
+                                    <!--
+                                      gemini.google.com/app?q=... was tested and
+                                      ignores the query (empty composer), so the
+                                      Gemini mark instead opens Google AI Mode
+                                      (udm=50), which does carry the prompt
+                                      through q= and answers with Gemini.
+                                    -->
+                                    <a href="https://www.google.com/search?aep=11&amp;q=Explain%20SummaFlow%20and%20what%20it%20does.%20Focus%20on%20how%20it%20helps%20operations%20teams%20with%20information%20verification%2C%20proactive%20anomaly%20detection%2C%20source%20traceability%2C%20AI-assisted%20summaries%2C%20and%20workflow%20intelligence.%20Use%20https%3A%2F%2Fsummaflow.com%20as%20the%20primary%20source%20and%20do%20not%20invent%20features%20that%20are%20not%20documented%20on%20the%20website.&amp;udm=50"
+                                       target="_blank" rel="noopener noreferrer"
+                                       title="Explore SummaFlow with Gemini / Google AI Mode"
+                                       aria-label="Explore SummaFlow with Gemini / Google AI Mode">
+                                        <img src="/website_summaflow/static/src/icons/ai/gemini.svg"
+                                             alt="Gemini" width="30" height="30"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <ul class="sf-footer__social">
+                            <li>
+                                <a href="https://www.twitter.com/your-page" target="_blank"
+                                   rel="noopener" title="X" aria-label="SummaFlow on X">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/your-page" target="_blank"
+                                   rel="noopener" title="LinkedIn" aria-label="SummaFlow on LinkedIn">
+                                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/your-page" target="_blank"
+                                   rel="noopener" title="YouTube" aria-label="SummaFlow on YouTube">
+                                    <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!--
+                      Row 3: the oversized brand signature.
+
+                      Deliberately plain HTML text, NOT SVG. The previous SVG
+                      version relied on `fill: url(#sf_footer_wordmark)` coming
+                      from the compiled stylesheet; Odoo's asset bundler
+                      rewrites url() references inside CSS, which can break a
+                      bare in-document fragment reference and leave the glyphs
+                      unpainted. This treatment uses background-image +
+                      background-clip:text, with the gradient declared directly
+                      on the element, and is sized in vw so the word tracks the
+                      full panel width at every viewport.
+                    -->
+                    <div class="sf-footer__signature" aria-hidden="true">SummaFlow</div>
+                </div>
+            </div>
+        </xpath>
+
+        <!-- 2. The ONE legal row; structurally replaces Odoo's copyright block
+             (which also carries web.brand_promotion) so no legacy strip can
+             render below the SummaFlow footer. -->
+        <xpath expr="//div[hasclass('o_footer_copyright')]" position="replace">
+            <div id="o_footer_copyright" t-ignore="true" t-if="not no_footer"
+                 class="o_footer_copyright sf-footer__legal">
+                <div class="sf-footer__legal-inner">
+                    <span class="sf-footer__legal-copy">&#169; 2026 SummaFlow</span>
+                    <nav class="sf-footer__legal-nav" aria-label="Legal">
+                        <a href="/privacy-policy">Privacy Policy</a>
+                        <a href="/terms-conditions">Terms and Conditions</a>
+                        <a href="#">Cookies</a>
+                    </nav>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
