@@ -17,6 +17,9 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    // WebKit needs the fill override as well, otherwise the glyphs paint over
+    // the clipped background. The original inline hero treatment carried it.
+    -webkit-text-fill-color: transparent;
 }
 
 // Opt-in focus treatment for project interactive elements that are not

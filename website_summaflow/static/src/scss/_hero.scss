@@ -1,0 +1,211 @@
+// SummaFlow homepage hero — POLISH LAYER, not a redesign.
+//
+// The hero markup stays DB-managed Website Builder content ("Custom Banner").
+// hero.js attaches the .sf-hero* classes below to those existing elements; it
+// creates nothing. So every selector here is a SummaFlow class, except the few
+// Odoo classes this file must deliberately neutralise, each paired with a
+// SummaFlow class.
+//
+// SCALE RULE: the original builder hero is the visual reference. This file does
+// NOT set the headline font-size (Bootstrap's .display-4 keeps the original
+// scale), does NOT size the phone image (the builder's inline max-width: 54%
+// keeps the original proportion), and does NOT add section padding (the
+// builder's .pt56/.pb56 keep the original height). An earlier pass did all
+// three and made the hero taller, the headline heavier and the phone bigger
+// than the original.
+//
+// What it DOES do: the canonical brand gradient on "One Workspace" (via the
+// shared .sf-text-gradient utility, which resolves --sf-gradient-brand), a
+// lighter headline weight, consistent paragraph typography, the approved
+// black/white buttons, and modest internal rhythm.
+//
+// Specificity note: Odoo's spacing utilities (.pt8, .pb8, .pt16) and Bootstrap's
+// .h5-fs are single-class rules, and the theme's link colours apply to bare
+// <a> once .btn is gone. Selectors here are element+class or two-class on
+// purpose so they win without !important.
+//
+// No local @import / @use (forbidden on Odoo Online SaaS): this file is listed
+// explicitly in web.assets_frontend. No mixed-unit clamp()/min()/max().
+
+// --- Grid -----------------------------------------------------------------
+// The decorated element is Odoo's .row, so Bootstrap's flex sizing, gutters and
+// column widths are explicitly reset: a .col-lg-6 inside a grid track would
+// otherwise shrink to 50% of that track.
+.sf-hero .sf-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center; // keeps the phone optically level with the text block
+    gap: var(--sf-space-5);
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.sf-hero .sf-hero__grid > * {
+    flex: none;
+    width: auto;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+// --- Left column ----------------------------------------------------------
+// One shared left edge for headline, paragraph and buttons. The column's own
+// .pt8/.pb8 are dropped; the section keeps the builder's outer padding.
+.sf-hero .sf-hero__content {
+    min-width: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: left;
+}
+
+// Headline: size comes from the builder's .display-4, exactly as before. Only
+// the weight is corrected - the original reads light, and Bootstrap's display
+// headings are 300, so the heavier treatment of the previous pass is gone.
+h1.sf-hero__title {
+    margin: 0 0 var(--sf-space-4);
+    color: #111111;
+    font-family: var(--sf-font-heading); // inherited site face, not a new font
+    font-weight: 400;
+    line-height: var(--sf-lh-snug);
+}
+
+// The gradient phrase changes colour only: it inherits the headline's size and
+// weight, so it can never read bolder than the words around it.
+.sf-hero .sf-hero__title .sf-text-gradient {
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+p.sf-hero__lead {
+    margin: 0 0 var(--sf-space-4);
+    max-width: 56ch; // readable measure; the builder span had none
+    color: var(--sf-text);
+    line-height: var(--sf-lh-body); // 1.6
+}
+
+// The builder wraps the copy in <span class="h5-fs">, whose font-size comes
+// from a class, not the inline style hero.js clears.
+.sf-hero .sf-hero__lead span,
+.sf-hero .sf-hero__lead font {
+    font-size: inherit;
+    line-height: inherit;
+}
+
+// The emphasised clause stays emphasised, one step up from the body weight
+// rather than the browser's default <b> bold.
+.sf-hero .sf-hero__lead b,
+.sf-hero .sf-hero__lead strong {
+    font-weight: var(--sf-weight-semibold); // 600
+    color: #111111;
+}
+
+// Empty spacer paragraphs left in the builder arch. Collapsed, not removed:
+// vertical rhythm comes from the margins above.
+.sf-hero .sf-hero__void {
+    display: none;
+}
+
+// --- CTAs -----------------------------------------------------------------
+.sf-hero .sf-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sf-space-3); // 12px
+    padding-top: 0; // the builder's wrapper carries .pt16
+}
+
+// Compact: close to Bootstrap's own .btn metrics, which is what the original
+// pair used. Not taller than the original buttons.
+.sf-hero .sf-button {
+    display: inline-flex;
+    min-height: 0;
+    margin: 0; // the builder's primary link carries .me-2
+    padding: 0.375rem 0.9rem;
+    border: 1px solid transparent;
+    border-radius: 0.5rem; // 8px, as the header and footer
+    font-size: 0.9375rem; // 15px
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+// Primary label colour: stated for every link state with an element+two-class
+// selector. hero.js strips .btn from the anchor, which exposes it to the
+// theme's bare-<a> colour rules - that is what rendered the label dark on the
+// black fill. These selectors outrank them without !important.
+.sf-hero a.sf-button.sf-button--primary,
+.sf-hero a.sf-button.sf-button--primary:link,
+.sf-hero a.sf-button.sf-button--primary:visited,
+.sf-hero a.sf-button.sf-button--primary:hover,
+.sf-hero a.sf-button.sf-button--primary:focus,
+.sf-hero a.sf-button.sf-button--primary:active {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.sf-hero a.sf-button.sf-button--secondary,
+.sf-hero a.sf-button.sf-button--secondary:link,
+.sf-hero a.sf-button.sf-button--secondary:visited {
+    background-color: #ffffff;
+    border-color: #111111;
+    color: #000000;
+}
+
+.sf-hero a.sf-button.sf-button--secondary:hover,
+.sf-hero a.sf-button.sf-button--secondary:focus,
+.sf-hero a.sf-button.sf-button--secondary:active {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+// The builder wrapped the primary label in <font>/<span>; inherit so the button
+// rules own the colour in every state, including hover on the secondary.
+.sf-hero .sf-button font,
+.sf-hero .sf-button span,
+.sf-hero .sf-button:hover font,
+.sf-hero .sf-button:hover span {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.sf-hero a:focus-visible {
+    outline: 2px solid #000000;
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+// --- Right column: the existing phone asset, unchanged --------------------
+// No width, no max-width, no scaling: the builder's inline max-width: 54% and
+// its .img-fluid class keep the original proportion.
+.sf-hero .sf-hero__visual {
+    min-width: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: center;
+}
+
+img.sf-hero__device {
+    height: auto; // aspect safety only
+}
+
+// --- Responsive -----------------------------------------------------------
+// Desktop: the two-column composition, at the original proportions.
+@media (min-width: 992px) {
+    .sf-hero .sf-hero__grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: var(--sf-space-6); // 32px
+    }
+}
+
+// Mobile: the inline 54% is a share of the column, so the mockup gets small on
+// a narrow stacked layout. One floor, well under the original desktop size.
+@media (max-width: 767.98px) {
+    img.sf-hero__device {
+        min-width: 200px;
+    }
+}

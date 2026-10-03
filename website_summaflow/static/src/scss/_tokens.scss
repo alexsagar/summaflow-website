@@ -22,19 +22,17 @@
     --sf-accent: #53b973;    // green-blue accent
     --sf-focus: #2f80ed;
 
-    // THE canonical SummaFlow brand gradient — one definition, taken from the
-    // logo itself. Recovered by sampling the live brand asset
-    // (https://www.summaflow.com/web/image/website/1/logo/SUMMAFLOW, 156x156
-    // WebP) pixel by pixel: the mark spans x=11..144, the colour is constant
-    // down every column (top and bottom of x=78 both read #63BDB6), so the
-    // gradient is purely horizontal (90deg), and left edge / mid / right edge
-    // measure #326BB3 / #63BDB6 / #50BA74.
+    // THE canonical SummaFlow brand gradient — one definition, supplied by the
+    // client from the design source. These exact values are the single source
+    // of truth for every brand-gradient TEXT treatment on the site.
     //
-    // This REPLACES the earlier #4262AE / #64BEB5 / #53B973 values, which were
-    // read off branded headings in the original markup and are measurably not
-    // the logo's colours. Every brand-gradient token below now aliases this
-    // one; do not re-introduce a second set of stops.
-    --sf-gradient-brand: linear-gradient(90deg, #326BB3 0%, #63BDB6 50%, #50BA74 100%);
+    // They supersede both earlier sets: the pixel-sampled logo values
+    // (#326BB3 / #63BDB6 / #50BA74) and the original markup's inline values
+    // (#4262AE / #64BEB5 / #53B973). Neither is a design source; this is.
+    // Note the midpoint is 51%, not 50%. Every brand-gradient token below
+    // aliases this one; do not re-introduce a second set of stops, and do not
+    // re-sample the logo.
+    --sf-gradient-brand: linear-gradient(90deg, #3268B2 0%, #64BEB5 51%, #53B973 100%);
 
     // Aliases kept so existing call sites keep working. They are deliberately
     // not separate definitions.
