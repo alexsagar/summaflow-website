@@ -10,13 +10,33 @@
 // No local @import / @use (forbidden on Odoo Online SaaS): this file is listed
 // explicitly in web.assets_frontend.
 
+// Always visible while scrolling, on client instruction. `position: sticky`
+// (not fixed) on purpose: the header keeps its space in the flow, so there is
+// no layout jump and no compensating body/main padding to maintain. No
+// show-on-scroll-up behaviour and no JavaScript — it simply never leaves.
+//
+// z-index 1030 keeps it above page content and below Bootstrap's offcanvas
+// (1045), so the mobile menu and its backdrop still cover the bar correctly.
+// The background stays fully opaque so the gradient CTA bands cannot show
+// through as they scroll under it.
 .sf-header {
     --sf-header-h: 62px;
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 1030;
     width: 100%;
     background-color: #ffffff;
     border-bottom: 1px solid #e6eaef;
+}
+
+// A scrolling ancestor would cancel `sticky`, and Odoo's #wrapwrap carries
+// `overflow-x: hidden` to contain full-bleed snippets — which makes it one.
+// `clip` contains overflow exactly the same way WITHOUT creating a scroll
+// container, so the sticky header works and nothing else changes. Scoped to
+// the wrapper that actually holds a SummaFlow header.
+#wrapwrap:has(> header.sf-header) {
+    overflow-x: clip;
+    overflow-y: visible;
 }
 
 .sf-header__bar {

@@ -4,9 +4,10 @@
 // rows, then an oversized brand signature that spans nearly the full panel
 // width and supplies all of the footer's breathing room.
 //
-//   row 1   brand + CTAs | EXPLORE | COMPANY | STAY UPDATED   (asymmetric)
-//   row 2   contact details | EXPLORE AI SUMMARY | social icons
-//   row 3   oversized SummaFlow wordmark, full-bleed
+ //   grid    brand + CTAs + contact + socials | EXPLORE | COMPANY | STAY UPDATED
+//           (asymmetric; STAY UPDATED also carries the newsletter form, its
+//            inline success state, EXPLORE AI SUMMARY and the social icons)
+//   then    oversized SummaFlow wordmark, full-bleed
 //
 // Scoped entirely under `.sf-footer` / `.sf-footer__legal`; touches no other
 // page selectors. Buttons mirror the header's Bootstrap .btn values.
@@ -70,14 +71,18 @@
     gap: var(--sf-space-5);
 }
 
-// --- Row 2 ----------------------------------------------------------------
-.sf-footer__meta {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--sf-space-5);
+// --- Contact metadata, inside the brand column ----------------------------
+.sf-footer__details {
     margin-top: var(--sf-space-4);
-    padding-top: var(--sf-space-4);
-    border-top: var(--sf-border-width) solid var(--sf-border);
+    font-size: var(--sf-text-xs);
+    line-height: 1.5;
+}
+
+// --- AI providers, inside the Stay-updated column -------------------------
+// 24px clear of the newsletter block (form + its inline success), so the
+// confirmation reads as part of the form and this reads as a new block.
+.sf-footer__ai {
+    margin-top: var(--sf-space-5); // 24px
 }
 
 // --- Brand lead -----------------------------------------------------------
@@ -209,11 +214,14 @@
     }
 
     // Each mark is a real external link to that provider (see footer.xml).
+    // Comfortable ~32px click target around a 22px glyph, matching the social
+    // icons' touch-target-to-glyph ratio; no visual chip or background.
     a {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 3px; // keeps the focus ring off the glyph edge
+        width: 32px;
+        height: 32px;
         border-radius: 8px;
         text-decoration: none;
     }
@@ -223,10 +231,12 @@
         box-shadow: var(--sf-focus-ring);
     }
 
+    // 22px glyph box, the same visual size as the social icons (X, LinkedIn,
+    // YouTube), aspect ratio preserved.
     img {
         display: block;
-        width: 30px;
-        height: 30px;
+        width: 22px;
+        height: 22px;
         // Official marks are monochrome glyphs; held back slightly at rest so
         // the row stays editorial rather than becoming colourful stickers.
         opacity: 0.55;
@@ -240,14 +250,16 @@
     }
 }
 
-// Icons only — the network names are carried by aria-label/title.
+// Icons only — the network names are carried by aria-label/title. Sits in the
+// brand column under the contact metadata; the negative inline offset lines
+// the first glyph up with the column's text edge despite the touch target.
 .sf-footer__social {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--sf-space-2);
-    margin: 0;
+    gap: 2px; // 2px + 2 x 7px of padding inside each target = 16px apart
+    margin: var(--sf-space-4) 0 0 -7px;
     padding: 0;
 
     a {
@@ -257,7 +269,8 @@
         width: 36px; // touch-friendly without an icon background
         height: 36px;
         color: var(--sf-text-muted);
-        font-size: var(--sf-text-lg);
+        font-size: 22px; // glyph size, not the target size
+        line-height: 1;
         text-decoration: none;
     }
 
@@ -303,9 +316,17 @@
     max-width: 26rem;
 }
 
-// Reserved height so swapping to the success state cannot reflow the row.
 .sf-footer__form {
-    min-height: 52px;
+    min-height: 52px; // reserved so the success state cannot reflow the column
+}
+
+// Odoo's js_subscribe widget swaps the two wrappers by toggling .d-none, which
+// would REPLACE the form with the confirmation. The client asked for the form
+// to stay and the confirmation to appear directly below it, so the subscribe
+// wrapper is kept visible in this footer only. The widget's own state classes
+// are untouched, so its behaviour and validation are unchanged.
+.sf-footer__form .js_subscribe_wrap.d-none {
+    display: block !important;
 }
 
 // Input + action read as one unified control. Deliberately a small rounded
@@ -364,7 +385,7 @@
     display: inline-flex;
     align-items: center;
     gap: var(--sf-space-2);
-    margin: 0 0 var(--sf-space-2);
+    margin: 9px 0 0; // sits directly below the form, ~9px clear of it
     padding: 5px var(--sf-space-3);
     border: var(--sf-border-width) solid var(--sf-border);
     border-radius: 8px;
@@ -495,16 +516,6 @@
         grid-column: 1 / -1;
     }
 
-    .sf-footer__meta {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        column-gap: var(--sf-space-6);
-        align-items: start;
-    }
-
-    .sf-footer__social {
-        grid-column: 1 / -1;
-    }
-
     .sf-footer__legal-inner {
         flex-direction: row;
         align-items: center;
@@ -512,7 +523,7 @@
     }
 }
 
-// --- Desktop: four-column asymmetric row 1, three-column row 2 -----------
+// --- Desktop: the four-column asymmetric grid ----------------------------
 @media (min-width: 62rem) {
     .sf-footer {
         --sf-fg: 2rem;
@@ -537,25 +548,6 @@
 
     .sf-footer__news {
         grid-column: auto;
-    }
-
-    .sf-footer__meta {
-        grid-template-columns: minmax(0, 2.3fr) minmax(0, 2fr) auto;
-        column-gap: var(--sf-space-6);
-        align-items: center;
-        margin-top: var(--sf-space-4);
-        padding-top: var(--sf-space-4);
-    }
-
-    .sf-footer__social {
-        grid-column: auto;
-        justify-content: flex-end;
-    }
-
-    .sf-footer__details {
-        display: flex;
-        align-items: baseline;
-        gap: var(--sf-space-6);
     }
 
     .sf-footer__logotype {

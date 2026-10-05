@@ -24,12 +24,13 @@ classes, so there is no visible redesign yet. Retains the harmless
     # Short 2-3 part semantic version on purpose. The saas~19.4 module loader
     # prefixes the current Odoo SaaS series automatically; do NOT hard-code
     # 19.0 / 19.4 here.
-    'version': '1.3.0',
+    'version': '1.5.7',
     'license': 'LGPL-3',
     'depends': ['website'],
     'data': [
         'views/header.xml',
         'views/footer.xml',
+        'views/pages/utility_pages.xml',
     ],
     # Odoo Online SaaS forbids local @import between custom SCSS files, so
     # every file is listed explicitly here (no wildcards) in dependency order.
@@ -48,11 +49,21 @@ classes, so there is no visible redesign yet. Retains the harmless
             'website_summaflow/static/src/scss/_header.scss',
             'website_summaflow/static/src/scss/_hero.scss',
             'website_summaflow/static/src/scss/_challenge-solution.scss',
+            'website_summaflow/static/src/scss/_homepage-sections.scss',
             'website_summaflow/static/src/scss/_footer.scss',
+            'website_summaflow/static/src/scss/_legal.scss',
+            'website_summaflow/static/src/scss/_platform.scss',
             'website_summaflow/static/src/scss/summaflow.scss',
             'website_summaflow/static/src/js/operations_roles_viz.js',
             'website_summaflow/static/src/js/hero.js',
             'website_summaflow/static/src/js/challenge_solution.js',
+            # Last on purpose: its heading-semantics pass queries the tags the
+# scripts above rely on, so it must run after all of them.
+            'website_summaflow/static/src/js/homepage_sections.js',
+            # Platform-page polish layer. Last on purpose: its own heading pass
+            # retags /platform's builder headings, and it must run after the
+            # homepage-section scripts that also execute on every page load.
+            'website_summaflow/static/src/js/platform.js',
         ],
     },
     'installable': True,

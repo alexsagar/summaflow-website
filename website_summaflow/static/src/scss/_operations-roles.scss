@@ -65,7 +65,8 @@ $sec: 'section.s_title.pt72.pb40';
 // 2-line titles align their body copy. Mobile/tablet (stacked) keep natural
 // height — no reserved space, no blank areas.
 @media (min-width: 62rem) {
-    #{$sec} + section.s_three_columns .col-lg-4 h1.h3 {
+    #{$sec} + section.s_three_columns .col-lg-4 h1.h3,
+    #{$sec} + section.s_three_columns .col-lg-4 h3.h3 {
         min-height: 4.2rem; // ~2 lines of the 28px title
         margin-bottom: 0;
     }
@@ -77,7 +78,9 @@ $sec: 'section.s_title.pt72.pb40';
 #{$sec} h2.display-3-fs > span,
 .sf-op-roles__heading {
     font-size: var(--sf-h-xl) !important; // inline `font-size:39px` on the span
-    font-weight: var(--sf-weight-bold);
+    // Light editorial weight on client instruction: the accent line is
+    // emphasised by the brand gradient, never by boldness.
+    font-weight: var(--sf-weight-regular); // 400
     line-height: var(--sf-lh-tight);
     letter-spacing: -0.015em;
 }

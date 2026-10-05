@@ -1,0 +1,550 @@
+// SummaFlow /platform page — POLISH LAYER, not a redesign.
+//
+//   .sf-pf-hero   hero: headline + copy + CTA (left) / 2x3 benefits (right)
+//   .sf-band      CTA band #1 (reuses the homepage gradient-band styles)
+//   .sf-aud       audience cards (3 equal columns)
+//   .sf-adv       Key Advantages 3x2 grid (no divider lines, Heroicon marks)
+//   .sf-sec-title "Trust, Security & Control." gradient section heading
+//   .sf-sec       Security & Data Governance documentation 2-column layout
+//
+// The markup stays DB-managed Website Builder content; platform.js attaches
+// these classes to the existing elements. Every selector is a SummaFlow class
+// except the few Odoo/Bootstrap classes deliberately neutralised here, each
+// paired with a SummaFlow class so nothing global is affected.
+//
+// Odoo Online SaaS safety: no local @import/@use (listed explicitly in
+// __manifest__.py), no mixed-unit clamp()/min()/max(), single-unit values and
+// stepped media queries only. sf-band, sf-text-gradient and sf-button* are
+// defined in their own files and reused as-is.
+
+// Builder spacer nodes / <hr> separators collapsed (never removed): the
+// rhythm comes from the margins below, not from divider lines.
+.sf-pf-hero .sf-void,
+.sf-aud .sf-void,
+.sf-adv .sf-void,
+.sf-sec .sf-void {
+    display: none;
+}
+
+// =========================================================================
+// 1. Hero
+// =========================================================================
+// Compact, intentional spacing; beats Odoo's .pt80/.pb80 (declared !important).
+section.sf-pf-hero {
+    padding-top: var(--sf-space-6) !important;    // 32px — compact, as the old hero
+    padding-bottom: var(--sf-space-6) !important;
+}
+
+// Centered content wrapper, homepage philosophy: wide and balanced, 32/24/20
+// horizontal gutter. Overrides Odoo's narrower .container.
+.sf-pf-hero .container {
+    width: 100%;
+    max-width: 1440px !important;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+// Compact scale restored: close to the original ~39px h2 (not the 40px display
+// bump that over-expanded it), weight 400. Tight gap to the paragraph.
+.sf-pf-hero h1.sf-pf-hero__title {
+    margin: 0 0 var(--sf-space-3); // 12px headline -> paragraph
+    font-family: var(--sf-font-heading);
+    // Fixed size, NOT the stepped --sf-h-* tokens (which jump to 2.5-3rem on
+    // desktop and re-inflated the hero). 28px mobile, 34px desktop below.
+    font-size: 1.75rem;
+    font-weight: var(--sf-weight-regular); // 400, light editorial
+    line-height: var(--sf-lh-snug);
+    letter-spacing: -0.01em;
+}
+
+// The gradient phrase must not read heavier than the rest of the headline.
+.sf-pf-hero h1.sf-pf-hero__title .sf-text-gradient,
+.sf-pf-hero h1.sf-pf-hero__title span,
+.sf-pf-hero h1.sf-pf-hero__title font {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.sf-pf-hero p.sf-pf-hero__copy {
+    margin: 0 0 var(--sf-space-4); // 16px paragraph -> CTA
+    max-width: 34rem; // ~544px readable measure
+    color: var(--sf-text-muted);
+    font-size: var(--sf-text-base);
+    line-height: var(--sf-lh-body);
+}
+
+.sf-pf-hero p.sf-pf-hero__actions {
+    margin: 0;
+}
+
+// Benefits: two builder columns -> a clean list, 2 columns x 3 rows on desktop.
+// Separation from whitespace only (no cards, no icons, no dividers).
+.sf-pf-hero .sf-pf-hero__benefits {
+    padding-top: var(--sf-space-2);
+}
+
+// Desktop: one explicit grid on the builder .row so the width is used fully and
+// no dead edge is left on the far right. Three children (lead + two benefit
+// columns) map to lead ~45% / benefits ~55%. Bootstrap col widths, gutters and
+// the offset margin are neutralised INSIDE this section only.
+@media (min-width: 62rem) {
+    // Lead ~50% so the headline sits on two lines ("A Practical AI Layer for /
+    // operations heavy teams."), two benefit columns ~25% each. Wider lead +
+    // smaller headline = no 3-line wrap, no vertical over-expansion.
+    .sf-pf-hero .row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.5fr) minmax(0, 0.5fr);
+        column-gap: var(--sf-space-6);
+        align-items: start;
+    }
+
+    .sf-pf-hero .row > * {
+        width: auto;
+        max-width: none;
+        flex: none;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media (min-width: 48rem) {
+    .sf-pf-hero .container { padding-left: 40px; padding-right: 40px; }
+}
+
+@media (min-width: 62rem) {
+    .sf-pf-hero .container { padding-left: 64px; padding-right: 64px; }
+}
+
+.sf-pf-hero p.sf-pf-hero__benefit {
+    margin: 0;
+    font-size: var(--sf-text-lg); // ~20px, steady rhythm
+    line-height: var(--sf-lh-snug);
+    color: var(--sf-text);
+}
+
+.sf-pf-hero p.sf-pf-hero__benefit span {
+    font-size: inherit;
+}
+
+// Thin separator beneath each benefit (requested layout). The builder's s_hr
+// carries .pt16/.pb40 (16px + 40px, !important) which floated the rule in a big
+// gap, detached from its benefit. Padding is zeroed; tidy margins instead:
+// ~10px under the benefit text, ~28px to the next benefit.
+.sf-pf-hero .sf-pf-hero__rule {
+    margin: 10px 0 var(--sf-space-5); // 10px above rule, 24px below
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.sf-pf-hero .sf-pf-hero__rule hr {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    border-top: var(--sf-border-width) solid var(--sf-border);
+    opacity: 1;
+}
+
+// Hero button metrics: the shared black/white language, header/footer sizing.
+.sf-pf-hero .sf-button {
+    min-height: 0;
+    padding: 0.5rem 1.1rem;
+    border: 1px solid #000000;
+    border-radius: 0.5rem;
+    font-size: 0.9375rem;
+    font-weight: var(--sf-weight-medium);
+    line-height: 1.5;
+}
+
+.sf-pf-hero a.sf-button.sf-button--primary,
+.sf-pf-hero a.sf-button.sf-button--primary:link,
+.sf-pf-hero a.sf-button.sf-button--primary:visited,
+.sf-pf-hero a.sf-button.sf-button--primary:hover,
+.sf-pf-hero a.sf-button.sf-button--primary:focus,
+.sf-pf-hero a.sf-button.sf-button--primary:active {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.sf-pf-hero .sf-button span,
+.sf-pf-hero .sf-button font {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+@media (min-width: 62rem) {
+    section.sf-pf-hero {
+        padding-top: var(--sf-space-7) !important;    // 48px, compact
+        padding-bottom: var(--sf-space-7) !important;
+    }
+
+    // ~34px, close to the original 39px h2 and no longer dominating the column.
+    .sf-pf-hero h1.sf-pf-hero__title {
+        font-size: 2.125rem;
+    }
+}
+
+// =========================================================================
+// 2. Gradient CTA bands height fix
+// =========================================================================
+// Both platform gradient bands ("Built for teams…" and "Ready to Eliminate…")
+// carry Odoo's .o_three_quarter_height, whose `min-height: 75vh` is declared
+// !important and so beats the shared .sf-band `min-height: 0`. That 75vh was the
+// real cause of the excessive height. Neutralised here (platform-scoped via the
+// sf-pf-band marker that platform.js adds to both bands). Vertical padding and
+// the left/right layout stay the shared .sf-band treatment (72px desktop,
+// heading left / button right, both vertically centred).
+section.sf-pf-band.o_three_quarter_height {
+    min-height: 0 !important;
+}
+
+// =========================================================================
+// 3. Audience cards
+// =========================================================================
+section.sf-aud {
+    padding-top: var(--sf-space-7) !important;
+    padding-bottom: var(--sf-space-7) !important;
+}
+
+.sf-aud .container {
+    max-width: var(--sf-container);
+}
+
+// align-items-stretch is already on the builder row; h-100 on the cards gives
+// equal height. This just normalises spacing and the surface.
+.sf-aud .sf-aud__col {
+    padding-top: var(--sf-space-3);
+    padding-bottom: var(--sf-space-3);
+}
+
+.sf-aud .sf-aud__card {
+    height: 100%;
+    padding: var(--sf-space-6);
+    border: var(--sf-border-width) solid var(--sf-border);
+    border-radius: var(--sf-radius-lg);
+    background: var(--sf-surface);
+}
+
+.sf-aud h3.sf-aud__title {
+    margin: 0 0 var(--sf-space-3);
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-md);
+    font-weight: var(--sf-weight-medium); // 500 max
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-aud h3.sf-aud__title span {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.sf-aud p.sf-aud__text {
+    margin: 0;
+    color: var(--sf-text-muted);
+    font-size: var(--sf-text-base);
+    line-height: var(--sf-lh-body);
+    text-align: left;
+}
+
+// =========================================================================
+// 4. Key Advantages — 3 x 2, no divider lines
+// =========================================================================
+section.sf-adv {
+    padding-top: var(--sf-space-8) !important;
+    padding-bottom: var(--sf-space-8) !important;
+}
+
+// Centered content wrapper so the heading AND the grid share the same measure
+// and the section reads as centered with equal left/right outer space.
+.sf-adv .container {
+    width: 100%;
+    max-width: 1320px !important;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+@media (min-width: 48rem) {
+    .sf-adv .container { padding-left: 24px; padding-right: 24px; }
+}
+
+@media (min-width: 62rem) {
+    .sf-adv .container { padding-left: 32px; padding-right: 32px; }
+}
+
+.sf-adv h2.sf-adv__title {
+    margin: 0 0 var(--sf-space-7);
+    text-align: center;
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-xl);
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-adv h2.sf-adv__title span,
+.sf-adv h2.sf-adv__title font {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+// Explicit CSS grid that does NOT depend on Bootstrap col widths: guarantees a
+// true 3-up (desktop) / 2-up (tablet) / 1-up (mobile) with no empty column and
+// no dead right edge. The builder's .row flex + .col-lg-4 widths/gutters/margins
+// are neutralised INSIDE this section only.
+// Rows align at the TOP (align-items: start): content flows naturally, so a
+// 4-line description is simply taller than a 2-line one — no forced equal cell
+// height, no stretched gaps. column-gap 60px, row-gap 48px, both compact.
+.sf-adv .sf-adv__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);  // mobile: 1 column
+    align-items: start;
+    row-gap: var(--sf-space-6);             // 32px mobile
+    column-gap: 3.75rem;                    // 60px
+}
+
+.sf-adv .sf-adv__grid > * {
+    width: auto;
+    max-width: none;
+    flex: none;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+// Tablet: 2 columns x 3 rows.
+@media (min-width: 48rem) {
+    .sf-adv .sf-adv__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: var(--sf-space-7); // 48px
+    }
+}
+
+// Desktop (>=1200px): 3 columns x 2 rows.
+@media (min-width: 75rem) {
+    .sf-adv .sf-adv__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+// Simple vertical flow: icon, title, description. No card/border/shadow, no
+// forced height, no space-between. Description stays attached to its title.
+.sf-adv .sf-adv__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+// Builder wrapper around title + body; only drop its `overflow:hidden` so no
+// copy is clipped. No flex-grow (that stretched the gap).
+.sf-adv .sf-adv__item .overflow-hidden {
+    overflow: visible;
+}
+
+// Icons: Heroicons outline + solid stacked in one 28px wrapper — identical
+// system, size, timing and hover behaviour to the homepage Trust icons
+// (.sf-trust). No chip, plate, circle, border, shadow or glow. The wrapper owns
+// the box, so crossfading variants can never shift layout.
+.sf-adv .sf-adv__mark {
+    position: relative;
+    display: block;
+    width: 1.75rem;  // 28px, as the homepage
+    height: 1.75rem;
+    margin: 0 0 var(--sf-space-4); // 16px icon -> title
+    transform: translateY(0); // pre-declared so the hover lift cannot reflow
+    transition: transform 200ms ease;
+}
+
+.sf-adv svg.sf-adv__icon {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: opacity 200ms ease;
+}
+
+// Rest: lighter outline brand blue (same tone as the homepage).
+.sf-adv svg.sf-adv__icon--outline {
+    color: #5b8cc8; // lighter tone of --sf-primary-ink
+    opacity: 1;
+}
+
+// Hover/focus: solid variant in the stronger brand ink, crossfaded in.
+.sf-adv svg.sf-adv__icon--solid {
+    color: var(--sf-primary-ink);
+    opacity: 0;
+}
+
+.sf-adv .sf-adv__item:hover svg.sf-adv__icon--outline,
+.sf-adv .sf-adv__item:focus-within svg.sf-adv__icon--outline {
+    opacity: 0;
+}
+
+.sf-adv .sf-adv__item:hover svg.sf-adv__icon--solid,
+.sf-adv .sf-adv__item:focus-within svg.sf-adv__icon--solid {
+    opacity: 1;
+}
+
+// The only motion: a 2px lift of the icon wrapper, as the homepage.
+.sf-adv .sf-adv__item:hover .sf-adv__mark,
+.sf-adv .sf-adv__item:focus-within .sf-adv__mark {
+    transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sf-adv .sf-adv__item:hover .sf-adv__mark,
+    .sf-adv .sf-adv__item:focus-within .sf-adv__mark {
+        transform: translateY(0);
+    }
+}
+
+// Title: weight 400, consistent across all six. No min-height — titles align
+// from the top of their cell naturally (align-items: start on the grid).
+.sf-adv h3.sf-adv__item-title {
+    margin: 0 0 var(--sf-space-3); // 12px title -> description
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-md);
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-adv h3.sf-adv__item-title span {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+// Same measure/size/line-height/colour for every description — no feature uses
+// a wider text column than another. Copy is never truncated or clamped.
+.sf-adv p.sf-adv__item-text {
+    margin: 0;
+    max-width: 36ch; // 34-38ch target, uniform across all six
+    color: var(--sf-text-muted);
+    font-size: var(--sf-text-base);
+    line-height: var(--sf-lh-body);
+}
+
+// =========================================================================
+// 5. "Trust, Security & Control." section heading
+// =========================================================================
+section.sf-sec-title {
+    padding-top: var(--sf-space-7) !important;
+    padding-bottom: var(--sf-space-5) !important;
+}
+
+.sf-sec-title h2.sf-sec-title__h {
+    margin: 0;
+    text-align: center;
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-xl);
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-sec-title h2.sf-sec-title__h span,
+.sf-sec-title h2.sf-sec-title__h font {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+// =========================================================================
+// 6. Security & Data Governance — documentation two-column layout
+// =========================================================================
+section.sf-sec {
+    padding-top: var(--sf-space-4) !important;
+    padding-bottom: var(--sf-space-8) !important;
+}
+
+.sf-sec .container {
+    max-width: var(--sf-container);
+}
+
+.sf-sec .sf-sec__block {
+    padding-top: 0 !important;
+    padding-bottom: var(--sf-space-6) !important;
+}
+
+// Topic headings: light weight, clear top spacing, no divider rule.
+.sf-sec h3.sf-sec__head {
+    margin: 0 0 var(--sf-space-3);
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-md);
+    font-weight: var(--sf-weight-regular); // ~400
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-sec h3.sf-sec__head span {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+// Readable body: ~16-17px, 1.6 line-height, sensible measure. Bold lead-ins
+// inside the source (<b>…</b>) are preserved as-is.
+.sf-sec p.sf-sec__text {
+    margin: 0 0 var(--sf-space-3);
+    max-width: 46rem;
+    color: var(--sf-text);
+    font-size: var(--sf-text-base);
+    line-height: var(--sf-lh-body);
+}
+
+.sf-sec p.sf-sec__text:last-child {
+    margin-bottom: 0;
+}
+
+// Left contents column: visually secondary. The builder already hides it below
+// lg (d-none d-lg-block), so mobile/tablet stacks to content only.
+.sf-sec .sf-sec__nav-list {
+    font-size: var(--sf-text-sm);
+}
+
+.sf-sec .sf-sec__nav-list a.table_of_content_link {
+    padding-top: var(--sf-space-2);
+    padding-bottom: var(--sf-space-2);
+    color: var(--sf-text-muted);
+    border: 0;
+    border-radius: 0;
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-sec .sf-sec__nav-list a.table_of_content_link:hover,
+.sf-sec .sf-sec__nav-list a.table_of_content_link.active {
+    color: var(--sf-primary-ink);
+    background: transparent;
+}
+
+// Desktop sticky contents.
+//
+// The sticky element is the nav COLUMN (.sf-sec__nav == Odoo's
+// .s_table_of_content_navbar_sticky), stuck as ONE unit so the title link and
+// all six items travel together and item 1 never slides under the navbar.
+//
+// Two real causes fixed here:
+//   1. Bootstrap `.row` stretches its columns to equal height (align-items:
+//      stretch), so the nav column was as tall as the content column and sticky
+//      had no room to travel — `align-self: flex-start` gives it its own height.
+//   2. The builder's inline `top: 76px` on the inner list was cleared last pass,
+//      leaving Odoo's sticky at top:0 (under the 62px navbar). The inner list is
+//      forced static here and the column owns the single, correct sticky offset:
+//      --sf-header-h (62px) + 24px breathing room = 86px.
+@media (min-width: 62rem) {
+    .sf-sec .sf-sec__nav {
+        position: sticky;
+        top: 86px;
+        align-self: flex-start;
+    }
+
+    // Collapse Odoo's second (inner-list) sticky so only the column sticks.
+    .sf-sec .sf-sec__nav-list {
+        position: static;
+        top: auto;
+        max-height: none;
+    }
+}

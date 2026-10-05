@@ -16,11 +16,19 @@
       replacing #footer alone left it rendering underneath. It is replaced
       structurally rather than hidden with CSS.
 
-      Composition (two dense rows, then the brand signature):
+      Composition (ONE four-column grid, then the brand signature):
 
-        row 1   brand + CTAs | EXPLORE | COMPANY | STAY UPDATED
-        row 2   contact details | EXPLORE AI SUMMARY | social icons
-        row 3   oversized SummaFlow wordmark, full-bleed, nearly full width
+        col 1   brand wordmark + Sign In / Contact + contact metadata + socials
+        col 2   EXPLORE
+        col 3   COMPANY
+        col 4   STAY UPDATED: copy, form, inline success,
+                EXPLORE AI SUMMARY
+        then    oversized SummaFlow wordmark, full-bleed, nearly full width
+
+      The earlier separate middle utility row (contact left / AI centre /
+      socials far right) is gone on client instruction: it read as two
+      unrelated footers stacked. Its three blocks now live inside the columns
+      above, each exactly once — no duplicate copies left behind.
 
       Both divs keep t-ignore="true" so the Website Builder never treats this
       footer as editable content and never persists a divergent copy into the
@@ -61,10 +69,56 @@
                                     Contact
                                 </a>
                             </div>
+
+                            <!--
+                              Contact details belong to the brand column, not to
+                              a separate utility row: they read as metadata
+                              under the two CTAs, in smaller muted type, with no
+                              decorative icon chips.
+                            -->
+                            <div class="sf-footer__details">
+                                <ul class="sf-footer__contact">
+                                    <li><a href="mailto:info@summaflow.com">info@summaflow.com</a></li>
+                                    <li>
+                                        <span class="sf-footer__contact-key">WhatsApp</span>
+                                        <a href="tel:+85292209701"><span class="o_force_ltr">+852 9220 9701</span></a>
+                                    </li>
+                                </ul>
+                                <p class="sf-footer__address">GF, Koon Nam House, 12-14 Shing Wong Street, Hong Kong</p>
+                            </div>
+
+                            <!--
+                              Socials belong to the brand block, under the
+                              contact metadata. Icons only, monochrome, no text
+                              labels and no background chips; the network names
+                              are carried by aria-label/title. The three hrefs
+                              are the ones already in the arch - placeholders
+                              the client still has to supply.
+                            -->
+                            <ul class="sf-footer__social">
+                                <li>
+                                    <a href="https://www.twitter.com/your-page" target="_blank"
+                                       rel="noopener" title="X" aria-label="SummaFlow on X">
+                                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/your-page" target="_blank"
+                                       rel="noopener" title="LinkedIn" aria-label="SummaFlow on LinkedIn">
+                                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.youtube.com/your-page" target="_blank"
+                                       rel="noopener" title="YouTube" aria-label="SummaFlow on YouTube">
+                                        <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
 
                         <nav class="sf-footer__navgroup" aria-label="Explore">
-                            <h3 class="sf-footer__head">Explore</h3>
+                            <div class="sf-footer__head">Explore</div>
                             <ul class="sf-footer__list">
                                 <li><a href="/platform">Platform</a></li>
                                 <li><a href="/solutions">Solutions</a></li>
@@ -73,7 +127,7 @@
                         </nav>
 
                         <nav class="sf-footer__navgroup" aria-label="Company">
-                            <h3 class="sf-footer__head">Company</h3>
+                            <div class="sf-footer__head">Company</div>
                             <ul class="sf-footer__list">
                                 <li><a href="/company">Company</a></li>
                                 <li><a href="/blog">Resources</a></li>
@@ -81,17 +135,15 @@
                         </nav>
 
                         <div class="sf-footer__news">
-                            <h3 class="sf-footer__head">Stay updated</h3>
+                            <div class="sf-footer__head">Stay updated</div>
                             <p class="sf-footer__news-copy">A weekly roundup of news and insights on the world of LLMs.</p>
                             <div data-vxml="001" data-name="Newsletter"
                                  class="s_newsletter_subscribe_form s_newsletter_list js_subscribe sf-footer__form"
                                  data-snippet="s_newsletter_subscribe_form" data-list-id="1">
-                                <div class="js_subscribed_wrap d-none sf-footer__news-done">
-                                    <p>
-                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                        <span>Thanks for registering.</span>
-                                    </p>
-                                </div>
+                                <!-- Form first, success state DIRECTLY BELOW it:
+                                     Odoo only toggles d-none on these two
+                                     wrappers, so document order is what decides
+                                     where the confirmation appears. -->
                                 <div class="js_subscribe_wrap">
                                     <div class="input-group sf-footer__field">
                                         <input type="email" name="email" aria-label="Email address"
@@ -103,22 +155,13 @@
                                         </a>
                                     </div>
                                 </div>
+                                <div class="js_subscribed_wrap d-none sf-footer__news-done">
+                                    <p>
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                        <span>Thanks for registering.</span>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Row 2: contact details, AI providers, social icons -->
-                    <div class="sf-footer__meta">
-                        <div class="sf-footer__details">
-                            <ul class="sf-footer__contact">
-                                <li><a href="mailto:info@summaflow.com">info@summaflow.com</a></li>
-                                <li>
-                                    <span class="sf-footer__contact-key">WhatsApp</span>
-                                    <a href="tel:+85292209701"><span class="o_force_ltr">+852 9220 9701</span></a>
-                                </li>
-                            </ul>
-                            <p class="sf-footer__address">GF, Koon Nam House, 12-14 Shing Wong Street, Hong Kong</p>
-                        </div>
 
                         <!--
                           Explore AI Summary: the four AI assistants a summary can
@@ -128,14 +171,14 @@
                           only: provider names are carried by alt/title.
                         -->
                         <div class="sf-footer__ai">
-                            <h3 class="sf-footer__head">Explore AI Summary</h3>
+                            <div class="sf-footer__head">Explore AI Summary</div>
                             <ul class="sf-footer__ai-marks">
                                 <li>
                                     <a href="https://chatgpt.com/?q=Explain%20SummaFlow%20and%20what%20it%20does.%20Focus%20on%20how%20it%20helps%20operations%20teams%20with%20information%20verification%2C%20proactive%20anomaly%20detection%2C%20source%20traceability%2C%20AI-assisted%20summaries%2C%20and%20workflow%20intelligence.%20Use%20https%3A%2F%2Fsummaflow.com%20as%20the%20primary%20source%20and%20do%20not%20invent%20features%20that%20are%20not%20documented%20on%20the%20website."
                                        target="_blank" rel="noopener noreferrer"
                                        title="Ask ChatGPT about SummaFlow" aria-label="Ask ChatGPT about SummaFlow">
                                         <img src="/website_summaflow/static/src/icons/ai/openai.svg"
-                                             alt="ChatGPT" width="30" height="30"/>
+                                             alt="ChatGPT" width="22" height="22"/>
                                     </a>
                                 </li>
                                 <li>
@@ -143,7 +186,7 @@
                                        target="_blank" rel="noopener noreferrer"
                                        title="Ask Claude about SummaFlow" aria-label="Ask Claude about SummaFlow">
                                         <img src="/website_summaflow/static/src/icons/ai/claude.svg"
-                                             alt="Claude" width="30" height="30"/>
+                                             alt="Claude" width="22" height="22"/>
                                     </a>
                                 </li>
                                 <li>
@@ -151,7 +194,7 @@
                                        target="_blank" rel="noopener noreferrer"
                                        title="Ask Perplexity about SummaFlow" aria-label="Ask Perplexity about SummaFlow">
                                         <img src="/website_summaflow/static/src/icons/ai/perplexity.svg"
-                                             alt="Perplexity" width="30" height="30"/>
+                                             alt="Perplexity" width="22" height="22"/>
                                     </a>
                                 </li>
                                 <li>
@@ -167,32 +210,13 @@
                                        title="Explore SummaFlow with Gemini / Google AI Mode"
                                        aria-label="Explore SummaFlow with Gemini / Google AI Mode">
                                         <img src="/website_summaflow/static/src/icons/ai/gemini.svg"
-                                             alt="Gemini" width="30" height="30"/>
+                                             alt="Gemini" width="22" height="22"/>
                                     </a>
                                 </li>
                             </ul>
                         </div>
 
-                        <ul class="sf-footer__social">
-                            <li>
-                                <a href="https://www.twitter.com/your-page" target="_blank"
-                                   rel="noopener" title="X" aria-label="SummaFlow on X">
-                                    <i class="fa fa-twitter" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/your-page" target="_blank"
-                                   rel="noopener" title="LinkedIn" aria-label="SummaFlow on LinkedIn">
-                                    <i class="fa fa-linkedin" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/your-page" target="_blank"
-                                   rel="noopener" title="YouTube" aria-label="SummaFlow on YouTube">
-                                    <i class="fa fa-youtube-play" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                        </ul>
+                        </div>
                     </div>
 
                     <!--
@@ -222,9 +246,10 @@
                 <div class="sf-footer__legal-inner">
                     <span class="sf-footer__legal-copy">&#169; 2026 SummaFlow</span>
                     <nav class="sf-footer__legal-nav" aria-label="Legal">
-                        <a href="/privacy-policy">Privacy Policy</a>
-                        <a href="/terms-conditions">Terms and Conditions</a>
-                        <a href="#">Cookies</a>
+                        <a href="/support">Support</a>
+                        <a href="/oauth-verification">Verification</a>
+                        <a href="/privacy-policy">Privacy</a>
+                        <a href="/terms-and-conditions">Terms</a>
                     </nav>
                 </div>
             </div>

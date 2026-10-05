@@ -36,7 +36,7 @@
         return '<svg class="sf-viz__svg" viewBox="24 16 272 168"preserveAspectRatio="xMidYMid meet" focusable="false" aria-hidden="true">' +
             '<defs><linearGradient id="' + id + '" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="320" y2="0">' +
             '<stop offset="0" class="sf-viz__stop-1"/>' +
-            '<stop offset="0.5" class="sf-viz__stop-2"/>' +
+            '<stop offset="0.51" class="sf-viz__stop-2"/>' +
             '<stop offset="1" class="sf-viz__stop-3"/>' +
             '</linearGradient></defs>' + body + '</svg>';
     }
