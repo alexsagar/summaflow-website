@@ -1,0 +1,396 @@
+// SummaFlow /solutions page — POLISH LAYER, not a redesign.
+//
+//   .sf-sol-hero       hero: headline + copy + CTA (left) / device (right)
+//   .sf-sol-pain       "The Daily Operational Pain" — 4 pain points
+//   .sf-sol-sectitle   "How SummaFlow Transforms…" gradient section title
+//   .sf-sol-grid       transformation cards — 3 x 2
+//   .sf-sol-metrics    "Key Metrics Impacted" — unified 3-metric row
+//
+// The FAQ/CTA band (.s_call_to_action) reuses .sf-faq from _homepage-sections,
+// applied by homepage_sections.js on every page — not restyled here.
+//
+// Markup stays DB-managed; solutions.js attaches these classes. Odoo Online
+// safe: no local @import/@use (listed in __manifest__.py), no mixed-unit
+// clamp()/min()/max(), single-unit values and stepped media queries only.
+// sf-text-gradient (_utilities) and sf-button* (_buttons) are reused as-is.
+
+// Builder spacer nodes / separators collapsed (never removed).
+.sf-sol-hero .sf-void,
+.sf-sol-pain .sf-void,
+.sf-sol-grid .sf-void,
+.sf-sol-metrics .sf-void {
+    display: none;
+}
+
+// Every decorated section carries .o_three_quarter_height (min-height:75vh,
+// !important) which left the whole page over-tall. Neutralised once here.
+section.sf-sol-sec.o_three_quarter_height {
+    min-height: 0 !important;
+}
+
+// Shared centered container for the page.
+.sf-sol-sec .container {
+    width: 100%;
+    max-width: var(--sf-container); // 1240px
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+@media (min-width: 62rem) {
+    .sf-sol-sec .container { padding-left: 32px; padding-right: 32px; }
+}
+
+// =========================================================================
+// Shared icon — Heroicons outline + solid crossfade (as homepage/platform)
+// =========================================================================
+.sf-sol-icon {
+    position: relative;
+    display: block;
+    width: 1.75rem;  // 28px
+    height: 1.75rem;
+    margin: 0 0 var(--sf-space-4);
+    transform: translateY(0);
+    transition: transform 200ms ease;
+}
+
+.sf-sol-icon .sf-sol-icon__svg {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: opacity 200ms ease;
+}
+
+.sf-sol-icon .sf-sol-icon__svg--outline { color: #5b8cc8; opacity: 1; }
+.sf-sol-icon .sf-sol-icon__svg--solid { color: var(--sf-primary-ink); opacity: 0; }
+
+.sf-sol-pain__item:hover .sf-sol-icon__svg--outline,
+.sf-sol-pain__item:focus-within .sf-sol-icon__svg--outline { opacity: 0; }
+.sf-sol-pain__item:hover .sf-sol-icon__svg--solid,
+.sf-sol-pain__item:focus-within .sf-sol-icon__svg--solid { opacity: 1; }
+
+.sf-sol-pain__item:hover .sf-sol-icon,
+.sf-sol-pain__item:focus-within .sf-sol-icon { transform: translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+    .sf-sol-pain__item:hover .sf-sol-icon,
+    .sf-sol-pain__item:focus-within .sf-sol-icon { transform: translateY(0); }
+}
+
+// =========================================================================
+// 1. Hero
+// =========================================================================
+section.sf-sol-hero {
+    padding-top: var(--sf-space-7) !important;    // 48px
+    padding-bottom: var(--sf-space-7) !important;
+}
+
+.sf-sol-hero .row { align-items: center; }
+
+.sf-sol-hero h1.sf-sol-hero__title {
+    margin: 0 0 var(--sf-space-4);
+    font-family: var(--sf-font-heading);
+    font-size: 1.875rem; // 30px mobile
+    font-weight: var(--sf-weight-regular); // 400, light editorial
+    line-height: var(--sf-lh-snug);
+    letter-spacing: -0.01em;
+}
+
+.sf-sol-hero h1.sf-sol-hero__title span { font-size: inherit; font-weight: inherit; }
+
+.sf-sol-hero p.sf-sol-hero__copy {
+    margin: 0 0 var(--sf-space-5);
+    max-width: 38rem;
+    color: var(--sf-text-muted);
+    font-size: var(--sf-text-base); // ~17px
+    line-height: var(--sf-lh-body);
+}
+
+.sf-sol-hero p.sf-sol-hero__copy span { font-size: inherit; }
+
+.sf-sol-hero .sf-sol-hero__actions { margin: 0; }
+
+// Device: keep the exact asset; only cap the width and centre it.
+.sf-sol-hero .sf-sol-hero__media img {
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// Hero button: the shared black/white language.
+.sf-sol-hero .sf-button {
+    min-height: 0;
+    padding: 0.5rem 1.1rem;
+    border: 1px solid #000000;
+    border-radius: 0.5rem;
+    font-size: 0.9375rem;
+    font-weight: var(--sf-weight-medium);
+    line-height: 1.5;
+}
+
+.sf-sol-hero a.sf-button.sf-button--primary,
+.sf-sol-hero a.sf-button.sf-button--primary:link,
+.sf-sol-hero a.sf-button.sf-button--primary:visited,
+.sf-sol-hero a.sf-button.sf-button--primary:hover,
+.sf-sol-hero a.sf-button.sf-button--primary:focus,
+.sf-sol-hero a.sf-button.sf-button--primary:active {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.sf-sol-hero .sf-button span,
+.sf-sol-hero .sf-button font {
+    color: inherit; font-size: inherit; font-weight: inherit;
+}
+
+@media (min-width: 62rem) {
+    section.sf-sol-hero {
+        padding-top: var(--sf-space-8) !important; // 64px
+        padding-bottom: var(--sf-space-8) !important;
+    }
+    .sf-sol-hero h1.sf-sol-hero__title { font-size: 2.5rem; }
+    .sf-sol-hero .sf-sol-hero__media img { max-width: 360px; }
+}
+
+// =========================================================================
+// 2. Daily Operational Pain — 4 columns
+// =========================================================================
+section.sf-sol-pain {
+    padding-top: var(--sf-space-7) !important;
+    padding-bottom: var(--sf-space-7) !important;
+}
+
+.sf-sol-pain h2.sf-sol-pain__title {
+    margin: 0 0 var(--sf-space-6);
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-lg);
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-sol-pain .sf-sol-pain__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr); // mobile 1-col
+    align-items: start;
+    row-gap: var(--sf-space-6);
+    column-gap: var(--sf-space-6);
+}
+
+.sf-sol-pain .sf-sol-pain__grid > * {
+    width: auto; max-width: none; flex: none; margin: 0;
+    padding-left: 0; padding-right: 0;
+}
+
+.sf-sol-pain .sf-sol-pain__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.sf-sol-pain h3.sf-sol-pain__item-title {
+    margin: 0 0 var(--sf-space-2);
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-md);
+    font-weight: var(--sf-weight-medium); // <=500
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-sol-pain h3.sf-sol-pain__item-title span { font-size: inherit; font-weight: inherit; }
+
+.sf-sol-pain p.sf-sol-pain__item-text {
+    margin: 0;
+    max-width: 34ch;
+    color: var(--sf-text-muted);
+    font-size: var(--sf-text-sm); // ~15px
+    line-height: var(--sf-lh-body);
+}
+
+@media (min-width: 48rem) {
+    .sf-sol-pain .sf-sol-pain__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } // 2x2
+}
+@media (min-width: 62rem) {
+    .sf-sol-pain .sf-sol-pain__grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr)); // 4 columns
+        column-gap: var(--sf-space-7);
+    }
+}
+
+// =========================================================================
+// 3. "How SummaFlow Transforms…" section title
+// =========================================================================
+section.sf-sol-sectitle {
+    padding-top: var(--sf-space-7) !important;
+    padding-bottom: var(--sf-space-4) !important;
+}
+
+.sf-sol-sectitle h2.sf-sol-sectitle__h {
+    margin: 0;
+    text-align: center;
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-xl);
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-sol-sectitle h2.sf-sol-sectitle__h span,
+.sf-sol-sectitle h2.sf-sol-sectitle__h font { font-size: inherit; font-weight: inherit; }
+
+// =========================================================================
+// 4. Transformation cards — 3 x 2
+// =========================================================================
+section.sf-sol-grid {
+    padding-top: var(--sf-space-6) !important;
+    padding-bottom: var(--sf-space-8) !important;
+}
+
+.sf-sol-grid .sf-sol-grid__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr); // mobile 1-col
+    align-items: stretch;
+    row-gap: var(--sf-space-6);
+    column-gap: var(--sf-space-6);
+}
+
+.sf-sol-grid .sf-sol-grid__row > * {
+    width: auto; max-width: none; flex: none; margin: 0;
+    padding-left: 0; padding-right: 0;
+}
+
+// Restrained card: very subtle 1px neutral border, no shadow/glow/gradient.
+.sf-sol-grid .sf-sol-grid__card {
+    height: 100%;
+    padding: var(--sf-space-5);
+    border: var(--sf-border-width) solid var(--sf-border);
+    border-radius: var(--sf-radius-lg);
+    background: var(--sf-surface);
+}
+
+.sf-sol-grid h3.sf-sol-grid__title {
+    margin: 0 0 var(--sf-space-3);
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-md);
+    font-weight: var(--sf-weight-medium); // <=500
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-sol-grid h3.sf-sol-grid__title span { font-size: inherit; font-weight: inherit; }
+
+.sf-sol-grid p.sf-sol-grid__text {
+    margin: 0;
+    color: var(--sf-text-muted);
+    font-size: var(--sf-text-sm); // ~15-16px
+    line-height: var(--sf-lh-body);
+    text-align: left;
+}
+
+@media (min-width: 48rem) {
+    .sf-sol-grid .sf-sol-grid__row { grid-template-columns: repeat(2, minmax(0, 1fr)); } // 2x3
+}
+@media (min-width: 75rem) {
+    .sf-sol-grid .sf-sol-grid__row {
+        grid-template-columns: repeat(3, minmax(0, 1fr)); // 3x2
+        column-gap: var(--sf-space-6);
+    }
+}
+
+// =========================================================================
+// 5. Key Metrics — unified 3-metric row
+// =========================================================================
+section.sf-sol-metrics {
+    padding-top: var(--sf-space-7) !important;
+    padding-bottom: var(--sf-space-9) !important; // 96px clear of the FAQ band
+}
+
+// Replace the builder's 12-col o_grid_mode with a clean grid: intro spans the
+// full width on top, the three metrics form an equal 3-column row.
+.sf-sol-metrics .sf-sol-metrics__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr); // mobile: stack
+    row-gap: var(--sf-space-6);
+    column-gap: var(--sf-space-6);
+    align-items: start;
+}
+
+.sf-sol-metrics .sf-sol-metrics__row > * {
+    width: auto; max-width: none; flex: none; margin: 0;
+    // Ignore any leftover builder grid-span placement.
+    grid-column: auto;
+    grid-row: auto;
+}
+
+.sf-sol-metrics .sf-sol-metrics__intro {
+    text-align: center;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+}
+
+.sf-sol-metrics h2.sf-sol-metrics__heading {
+    margin: 0 0 var(--sf-space-3);
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-lg);
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-sol-metrics p.sf-sol-metrics__intro-copy {
+    margin: 0;
+    color: var(--sf-text-muted);
+    font-size: var(--sf-text-base);
+    line-height: var(--sf-lh-body);
+}
+
+// Each metric: no card, no box — big gradient number, dark label, note below.
+.sf-sol-metrics .sf-sol-metrics__item {
+    text-align: center;
+    padding: 0;
+}
+
+.sf-sol-metrics .sf-sol-metrics__num {
+    margin: 0 0 var(--sf-space-2);
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-display); // large
+    font-weight: var(--sf-weight-semibold);
+    line-height: 1;
+}
+
+.sf-sol-metrics .sf-sol-metrics__num span,
+.sf-sol-metrics .sf-sol-metrics__num font { font-size: inherit; font-weight: inherit; }
+
+.sf-sol-metrics h4.sf-sol-metrics__label {
+    margin: 0 0 var(--sf-space-2);
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-md);
+    font-weight: var(--sf-weight-medium);
+    line-height: var(--sf-lh-snug);
+    color: var(--sf-text);
+}
+
+.sf-sol-metrics h4.sf-sol-metrics__label span { font-size: inherit; font-weight: inherit; }
+
+.sf-sol-metrics p.sf-sol-metrics__note {
+    margin: 0;
+    max-width: 22rem;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--sf-text-muted);
+    font-size: var(--sf-text-sm);
+    line-height: var(--sf-lh-body);
+}
+
+// Intro full-width, metrics 3-up from tablet.
+@media (min-width: 48rem) {
+    .sf-sol-metrics .sf-sol-metrics__row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: var(--sf-space-7);
+        row-gap: var(--sf-space-7);
+    }
+    .sf-sol-metrics .sf-sol-metrics__intro { grid-column: 1 / -1; }
+}
