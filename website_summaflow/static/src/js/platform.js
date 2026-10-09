@@ -166,61 +166,50 @@
         return next;
     }
 
-    // Heroicons v2.2.0 (MIT, Tailwind Labs), 24x24 outline + solid pairs — the
-    // SAME family, construction method and outline/solid crossfade as the
-    // homepage Trust/Security icons (homepage_sections.js svgIcon). Path data is
-    // transcribed verbatim from the published package: nothing is fetched, no
-    // CDN, no sprite, no second icon library. The cpu-chip / link / shield-check
-    // pairs are the exact strings already vetted on the homepage. Each block
-    // renders both variants stacked in one wrapper; outline at rest, solid on
-    // hover, crossfaded with opacity so neither variant ever affects layout.
+    // Fill-on-hover line icons — the SAME construction as the homepage Trust
+    // icons (homepage_sections.js svgIcon): 24x24, 1.5 stroke, ONE svg per icon.
+    // Closed "body" shapes (.sf-ico__b) fill with the brand blue on hover; inner
+    // details (.sf-ico__d) flip to white so they stay legible; unclassed parts
+    // outside the body stay stroked. Each icon is matched to its heading.
+    // Static markup only, nothing fetched, no CDN.
     var ADV_ICONS = {
-        // Zero Manual Data Entry — cpu-chip.
-        'cpu-chip': {
-            outline: '<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"/>',
-            solid: '<path d="M16.5 7.5h-9v9h9v-9Z"/><path fill-rule="evenodd" d="M8.25 2.25A.75.75 0 0 1 9 3v.75h2.25V3a.75.75 0 0 1 1.5 0v.75H15V3a.75.75 0 0 1 1.5 0v.75h.75a3 3 0 0 1 3 3v.75H21A.75.75 0 0 1 21 9h-.75v2.25H21a.75.75 0 0 1 0 1.5h-.75V15H21a.75.75 0 0 1 0 1.5h-.75v.75a3 3 0 0 1-3 3h-.75V21a.75.75 0 0 1-1.5 0v-.75h-2.25V21a.75.75 0 0 1-1.5 0v-.75H9V21a.75.75 0 0 1-1.5 0v-.75h-.75a3 3 0 0 1-3-3v-.75H3A.75.75 0 0 1 3 15h.75v-2.25H3a.75.75 0 0 1 0-1.5h.75V9H3a.75.75 0 0 1 0-1.5h.75v-.75a3 3 0 0 1 3-3h.75V3a.75.75 0 0 1 .75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h10.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V6.75Z" clip-rule="evenodd"/>'
-        },
-        // 100% Traceable — link.
-        link: {
-            outline: '<path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/>',
-            solid: '<path fill-rule="evenodd" d="M19.902 4.098a3.75 3.75 0 0 0-5.304 0l-4.5 4.5a3.75 3.75 0 0 0 1.035 6.037.75.75 0 0 1-.646 1.353 5.25 5.25 0 0 1-1.449-8.45l4.5-4.5a5.25 5.25 0 1 1 7.424 7.424l-1.757 1.757a.75.75 0 1 1-1.06-1.06l1.757-1.757a3.75 3.75 0 0 0 0-5.304Zm-7.389 4.267a.75.75 0 0 1 1-.353 5.25 5.25 0 0 1 1.449 8.45l-4.5 4.5a5.25 5.25 0 1 1-7.424-7.424l1.757-1.757a.75.75 0 1 1 1.06 1.06l-1.757 1.757a3.75 3.75 0 1 0 5.304 5.304l4.5-4.5a3.75 3.75 0 0 0-1.035-6.037.75.75 0 0 1-.354-1Z" clip-rule="evenodd"/>'
-        },
-        // Privacy First — shield-check.
-        'shield-check': {
-            outline: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/>',
-            solid: '<path fill-rule="evenodd" d="M12.516 2.17a.75.75 0 0 0-1.032 0 11.209 11.209 0 0 1-7.877 3.08.75.75 0 0 0-.722.515A12.74 12.74 0 0 0 2.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 0 0 .374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 0 0-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08Zm3.094 8.016a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd"/>'
-        },
-        // Clear Action Items — check-circle.
-        'check-circle': {
-            outline: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>',
-            solid: '<path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd"/>'
-        },
-        // Instant Negotiation Trends — arrow-trending-up.
-        'arrow-trending-up': {
-            outline: '<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/>',
-            solid: '<path fill-rule="evenodd" d="M15.22 6.268a.75.75 0 0 1 .968-.432l5.942 2.28a.75.75 0 0 1 .431.97l-2.28 5.941a.75.75 0 1 1-1.4-.537l1.63-4.251-1.086.483a11.2 11.2 0 0 0-5.45 5.173.75.75 0 0 1-1.199.19L9 12.312l-6.22 6.22a.75.75 0 0 1-1.06-1.061l6.75-6.75a.75.75 0 0 1 1.06 0l3.606 3.605a12.694 12.694 0 0 1 5.68-4.973l1.086-.484-4.251-1.631a.75.75 0 0 1-.432-.97Z" clip-rule="evenodd"/>'
-        },
-        // Seamless Team Onboarding — user-group.
-        'user-group': {
-            outline: '<path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/>',
-            solid: '<path fill-rule="evenodd" d="M8.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM15.75 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM2.25 19.125a6.375 6.375 0 0 1 12.75 0 .75.75 0 0 1-.366.643 11.957 11.957 0 0 1-6.009 1.61c-2.163 0-4.185-.573-5.939-1.575a.75.75 0 0 1-.436-.678ZM19.5 19.125c0 .613-.076 1.21-.219 1.78a.75.75 0 0 0 .935.805 11.963 11.963 0 0 0 2.5-1.134.75.75 0 0 0 .316-.945 4.502 4.502 0 0 0-5.74-2.59 7.829 7.829 0 0 1 1.208 2.084Z" clip-rule="evenodd"/>'
-        }
+        // Zero Manual Data Entry — automation bolt.
+        'auto-bolt': '<path class="sf-ico__b" d="M13.25 2.75 5.5 13.25H11l-1 8 8.5-11H13Z"/>',
+        // 100% Traceable — source-to-summary trace route.
+        'trace-route': '<path d="M8.25 18h7.25a3.25 3.25 0 0 0 0-6.5h-7a3.25 3.25 0 0 1 0-6.5h7.25"/>' +
+            '<circle class="sf-ico__b" cx="5.75" cy="18" r="2.5"/>' +
+            '<circle class="sf-ico__b" cx="18.25" cy="5" r="2.5"/>',
+        // Privacy First — padlock.
+        'privacy-lock': '<path d="M8 10.5V7.75a4 4 0 0 1 8 0v2.75"/>' +
+            '<rect class="sf-ico__b" x="4.75" y="10.5" width="14.5" height="10.75" rx="2"/>' +
+            '<path class="sf-ico__d" d="M12 14.5v2.75"/>',
+        // Clear Action Items — checklist clipboard.
+        'action-list': '<rect class="sf-ico__b" x="4.75" y="4.5" width="14.5" height="16.75" rx="1.75"/>' +
+            '<rect class="sf-ico__b" x="8.75" y="2.75" width="6.5" height="3.5" rx="1"/>' +
+            '<path class="sf-ico__d" d="m8 11.5 1.5 1.5 2.5-3M14 12h2.5M8 16.75h8.5"/>',
+        // Instant Negotiation Trends — rising bar chart.
+        'trend-bars': '<path d="M3 20.75h18"/>' +
+            '<rect class="sf-ico__b" x="4.75" y="13" width="3.5" height="7.75" rx=".75"/>' +
+            '<rect class="sf-ico__b" x="10.25" y="9" width="3.5" height="11.75" rx=".75"/>' +
+            '<rect class="sf-ico__b" x="15.75" y="4.75" width="3.5" height="16" rx=".75"/>',
+        // Seamless Team Onboarding — team.
+        'team': '<circle class="sf-ico__b" cx="9" cy="8" r="3.25"/>' +
+            '<circle class="sf-ico__b" cx="16.75" cy="9.25" r="2.5"/>' +
+            '<path class="sf-ico__b" d="M3.25 20.25a5.75 5.75 0 0 1 11.5 0Z"/>' +
+            '<path class="sf-ico__b" d="M16.75 20.25h4a4.25 4.25 0 0 0-6.3-3.72 7.2 7.2 0 0 1 2.3 3.72Z"/>'
     };
 
-    var ADV_ORDER = ['cpu-chip', 'link', 'shield-check', 'check-circle', 'arrow-trending-up', 'user-group'];
+    var ADV_ORDER = ['auto-bolt', 'trace-route', 'privacy-lock', 'action-list', 'trend-bars', 'team'];
 
     // Same construction method as homepage_sections.js svgIcon: innerHTML on a
     // throwaway host so the parser places <svg> in the SVG namespace.
     function advIcon(name) {
-        var set = ADV_ICONS[name] || ADV_ICONS['check-circle'];
-        var head = ' viewBox="0 0 24 24" focusable="false" aria-hidden="true">';
         var host = document.createElement('div');
         host.innerHTML = '<span class="sf-adv__mark">' +
-            '<svg class="sf-adv__icon sf-adv__icon--outline" fill="none"' +
-            ' stroke="currentColor" stroke-width="1.5"' + head + set.outline + '</svg>' +
-            '<svg class="sf-adv__icon sf-adv__icon--solid" fill="currentColor"' +
-            head + set.solid + '</svg>' +
-            '</span>';
+            '<svg class="sf-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"' +
+            ' stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"' +
+            ' focusable="false" aria-hidden="true">' + (ADV_ICONS[name] || ADV_ICONS['action-list']) +
+            '</svg></span>';
         return host.firstChild;
     }
 
@@ -345,6 +334,13 @@
 
             asButton(s.querySelector('a'), 'primary');
             markVoids(box || s, 'sf-void');
+
+            // The product screenshot slider inside this band is mounted by
+            // shots.js, which owns its own guard and undo log: this band is
+            // also matched by homepage_sections.js, which sets data-sf-ready
+            // first, so anything added after the READY check here would never
+            // run.
+
             ready(s);
             return;
         }
@@ -454,7 +450,7 @@
                     removeClass(icon, 'mb-3');
                     addClass(icon, 'sf-void');
                     if (!col.querySelector('.sf-adv__mark')) {
-                        var mark = advIcon(ADV_ORDER[idx] || 'check-circle');
+                        var mark = advIcon(ADV_ORDER[idx] || 'action-list');
                         icon.parentNode.insertBefore(mark, icon);
                         undo.push(function () {
                             if (mark.parentNode) { mark.parentNode.removeChild(mark); }

@@ -1,0 +1,405 @@
+// SummaFlow /company page — POLISH LAYER, not a redesign.
+//
+//   .sf-company-hero       hero: single H1 + layered-line illustration
+//   .sf-company-split      shared editorial two-column section (heading / body)
+//   .sf-company-principles "Core Engineering & Operating Principles" 3x2 grid
+//   .sf-company-cta        final gradient "Ready to Bring Clarity…" CTA band
+//
+// Markup stays DB-managed; company.js attaches these classes and clears the
+// inline declarations that beat the stylesheet (off-canon gradients, inline
+// font-size/weight, the builder's divider HRs, the 75vh min-heights). No copy
+// rewrite, no DB write, no numeric DB IDs.
+//
+// Odoo Online safe: no local @import/@use (listed in __manifest__.py), no
+// mixed-unit clamp()/min()/max(), single-unit values + stepped media queries.
+// sf-text-gradient (_utilities) and sf-button* (_buttons) are reused as-is.
+// Sticky-header literal (62px) matches _header.scss --sf-header-h.
+
+// Builder spacer nodes, empty paragraphs and divider HRs collapsed.
+.sf-company-hero .sf-void,
+.sf-company-split .sf-void,
+.sf-company-principles .sf-void,
+.sf-company-cta .sf-void {
+    display: none;
+}
+
+// Every section carries o_three_quarter_height (min-height:75vh !important),
+// which is what makes the page read sparse / too tall. Neutralised once.
+section.sf-company-hero.o_three_quarter_height,
+section.sf-company-split.o_three_quarter_height,
+section.sf-company-principles.o_three_quarter_height,
+section.sf-company-cta.o_three_quarter_height {
+    min-height: 0 !important;
+}
+
+// Shared centered container for every company section.
+.sf-company-hero .container,
+.sf-company-split .container,
+.sf-company-principles .container,
+.sf-company-cta .container {
+    width: 100%;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+@media (min-width: 62rem) {
+    .sf-company-hero .container,
+    .sf-company-split .container,
+    .sf-company-principles .container,
+    .sf-company-cta .container {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+// =========================================================================
+// 1. Hero
+// =========================================================================
+section.sf-company-hero {
+    padding-top: var(--sf-space-8) !important;    // 64px
+    padding-bottom: var(--sf-space-6) !important; // 32px
+}
+
+h1.sf-company-hero__title {
+    margin: 0 auto;
+    max-width: 18ch;
+    font-size: var(--sf-h-xl); // 32px
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+    letter-spacing: -0.01em;
+}
+
+h1.sf-company-hero__title .sf-text-gradient {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+@media (min-width: 62rem) {
+    h1.sf-company-hero__title { font-size: var(--sf-display); } // 40px
+}
+
+.sf-company-hero__media {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    margin: var(--sf-space-6) auto 0; // 32px below the title, no giant gap
+}
+
+// =========================================================================
+// 2. Shared editorial two-column sections
+// =========================================================================
+section.sf-company-split {
+    padding-top: var(--sf-space-7) !important;    // 48px
+    padding-bottom: var(--sf-space-7) !important;
+}
+
+.sf-company-split .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.sf-company-split__head,
+.sf-company-split__body {
+    margin-left: 0 !important; // kill Bootstrap offset-lg-1
+    padding-left: 0;
+    padding-right: 0;
+}
+
+h2.sf-company-split__title {
+    margin: 0;
+    font-size: var(--sf-h-lg); // 26px
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+    letter-spacing: -0.01em;
+}
+
+h2.sf-company-split__title span,
+h2.sf-company-split__title .h2-fs {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+h2.sf-company-split__title .sf-text-gradient {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+@media (min-width: 62rem) {
+    h2.sf-company-split__title { font-size: var(--sf-h-xl); } // 32px
+}
+
+.sf-company-split__body {
+    max-width: 62ch;
+}
+
+.sf-company-split__body p {
+    margin: 0 0 var(--sf-space-4);
+}
+
+.sf-company-split__body p:last-child { margin-bottom: 0; }
+
+.sf-company-split__body p span,
+.sf-company-split__body p .h5-fs {
+    font-size: var(--sf-text-base); // 17px
+    line-height: 1.6;
+}
+
+// Right-column subheadings (Global Hub / Enterprise Trust): the builder set
+// an inline 22px span inside a <p>; company.js retags those to <h3>.
+h3.sf-company-split__subhead {
+    margin: var(--sf-space-5) 0 var(--sf-space-2);
+    font-size: var(--sf-text-lg); // 20px
+    font-weight: var(--sf-weight-medium); // 500
+    line-height: var(--sf-lh-snug);
+}
+
+h3.sf-company-split__subhead:first-child { margin-top: 0; }
+
+h3.sf-company-split__subhead span {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+@media (min-width: 62rem) {
+    .sf-company-split .row {
+        display: grid;
+        grid-template-columns: 2fr 3fr; // ~40% / ~60%
+        gap: 64px;
+        align-items: start;
+    }
+    .sf-company-split__head,
+    .sf-company-split__body {
+        width: auto;
+        max-width: none;
+        flex: none;
+    }
+    .sf-company-split__body { max-width: 62ch; }
+
+    // Left heading sticks within its own section (the grid .row is the
+    // containing block; align-items:start keeps the cell its natural height,
+    // so the heading releases exactly when the right content ends). Offset =
+    // 62px sticky header (_header.scss --sf-header-h) + 22px. Desktop only;
+    // the base rules leave it static in normal flow on tablet/mobile.
+    .sf-company-split__head {
+        position: sticky;
+        top: 84px;
+        align-self: start;
+    }
+}
+
+// =========================================================================
+// 3. Core Engineering & Operating Principles — clean 3x2 editorial grid
+// =========================================================================
+section.sf-company-principles {
+    padding-top: var(--sf-space-7) !important;    // 48px
+    padding-bottom: var(--sf-space-7) !important;
+}
+
+h2.sf-company-principles__title {
+    margin: 0 0 var(--sf-space-7); // 48px below the heading
+    font-size: var(--sf-h-xl); // 32px
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+    text-align: center;
+}
+
+h2.sf-company-principles__title span {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.sf-company-principles__grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    column-gap: 56px;
+    row-gap: 44px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+@media (min-width: 48rem) {
+    .sf-company-principles__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 62rem) {
+    .sf-company-principles__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+// Each item: NUMBER / TITLE / DESCRIPTION. No card, border, shadow, divider.
+// Natural height; starts aligned, not bottoms.
+.sf-company-principle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+    max-width: none;
+    padding: 0 !important; // drop builder pt48 pb24
+    margin: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+.sf-company-principle__num {
+    display: block;
+    margin: 0 0 var(--sf-space-3); // 12px → title
+    font-size: 2.25rem; // 36px, prominent but not oversized
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: 1;
+}
+
+.sf-company-principle__num .sf-text-gradient,
+.sf-company-principle__num font {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+h3.sf-company-principle__title {
+    margin: 0 0 var(--sf-space-2); // 8px → description
+    font-size: var(--sf-text-lg); // 20px
+    font-weight: var(--sf-weight-medium); // 500
+    line-height: var(--sf-lh-snug);
+}
+
+h3.sf-company-principle__title span {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.sf-company-principle__text {
+    margin: 0;
+    font-size: var(--sf-text-sm); // 15px
+    line-height: 1.55;
+    color: var(--sf-text-muted);
+}
+
+.sf-company-principle__text b { font-weight: var(--sf-weight-semibold); } // 600
+
+// =========================================================================
+// 4. Final CTA band
+// =========================================================================
+section.sf-company-cta {
+    padding-top: var(--sf-space-8) !important;    // 64px
+    padding-bottom: var(--sf-space-8) !important;
+    background: var(--sf-gradient-brand) !important; // canonical, replaces inline
+}
+
+.sf-company-cta .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sf-space-5);
+}
+
+.sf-company-cta h2 {
+    margin: 0;
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-company-cta h2 .h2-fs,
+.sf-company-cta h2 font {
+    font-weight: inherit;
+    color: #ffffff;
+}
+
+.sf-company-cta__copy {
+    margin: 0;
+    max-width: 60ch;
+}
+
+.sf-company-cta__copy font,
+.sf-company-cta__copy .h5-fs {
+    font-size: 1rem; // 16px
+    line-height: 1.6;
+    color: #ffffff;
+}
+
+.sf-company-cta__actions { margin: 0; }
+
+// Approved black / white button (mirrors homepage .sf-band / security CTA).
+.sf-company-cta .sf-button {
+    min-height: 0;
+    margin: 0;
+    padding: 0.5rem 1.1rem;
+    border: 1px solid #000000;
+    border-radius: 0.5rem;
+    font-size: 0.9375rem; // 15px
+    font-weight: var(--sf-weight-medium);
+    line-height: 1.5;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.sf-company-cta a.sf-button.sf-button--primary,
+.sf-company-cta a.sf-button.sf-button--primary:link,
+.sf-company-cta a.sf-button.sf-button--primary:visited,
+.sf-company-cta a.sf-button.sf-button--primary:hover,
+.sf-company-cta a.sf-button.sf-button--primary:focus,
+.sf-company-cta a.sf-button.sf-button--primary:active {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.sf-company-cta .sf-button font,
+.sf-company-cta .sf-button span {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.sf-company-cta a.sf-button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+// A second, builder-duplicated CTA band (if one exists in the DB) is collapsed
+// so only one renders. company.js marks extras .sf-company-dup.
+.sf-company-dup { display: none !important; }
+
+@media (min-width: 62rem) {
+    .sf-company-cta .container {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: var(--sf-space-3) var(--sf-space-7);
+    }
+    .sf-company-cta h2 { grid-column: 1; grid-row: 1; }
+    .sf-company-cta__copy { grid-column: 1; grid-row: 2; }
+    .sf-company-cta__actions {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        align-self: center;
+        justify-self: end;
+    }
+}
+
+// =========================================================================
+// 1b. Hero product showcase (company.js appends the shared shots.js slider)
+// =========================================================================
+// Replaces the stacked-rectangle illustration below "Bringing Truth,
+// Transparency, and Control to Global Trade Operations." The builder image
+// node stays in the arch; it is only hidden on the public page.
+.sf-company-hero--shots .sf-company-hero__media--void {
+    display: none;
+}
+
+.sf-company-hero--shots .sf-shots {
+    margin-top: var(--sf-space-6); // 32px below the title — no large void
+}
+
+section.sf-company-hero--shots {
+    padding-bottom: var(--sf-space-8) !important; // 64px, balances the slider nav
+}
+
+@media (max-width: 47.98rem) {
+    .sf-company-hero--shots .sf-shots { margin-top: var(--sf-space-5); }
+
+    section.sf-company-hero--shots {
+        padding-bottom: var(--sf-space-7) !important;
+    }
+}

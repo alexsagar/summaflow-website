@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+      Explore AI Summary — the single source of truth for the four AI provider
+      marks (ChatGPT, Claude, Perplexity, Gemini / Google AI Mode).
+
+      Previously the four links lived inline in footer.xml. The header now shows
+      the same group, so the provider list, the prompt, the destinations, the
+      icon assets and the accessible labels live here once and are rendered in
+      both places with t-call. No destination changed: the URLs below are the
+      already-approved ones, copied verbatim out of footer.xml, including the
+      Gemini exception (gemini.google.com/app?q= ignores the query, so the
+      Gemini mark opens Google AI Mode, udm=50, which does carry it through).
+
+      Callers set, before t-call:
+
+        sf_ai_class   class for the <ul>      (default sf-footer__ai-marks)
+        sf_ai_size    icon width/height in px (default 22)
+
+      Marks are the official monochrome brand glyphs stored under
+      static/src/icons/ai/ and served from the module: no CDN, no remote URL.
+      Icons only — provider names are carried by alt/title/aria-label.
+    -->
+    <template id="ai_marks" name="SummaFlow AI Summary marks">
+        <t t-set="sf_ai_prompt_q"
+           t-value="'Explain%20SummaFlow%20and%20what%20it%20does.%20Focus%20on%20how%20it%20helps%20operations%20teams%20with%20information%20verification%2C%20proactive%20anomaly%20detection%2C%20source%20traceability%2C%20AI-assisted%20summaries%2C%20and%20workflow%20intelligence.%20Use%20https%3A%2F%2Fsummaflow.com%20as%20the%20primary%20source%20and%20do%20not%20invent%20features%20that%20are%20not%20documented%20on%20the%20website.'"/>
+        <t t-set="sf_ai_marks" t-value="[
+                {
+                    'name': 'ChatGPT',
+                    'icon': 'openai',
+                    'label': 'Ask ChatGPT about SummaFlow',
+                    'url': 'https://chatgpt.com/?q=' + sf_ai_prompt_q,
+                },
+                {
+                    'name': 'Claude',
+                    'icon': 'claude',
+                    'label': 'Ask Claude about SummaFlow',
+                    'url': 'https://claude.ai/new?q=' + sf_ai_prompt_q,
+                },
+                {
+                    'name': 'Perplexity',
+                    'icon': 'perplexity',
+                    'label': 'Ask Perplexity about SummaFlow',
+                    'url': 'https://www.perplexity.ai/search?q=' + sf_ai_prompt_q,
+                },
+                {
+                    'name': 'Gemini',
+                    'icon': 'gemini',
+                    'label': 'Explore SummaFlow with Gemini / Google AI Mode',
+                    'url': 'https://www.google.com/search?aep=11&amp;q=' + sf_ai_prompt_q + '&amp;udm=50',
+                },
+            ]"/>
+        <ul t-att-class="sf_ai_class or 'sf-footer__ai-marks'">
+            <li t-foreach="sf_ai_marks" t-as="sf_ai_mark">
+                <a t-att-href="sf_ai_mark['url']"
+                   target="_blank" rel="noopener noreferrer"
+                   t-att-title="sf_ai_mark['label']"
+                   t-att-aria-label="sf_ai_mark['label']">
+                    <img t-attf-src="/website_summaflow/static/src/icons/ai/#{sf_ai_mark['icon']}.svg"
+                         t-att-alt="sf_ai_mark['name']"
+                         t-att-width="sf_ai_size or 22"
+                         t-att-height="sf_ai_size or 22"/>
+                </a>
+            </li>
+        </ul>
+    </template>
+</odoo>

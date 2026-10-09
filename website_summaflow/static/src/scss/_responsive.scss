@@ -27,8 +27,8 @@
         --sf-h-lg: 1.9rem;
         --sf-h-xl: 2.5rem;
         --sf-display: 3.25rem;
-        --sf-section-y: 6.5rem;
-        --sf-gutter: 1.5rem;
+        --sf-section-y: 5.5rem;
+        --sf-gutter: 1.75rem; // 28px
     }
 }
 @media (min-width: 75rem) {
@@ -37,7 +37,22 @@
         --sf-h-lg: 2.25rem;
         --sf-h-xl: 3rem;
         --sf-display: 4rem;
-        --sf-section-y: 9rem;
-        --sf-gutter: 2rem;
+        // Section rhythm capped so bands don't become absurdly tall voids on
+        // large monitors (was 9rem / 144px).
+        --sf-section-y: 7rem; // 112px
+        --sf-gutter: 2rem;    // 32px
+    }
+}
+
+// Large-monitor treatment (>=1600px). Containers widen and horizontal gutters
+// grow so the site feels scaled to the viewport rather than floating tiny in
+// the middle. Typography is deliberately NOT scaled with vw here — heading
+// tokens stay as-is; only container width, gutter and section rhythm move.
+@media (min-width: 100rem) {
+    :root {
+        --sf-container: 1440px;
+        --sf-container-wide: 1600px;
+        --sf-section-y: 7.5rem; // 120px — controlled, not proportional
+        --sf-gutter: 3rem;      // 48px
     }
 }

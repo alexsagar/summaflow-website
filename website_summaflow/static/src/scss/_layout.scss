@@ -48,3 +48,26 @@
     // keeps >=260px of inner width at all target breakpoints (320px and up).
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
+
+// First-paint guard (see js/reveal.js). Only the builder-managed content area
+// is held back while the runtime decorators restyle it, so the old builder
+// look never flashes. Header/footer paint immediately. Fallback: the
+// animation reveals the content after 2.5s even if JS never runs.
+body:not(.sf-ready) #wrap {
+    opacity: 0;
+    animation: sf-reveal-fallback 0s linear 2.5s forwards;
+}
+
+#wrap {
+    transition: opacity 180ms ease;
+}
+
+@keyframes sf-reveal-fallback {
+    to { opacity: 1; }
+}
+
+// Never hide anything while editing in the Website Builder.
+body.editor_enable #wrap {
+    opacity: 1;
+    animation: none;
+}

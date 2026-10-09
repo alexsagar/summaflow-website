@@ -1,0 +1,128 @@
+// SummaFlow — shared product-screenshot slider (shots.js injects the markup).
+//
+// Used on /platform (inside the "Built for teams…" gradient band) and on
+// /company (in place of the stacked-rectangle hero visual). One frame, three
+// overlapping layers, one opacity crossfade, buttons + dots below.
+//
+// Odoo Online / libsass safe: no local @import/@use (listed in __manifest__.py),
+// no mixed-unit clamp()/min()/max().
+
+.sf-shots {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+// The frame owns the proportion, so the three screenshots never jump in height
+// and the layout cannot shift while switching.
+.sf-shots__frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1440 / 810;
+    overflow: hidden;
+    border-radius: var(--sf-radius-lg);
+    background: var(--sf-surface);
+    box-shadow: var(--sf-shadow);
+}
+
+.sf-shots__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; // never crop the product UI
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.sf-shots__img.is-active { opacity: 1; }
+
+// --- Navigation -----------------------------------------------------------
+.sf-shots__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sf-space-4);
+    margin-top: var(--sf-space-4);
+}
+
+.sf-shots__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: var(--sf-border-width) solid var(--sf-border);
+    border-radius: 50%;
+    background: var(--sf-surface);
+    color: var(--sf-text);
+    transition: background-color var(--sf-transition), color var(--sf-transition);
+}
+
+.sf-shots__btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.sf-shots__btn:hover {
+    background: var(--sf-text);
+    border-color: var(--sf-text);
+    color: #ffffff;
+}
+
+.sf-shots__dots {
+    display: flex;
+    align-items: center;
+    gap: var(--sf-space-2);
+}
+
+.sf-shots__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--sf-border);
+    transition: background-color var(--sf-transition);
+}
+
+.sf-shots__dot.is-active { background: var(--sf-text); }
+
+.sf-shots__btn:focus-visible,
+.sf-shots__dot:focus-visible {
+    outline: 2px solid var(--sf-text);
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+// --- On a gradient band: the controls sit on colour, not on white ---------
+.sf-band .sf-shots__btn {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.55);
+    color: #ffffff;
+}
+
+.sf-band .sf-shots__btn:hover {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: var(--sf-text);
+}
+
+.sf-band .sf-shots__dot { background: rgba(255, 255, 255, 0.45); }
+.sf-band .sf-shots__dot.is-active { background: #ffffff; }
+
+.sf-band .sf-shots__btn:focus-visible,
+.sf-band .sf-shots__dot:focus-visible {
+    outline: 2px solid #ffffff;
+}
+
+// --- Mobile ---------------------------------------------------------------
+@media (max-width: 47.98rem) {
+    .sf-shots__frame { border-radius: var(--sf-radius); }
+    .sf-shots__nav { gap: var(--sf-space-3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sf-shots__img { transition: opacity 0.01s linear; }
+}

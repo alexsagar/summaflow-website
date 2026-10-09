@@ -18,9 +18,9 @@
 
       Composition (ONE four-column grid, then the brand signature):
 
-        col 1   brand wordmark + Sign In / Contact + contact metadata + socials
-        col 2   EXPLORE
-        col 3   COMPANY
+        col 1   brand wordmark + Sign In / Request a Free Trial + contact metadata + socials
+        col 2   SOLUTIONS (Platform, Resources)
+        col 3   EXPLORE (Company, Security)
         col 4   STAY UPDATED: copy, form, inline success,
                 EXPLORE AI SUMMARY
         then    oversized SummaFlow wordmark, full-bleed, nearly full width
@@ -65,8 +65,8 @@
                                     Sign In
                                 </a>
                                 <a class="sf-button sf-button--secondary"
-                                   href="mailto:info@summaflow.com">
-                                    Contact
+                                   href="/contactus">
+                                    Request a Free Trial
                                 </a>
                             </div>
 
@@ -81,7 +81,18 @@
                                     <li><a href="mailto:info@summaflow.com">info@summaflow.com</a></li>
                                     <li>
                                         <span class="sf-footer__contact-key">WhatsApp</span>
-                                        <a href="tel:+85292209701"><span class="o_force_ltr">+852 9220 9701</span></a>
+                                        <!--
+                                          wa.me, not tel: - this is the
+                                          WhatsApp number, so the link must
+                                          open a WhatsApp chat instead of
+                                          placing a phone call. Displayed
+                                          number unchanged; wa.me needs the
+                                          international form with no + or
+                                          spaces.
+                                        -->
+                                        <a href="https://wa.me/85292209701"
+                                           target="_blank" rel="noopener"
+                                           aria-label="Chat with SummaFlow on WhatsApp"><span class="o_force_ltr">+852 9220 9701</span></a>
                                     </li>
                                 </ul>
                                 <p class="sf-footer__address">GF, Koon Nam House, 12-14 Shing Wong Street, Hong Kong</p>
@@ -117,20 +128,25 @@
                             </ul>
                         </div>
 
-                        <nav class="sf-footer__navgroup" aria-label="Explore">
-                            <div class="sf-footer__head">Explore</div>
+                        <!--
+                          Navigation groups, regrouped on client instruction:
+                          SOLUTIONS (Platform, Resources) and EXPLORE (Company,
+                          Security). Vertical stacked lists, one link per row -
+                          never two links side by side. Routes are unchanged.
+                        -->
+                        <nav class="sf-footer__navgroup" aria-label="Solutions">
+                            <div class="sf-footer__head">Solutions</div>
                             <ul class="sf-footer__list">
                                 <li><a href="/platform">Platform</a></li>
-                                <li><a href="/solutions">Solutions</a></li>
-                                <li><a href="/security">Security</a></li>
+                                <li><a href="/blog">Resources</a></li>
                             </ul>
                         </nav>
 
-                        <nav class="sf-footer__navgroup" aria-label="Company">
-                            <div class="sf-footer__head">Company</div>
+                        <nav class="sf-footer__navgroup" aria-label="Explore">
+                            <div class="sf-footer__head">Explore</div>
                             <ul class="sf-footer__list">
                                 <li><a href="/company">Company</a></li>
-                                <li><a href="/blog">Resources</a></li>
+                                <li><a href="/security">Security</a></li>
                             </ul>
                         </nav>
 
@@ -172,48 +188,9 @@
                         -->
                         <div class="sf-footer__ai">
                             <div class="sf-footer__head">Explore AI Summary</div>
-                            <ul class="sf-footer__ai-marks">
-                                <li>
-                                    <a href="https://chatgpt.com/?q=Explain%20SummaFlow%20and%20what%20it%20does.%20Focus%20on%20how%20it%20helps%20operations%20teams%20with%20information%20verification%2C%20proactive%20anomaly%20detection%2C%20source%20traceability%2C%20AI-assisted%20summaries%2C%20and%20workflow%20intelligence.%20Use%20https%3A%2F%2Fsummaflow.com%20as%20the%20primary%20source%20and%20do%20not%20invent%20features%20that%20are%20not%20documented%20on%20the%20website."
-                                       target="_blank" rel="noopener noreferrer"
-                                       title="Ask ChatGPT about SummaFlow" aria-label="Ask ChatGPT about SummaFlow">
-                                        <img src="/website_summaflow/static/src/icons/ai/openai.svg"
-                                             alt="ChatGPT" width="22" height="22"/>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://claude.ai/new?q=Explain%20SummaFlow%20and%20what%20it%20does.%20Focus%20on%20how%20it%20helps%20operations%20teams%20with%20information%20verification%2C%20proactive%20anomaly%20detection%2C%20source%20traceability%2C%20AI-assisted%20summaries%2C%20and%20workflow%20intelligence.%20Use%20https%3A%2F%2Fsummaflow.com%20as%20the%20primary%20source%20and%20do%20not%20invent%20features%20that%20are%20not%20documented%20on%20the%20website."
-                                       target="_blank" rel="noopener noreferrer"
-                                       title="Ask Claude about SummaFlow" aria-label="Ask Claude about SummaFlow">
-                                        <img src="/website_summaflow/static/src/icons/ai/claude.svg"
-                                             alt="Claude" width="22" height="22"/>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.perplexity.ai/search?q=Explain%20SummaFlow%20and%20what%20it%20does.%20Focus%20on%20how%20it%20helps%20operations%20teams%20with%20information%20verification%2C%20proactive%20anomaly%20detection%2C%20source%20traceability%2C%20AI-assisted%20summaries%2C%20and%20workflow%20intelligence.%20Use%20https%3A%2F%2Fsummaflow.com%20as%20the%20primary%20source%20and%20do%20not%20invent%20features%20that%20are%20not%20documented%20on%20the%20website."
-                                       target="_blank" rel="noopener noreferrer"
-                                       title="Ask Perplexity about SummaFlow" aria-label="Ask Perplexity about SummaFlow">
-                                        <img src="/website_summaflow/static/src/icons/ai/perplexity.svg"
-                                             alt="Perplexity" width="22" height="22"/>
-                                    </a>
-                                </li>
-                                <li>
-                                    <!--
-                                      gemini.google.com/app?q=... was tested and
-                                      ignores the query (empty composer), so the
-                                      Gemini mark instead opens Google AI Mode
-                                      (udm=50), which does carry the prompt
-                                      through q= and answers with Gemini.
-                                    -->
-                                    <a href="https://www.google.com/search?aep=11&amp;q=Explain%20SummaFlow%20and%20what%20it%20does.%20Focus%20on%20how%20it%20helps%20operations%20teams%20with%20information%20verification%2C%20proactive%20anomaly%20detection%2C%20source%20traceability%2C%20AI-assisted%20summaries%2C%20and%20workflow%20intelligence.%20Use%20https%3A%2F%2Fsummaflow.com%20as%20the%20primary%20source%20and%20do%20not%20invent%20features%20that%20are%20not%20documented%20on%20the%20website.&amp;udm=50"
-                                       target="_blank" rel="noopener noreferrer"
-                                       title="Explore SummaFlow with Gemini / Google AI Mode"
-                                       aria-label="Explore SummaFlow with Gemini / Google AI Mode">
-                                        <img src="/website_summaflow/static/src/icons/ai/gemini.svg"
-                                             alt="Gemini" width="22" height="22"/>
-                                    </a>
-                                </li>
-                            </ul>
+                            <t t-set="sf_ai_class" t-value="'sf-footer__ai-marks'"/>
+                            <t t-set="sf_ai_size" t-value="22"/>
+                            <t t-call="website_summaflow.ai_marks"/>
                         </div>
 
                         </div>

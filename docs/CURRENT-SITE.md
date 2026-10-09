@@ -30,7 +30,7 @@ Production database:
 Neutralized redesign/test database:
 
 - sumflow-redesign-test
-- URL: https://sumflow-redesign-test.odoo.com/
+- URL: https://summaflow-redesign-test.odoo.com/
 
 The test database is a duplicated and neutralized copy of production.
 

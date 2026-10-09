@@ -304,6 +304,13 @@ section.sf-adv {
     display: grid;
     grid-template-columns: minmax(0, 1fr);  // mobile: 1 column
     align-items: start;
+    // The grid node is a builder .row: Bootstrap's negative gutter margins
+    // (-12px per side) eat the container padding and push the icons and text
+    // against the viewport edge on mobile. Zero them; the container owns the
+    // gutter.
+    margin: 0;
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
     row-gap: var(--sf-space-6);             // 32px mobile
     column-gap: 3.75rem;                    // 60px
 }
@@ -348,49 +355,34 @@ section.sf-adv {
     overflow: visible;
 }
 
-// Icons: Heroicons outline + solid stacked in one 28px wrapper — identical
-// system, size, timing and hover behaviour to the homepage Trust icons
-// (.sf-trust). No chip, plate, circle, border, shadow or glow. The wrapper owns
-// the box, so crossfading variants can never shift layout.
+// Icons: one fill-on-hover line icon in a 28px wrapper — identical system,
+// size, timing and hover behaviour to the homepage Trust icons (.sf-trust);
+// shared .sf-ico rules live in _utilities.scss. No chip, plate, border,
+// shadow or glow.
 .sf-adv .sf-adv__mark {
-    position: relative;
     display: block;
     width: 1.75rem;  // 28px, as the homepage
     height: 1.75rem;
     margin: 0 0 var(--sf-space-4); // 16px icon -> title
+    color: #5b8cc8; // rest: lighter tone of --sf-primary-ink
     transform: translateY(0); // pre-declared so the hover lift cannot reflow
-    transition: transform 200ms ease;
+    transition: transform 200ms ease, color 200ms ease;
 }
 
-.sf-adv svg.sf-adv__icon {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    transition: opacity 200ms ease;
-}
-
-// Rest: lighter outline brand blue (same tone as the homepage).
-.sf-adv svg.sf-adv__icon--outline {
-    color: #5b8cc8; // lighter tone of --sf-primary-ink
-    opacity: 1;
-}
-
-// Hover/focus: solid variant in the stronger brand ink, crossfaded in.
-.sf-adv svg.sf-adv__icon--solid {
+// Hover/focus: stronger brand ink + body shapes fill (details flip to white).
+.sf-adv .sf-adv__item:hover .sf-adv__mark,
+.sf-adv .sf-adv__item:focus-within .sf-adv__mark {
     color: var(--sf-primary-ink);
-    opacity: 0;
 }
 
-.sf-adv .sf-adv__item:hover svg.sf-adv__icon--outline,
-.sf-adv .sf-adv__item:focus-within svg.sf-adv__icon--outline {
-    opacity: 0;
+.sf-adv .sf-adv__item:hover .sf-ico__b,
+.sf-adv .sf-adv__item:focus-within .sf-ico__b {
+    fill: currentColor;
 }
 
-.sf-adv .sf-adv__item:hover svg.sf-adv__icon--solid,
-.sf-adv .sf-adv__item:focus-within svg.sf-adv__icon--solid {
-    opacity: 1;
+.sf-adv .sf-adv__item:hover .sf-ico__d,
+.sf-adv .sf-adv__item:focus-within .sf-ico__d {
+    stroke: #ffffff;
 }
 
 // The only motion: a 2px lift of the icon wrapper, as the homepage.
@@ -547,4 +539,32 @@ section.sf-sec {
         top: auto;
         max-height: none;
     }
+}
+
+// =========================================================================
+// 8. Product showcase inside the "Built for teams…" gradient band
+// =========================================================================
+// platform.js appends the shared slider (shots.js / _shots.scss) to the band's
+// container and marks the band .sf-pf-band--shots. The band keeps its
+// heading-left / CTA layout; the slider sits below it with breathing room.
+section.sf-pf-band--shots {
+    padding-top: var(--sf-space-8) !important;    // 64px
+    padding-bottom: var(--sf-space-8) !important;
+}
+
+.sf-pf-band--shots .sf-shots {
+    margin-top: var(--sf-space-7); // 48px below the heading / CTA
+    // From 62rem the band's .container is a 2-column grid (copy | CTA); the
+    // slider is a third child and must span both columns, not sit in the
+    // narrow copy column.
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 47.98rem) {
+    section.sf-pf-band--shots {
+        padding-top: var(--sf-space-7) !important;
+        padding-bottom: var(--sf-space-7) !important;
+    }
+
+    .sf-pf-band--shots .sf-shots { margin-top: var(--sf-space-6); }
 }

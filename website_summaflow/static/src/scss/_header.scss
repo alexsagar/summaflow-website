@@ -40,6 +40,14 @@
 }
 
 .sf-header__bar {
+    // Mobile stutter fix: the sticky bar shares a paint layer with the page
+    // behind it, so every scroll frame repaints it and it visibly vibrates on
+    // phones. translateZ(0) gives it its own compositor layer, which the
+    // browser then just moves. Scoped to the bar, NOT to .sf-header: a
+    // transform on the header would become the containing block for the
+    // offcanvas panel (a sibling of this bar) and break position: fixed.
+    transform: translateZ(0);
+    backface-visibility: hidden;
     display: flex;
     align-items: center;
     gap: var(--sf-space-4);
@@ -112,31 +120,39 @@
 }
 
 // --- Social utility area --------------------------------------------------
-.sf-header__social {
+// --- Explore AI Summary marks (replaces the old social glyphs) ------------
+// Same visual weight as the glyphs they replace: ~28px square click target,
+// no background chip, no glow, no animation beyond a subtle opacity change.
+.sf-header__ai {
     display: flex;
     align-items: center;
-    gap: var(--sf-space-3);
+    gap: var(--sf-space-2); // 8px — four marks stay compact
     margin: 0;
     padding: 0;
     list-style: none;
+    flex-shrink: 0;
 }
 
-.sf-header__social a {
+.sf-header__ai a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 28px;
     height: 28px;
-    color: #111111;
-    font-size: 1.0625rem; // 17px glyph
-    line-height: 1;
     text-decoration: none;
-    transition: color 0.15s ease-in-out;
+    opacity: 0.65;
+    transition: opacity 0.15s ease-in-out;
 }
 
-.sf-header__social a:hover,
-.sf-header__social a:focus {
-    color: #000000;
+.sf-header__ai a:hover,
+.sf-header__ai a:focus {
+    opacity: 1;
+}
+
+.sf-header__ai img {
+    display: block;
+    width: 20px;
+    height: 20px;
 }
 
 // --- Actions: Sign In + Request a Free Trial, a matched pair --------------
@@ -207,8 +223,12 @@
     line-height: 1.5;
 }
 
+// :focus-visible, NOT :focus. Bootstrap returns focus to this button when the
+// offcanvas closes, so a plain :focus rule left the Menu button stuck in its
+// inverted black state after every close - the "header does not reset" bug.
+// Keyboard users still get the visible focus ring below.
 .sf-header__toggle:hover,
-.sf-header__toggle:focus {
+.sf-header__toggle:focus-visible {
     background-color: #000000;
     border-color: #000000;
     color: #ffffff;
@@ -259,7 +279,7 @@
     min-height: 44px; // touch target on mobile
 }
 
-.sf-mobile-nav__social {
+.sf-mobile-nav__ai {
     display: flex;
     align-items: center;
     gap: var(--sf-space-4);
@@ -268,15 +288,25 @@
     list-style: none;
 }
 
-.sf-mobile-nav__social a {
+.sf-mobile-nav__ai a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 44px;
     height: 44px;
-    color: #111111;
-    font-size: 1.125rem;
     text-decoration: none;
+    opacity: 0.75;
+}
+
+.sf-mobile-nav__ai a:hover,
+.sf-mobile-nav__ai a:focus {
+    opacity: 1;
+}
+
+.sf-mobile-nav__ai img {
+    display: block;
+    width: 22px;
+    height: 22px;
 }
 
 // --- Focus visibility -----------------------------------------------------
@@ -294,7 +324,11 @@
 @media (min-width: 992px) and (max-width: 1199.98px) {
     .sf-header__nav { gap: var(--sf-space-4); }
     .sf-header__bar { gap: var(--sf-space-3); }
-    .sf-header__social { gap: var(--sf-space-2); }
+    // Narrow desktop band: nav + four AI marks + two CTAs do not all fit
+    // without crowding, so the AI group is suppressed here (it stays in the
+    // mobile offcanvas below 992px and returns at 1200px+). Suppressed, not
+    // wrapped: the header must never overflow.
+    .sf-header__ai { display: none !important; }
     // "Request a Free Trial" is a long label: trim the button padding only in
     // this narrow desktop band so nothing wraps.
     .sf-header .sf-button { padding: 0.3rem 0.7rem; }

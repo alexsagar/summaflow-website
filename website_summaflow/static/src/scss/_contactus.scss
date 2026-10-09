@@ -1,0 +1,436 @@
+// SummaFlow /contactus ("Request a Free Trial") — POLISH LAYER over the live
+// Website Builder page.
+//
+// The page, its form and its image stay Builder-owned. The form action is set
+// to "Create an Opportunity" in the Builder, so the public form carries
+// data-model_name="crm.lead" and redirects to /contactus-thank-you; nothing
+// here touches that. contactus.js attaches the .sf-trial* classes used below
+// and clears the builder inline label width. No markup is rebuilt, cloned,
+// reordered or hidden.
+//
+// Builder structure this styles (verified on the test DB):
+//   section.s_form_aside.o_full_screen_height.pt48.pb120   -> .sf-trial__shell
+//     .container > .row
+//       .col-12.col-lg-6              (H1 + copy + form) -> .sf-trial__col-form
+//       .col-12.col-lg-5.offset-lg-1  (image)            -> .sf-trial__col-media
+//
+// Desktop composition: 58% form column / 42% image column, 64px of column
+// padding between them, inside the shared 1320px site container. Below 992px
+// both columns stack: H1, copy, form, then the image.
+//
+// Odoo Online / libsass safe: no local @import/@use (listed in __manifest__.py),
+// no mixed-unit clamp()/min()/max(), single-unit values + stepped media queries.
+
+// --- Shell: content-driven height, shared container ----------------------
+.sf-trial .sf-trial__shell {
+    min-height: 0 !important;                        // kills o_full_screen_height
+    padding-top: var(--sf-section-y) !important;     // was pt48
+    padding-bottom: var(--sf-section-y) !important;  // was pb120
+}
+
+.sf-trial .sf-trial__shell > .container {
+    width: 100%;
+    max-width: 1320px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+// The inner builder form section carries its own pt/pb; the shell owns spacing.
+.sf-trial .sf-trial__form-section {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+// --- Heading + supporting copy -------------------------------------------
+.sf-trial .sf-trial__title {
+    margin: 0 0 var(--sf-space-3);
+    font-family: var(--sf-font-heading);
+    font-size: 2rem; // 32px mobile
+    font-weight: var(--sf-weight-regular); // 400 — never bold
+    line-height: var(--sf-lh-tight);
+    letter-spacing: -0.015em;
+    color: var(--sf-text);
+}
+
+// "Free Trial" in the canonical brand gradient (same treatment as the hero).
+.sf-trial .sf-trial__grad {
+    background: var(--sf-gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.sf-trial .sf-trial__support {
+    margin: 0 0 var(--sf-space-6);
+    max-width: 46ch;
+    font-size: 1.0625rem; // 17px
+    line-height: 1.6;
+    color: var(--sf-text-muted);
+}
+
+// --- Form grid: Name | Phone, Email | Company, then full-width rows -------
+.sf-trial .s_website_form_rows {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.sf-trial .s_website_form_field {
+    margin-bottom: var(--sf-space-5) !important; // 24px row rhythm (was mb-3)
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+// Builder renders each field as a label-left row; stack it instead.
+.sf-trial .s_website_form_field > .row {
+    display: block;
+    margin: 0;
+}
+
+.sf-trial .s_website_form_field > .row > [class*="col-"] {
+    width: 100%;
+    max-width: none;
+    flex: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+// --- Typography: one system across labels, inputs, helpers ---------------
+.sf-trial .s_website_form_label {
+    display: block;
+    width: auto !important; // builder pins 200px inline; JS clears it, this is the net
+    margin-bottom: 7px;     // label -> field
+    padding: 0;
+    font-family: var(--sf-font-body);
+    font-size: 0.9375rem;   // 15px
+    font-weight: var(--sf-weight-medium); // 500
+    line-height: 1.4;
+    color: var(--sf-text);
+    text-align: left;
+}
+
+.sf-trial .s_website_form_mark {
+    font-weight: var(--sf-weight-regular);
+    color: var(--sf-text-muted);
+}
+
+.sf-trial .form-control,
+.sf-trial .s_website_form_input {
+    width: 100%;
+    min-height: 46px;
+    padding: 0.5rem 0.875rem;
+    border: 1px solid var(--sf-border);
+    border-radius: var(--sf-radius-sm);
+    background: #ffffff;
+    font-family: var(--sf-font-body);
+    font-size: 1rem; // 16px
+    font-weight: var(--sf-weight-regular); // 400 — no Bootstrap weight drift
+    line-height: 1.5;
+    color: var(--sf-text);
+    box-shadow: none;
+}
+
+.sf-trial textarea.form-control,
+.sf-trial textarea.s_website_form_input {
+    min-height: 155px;
+    padding-top: 0.75rem;
+    resize: vertical;
+}
+
+.sf-trial .form-control::placeholder {
+    font-size: 1rem;
+    color: var(--sf-text-muted);
+    opacity: 1;
+}
+
+.sf-trial .form-control:focus,
+.sf-trial .s_website_form_input:focus {
+    border-color: var(--sf-primary);
+    outline: none;
+    box-shadow: var(--sf-focus-ring);
+}
+
+.sf-trial .s_website_form_field small,
+.sf-trial small.form-text,
+.sf-trial .s_website_form_error_message {
+    font-size: 0.8125rem; // 13px
+    font-weight: var(--sf-weight-regular);
+    line-height: 1.5;
+    color: var(--sf-text-muted);
+}
+
+// --- Submit: the global primary CTA, nothing special ---------------------
+.sf-trial .sf-trial__submit {
+    margin-top: var(--sf-space-2);
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.sf-trial .s_website_form_send,
+.sf-trial .s_website_form_send.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    padding: 0.3rem 0.9rem;
+    border: 1px solid #000000;
+    border-radius: 0.5rem; // 8px
+    background-color: #000000;
+    background-image: none;
+    font-size: 0.875rem; // 14px
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0;
+    color: #ffffff;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.sf-trial .s_website_form_send:hover,
+.sf-trial .s_website_form_send:focus {
+    background-color: #111111;
+    border-color: #111111;
+    color: #ffffff;
+}
+
+.sf-trial .s_website_form_send:focus-visible {
+    outline: 2px solid #000000;
+    outline-offset: 2px;
+}
+
+.sf-trial .s_website_form_send font,
+.sf-trial .s_website_form_send span {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+// --- The existing Builder image: visible on the public page --------------
+// It is never hidden, cropped or replaced; only sized and rounded.
+.sf-trial .sf-trial__col-media {
+    padding-bottom: 0 !important; // builder pb32
+}
+
+.sf-trial .sf-trial__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--sf-radius);
+    box-shadow: none;
+}
+
+// --- Tablet --------------------------------------------------------------
+@media (min-width: 48rem) {
+    .sf-trial .sf-trial__shell > .container {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .sf-trial .sf-trial__title { font-size: 2.5rem; } // 40px
+}
+
+// --- Desktop: 58 / 42 -----------------------------------------------------
+@media (min-width: 62rem) {
+    .sf-trial .sf-trial__shell > .container {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .sf-trial .sf-trial__title { font-size: 3rem; } // 48px, weight 400
+
+    // Column proportions replace the builder's col-lg-6 / col-lg-5 offset-lg-1.
+    // 54 / 46: the right column carries a two-column point grid now, so it
+    // needs more width than the old single image did.
+    .sf-trial .sf-trial__col-form {
+        width: 50%;
+        max-width: 50%;
+        flex: 0 0 50%;
+        // 48 + 48 = 96px between the form and the panel: the two blocks read
+        // as separate halves instead of sitting shoulder to shoulder.
+        padding-right: 48px;
+    }
+
+    // Also drops offset-lg-1. NOT sticky: a sticky panel beside a taller form
+    // read as "the form scrolls, the right side stays firm". Both columns now
+    // scroll together as one section.
+    .sf-trial .sf-trial__col-media {
+        width: 50%;
+        max-width: 50%;
+        flex: 0 0 50%;
+        margin-left: 0;
+        padding-left: 48px;
+        // The builder column carries its own right padding, which left a strip
+        // of empty space beside the panel. The panel runs to the container edge.
+        padding-right: 0;
+        position: static;
+        align-self: stretch;
+    }
+
+    // Two-up field rows: Name | Phone, then Email | Company.
+    .sf-trial .sf-trial__field--half {
+        width: 50%;
+        max-width: 50%;
+        flex: 0 0 50%;
+    }
+
+    .sf-trial .sf-trial__field--full {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}
+
+// --- Mobile / tablet: one column, image below the form ------------------
+@media (max-width: 61.98rem) {
+    // Natural button width -- full-bleed reads as an elongated bar.
+    .sf-trial .s_website_form_send { width: auto; }
+
+    .sf-trial .sf-trial__col-media {
+        margin-top: var(--sf-space-6);
+    }
+}
+
+@media (max-width: 23.5rem) { // 376px and below (320 / 360 viewports)
+    .sf-trial .sf-trial__title { font-size: 1.75rem; } // 28px
+    .sf-trial .sf-trial__support { font-size: 1rem; }
+}
+
+// =========================================================================
+// Right column: value panel (replaces the builder image)
+// =========================================================================
+// contactus.js injects .sf-trial__panel into the media column and marks the
+// builder image .sf-trial__image--void. The image node itself stays in the
+// arch; it is hidden on the public page only (restored in the Website Editor).
+.sf-trial .sf-trial__image--void { display: none; }
+
+.sf-trial .sf-trial__panel {
+    padding: var(--sf-space-6);
+    border: var(--sf-border-width) solid var(--sf-border);
+    border-radius: var(--sf-radius-lg);
+    background: var(--sf-bg-subtle);
+}
+
+.sf-trial h2.sf-trial__panel-title {
+    margin: 0 0 var(--sf-space-5);
+    font-family: var(--sf-font-heading);
+    font-size: 1.625rem; // 26px mobile
+    font-weight: var(--sf-weight-regular); // 400 — same as the homepage heading
+    line-height: var(--sf-lh-snug);
+    letter-spacing: -0.01em;
+    color: var(--sf-text);
+}
+
+.sf-trial .sf-trial__panel-title .sf-trial__grad {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+// One column on phones, 2 columns x 3 rows from 480px up (client request).
+.sf-trial .sf-trial__points {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sf-space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+// Tiles, not ruled rows: six separate cards scan faster in a grid than
+// hairline-separated lines do.
+.sf-trial .sf-trial__point {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sf-space-3);
+    padding: var(--sf-space-4);
+    border: var(--sf-border-width) solid var(--sf-border);
+    border-radius: var(--sf-radius);
+    background: var(--sf-surface);
+}
+
+// Fill-on-hover line icon — the same system, size and timing as the Platform
+// "Key Advantages" icons (.sf-adv__mark) and the homepage Trust icons; the
+// shared .sf-ico rules live in _utilities.scss. No chip, plate or glow.
+.sf-trial .sf-trial__mark {
+    display: block;
+    flex: 0 0 1.75rem;
+    width: 1.75rem;  // 28px
+    height: 1.75rem;
+    color: #5b8cc8;  // rest: lighter tone of --sf-primary-ink
+    transform: translateY(0); // pre-declared so the hover lift cannot reflow
+    transition: transform 200ms ease, color 200ms ease;
+}
+
+.sf-trial .sf-trial__point:hover .sf-trial__mark,
+.sf-trial .sf-trial__point:focus-within .sf-trial__mark {
+    color: var(--sf-primary-ink);
+    transform: translateY(-2px);
+}
+
+// Body shapes fill on hover; inner details flip to white so they stay legible.
+.sf-trial .sf-trial__point:hover .sf-ico__b,
+.sf-trial .sf-trial__point:focus-within .sf-ico__b {
+    fill: currentColor;
+}
+
+.sf-trial .sf-trial__point:hover .sf-ico__d,
+.sf-trial .sf-trial__point:focus-within .sf-ico__d {
+    stroke: #ffffff;
+}
+
+.sf-trial .sf-trial__point {
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.sf-trial .sf-trial__point:hover {
+    border-color: #c3cedb;
+    box-shadow: var(--sf-shadow-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sf-trial .sf-trial__point:hover .sf-trial__mark,
+    .sf-trial .sf-trial__point:focus-within .sf-trial__mark {
+        transform: translateY(0);
+    }
+}
+
+.sf-trial .sf-trial__point-label {
+    font-size: var(--sf-text-lg); // 20px — the panel carries real weight now
+    font-weight: var(--sf-weight-medium); // 500 max
+    line-height: var(--sf-lh-snug);
+    color: var(--sf-text);
+}
+
+@media (min-width: 30rem) { // 480px
+    .sf-trial .sf-trial__points {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--sf-space-4);
+    }
+}
+
+// Tablet and up: more interior room so the panel never feels cramped.
+@media (min-width: 48rem) {
+    .sf-trial .sf-trial__panel { padding: var(--sf-space-6); } // 32px
+    .sf-trial h2.sf-trial__panel-title { font-size: 2rem; }   // 32px
+}
+
+@media (min-width: 62rem) {
+    .sf-trial .sf-trial__panel { padding: var(--sf-space-7); } // 48px
+    .sf-trial h2.sf-trial__panel-title { font-size: 2.5rem; }  // 40px
+    .sf-trial .sf-trial__point { padding: var(--sf-space-5); } // 24px
+}
+
+// Mobile: tighter interior padding; the 2-column grid above collapses to one
+// column below 480px, so nothing is squeezed.
+@media (max-width: 47.98rem) {
+    .sf-trial .sf-trial__panel { padding: var(--sf-space-5); }
+    .sf-trial .sf-trial__point { padding: var(--sf-space-3); }
+}
+
+// Phone: form only. The value panel (headline + 6 points) is dropped so the
+// form is the whole page; the media column holds nothing else on the public
+// page (the builder image is already voided).
+@media (max-width: 47.98rem) {
+    .sf-trial .sf-trial__col-media { display: none; }
+}

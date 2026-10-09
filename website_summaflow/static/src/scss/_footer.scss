@@ -43,7 +43,7 @@
 .sf-footer {
     // --sf-fg: outer gutter. --sf-fp: the panel's inner padding; the oversized
     // wordmark cancels it with a negative margin to run full-bleed.
-    --sf-fg: 1rem; // 16px mobile
+    --sf-fg: 1.25rem; // 20px mobile gutter (site-wide floor)
     --sf-fp: 1.25rem;
     background-color: #f5f7f9;
     color: var(--sf-text);
@@ -54,12 +54,11 @@
 
 // --- Panel: nearly full viewport width, compact vertical padding ----------
 // No centred max-width container: the panel is the viewport minus the gutter,
-// which is what lets the signature read as a full-width brand mark.
+// which is what lets the signature read as a full-width brand mark. No card
+// treatment -- it inherits the footer background so the footer reads as one
+// continuous full-width section.
 .sf-footer__panel {
     position: relative;
-    background-color: var(--sf-surface);
-    border: var(--sf-border-width) solid #e6eaef;
-    border-radius: 20px;
     padding: var(--sf-space-4) var(--sf-fp) 0;
     overflow: hidden; // lets the signature crop against the panel boundary
 }
@@ -445,7 +444,10 @@
 .sf-footer__signature {
     margin: var(--sf-space-3) calc(var(--sf-fp) * -1) 0;
     font-family: var(--sf-font-heading);
-    font-size: 14.2vw;
+    // Mobile: scaled down so the wordmark stays recognisable without dominating
+    // the small-screen footer. Grows back to a full-bleed mark at tablet/desktop
+    // steps below.
+    font-size: 10.5vw;
     font-weight: 800;
     line-height: 0.86;
     letter-spacing: -0.035em;
@@ -493,11 +495,51 @@
     }
 }
 
+// --- Mobile: compact stack ------------------------------------------------
+// Brand block and newsletter span the width; Explore + Company sit side by
+// side instead of each eating a full row. CTAs become an equal-width pair.
+@media (max-width: 47.98rem) {
+    .sf-footer__top {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: var(--sf-space-5);
+        row-gap: var(--sf-space-6);
+    }
+
+    .sf-footer__lead,
+    .sf-footer__news {
+        grid-column: 1 / -1;
+    }
+
+    .sf-footer__ctas .sf-button {
+        flex: 1 1 auto;
+        white-space: nowrap;
+        justify-content: center;
+        text-align: center;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .sf-footer__legal-inner {
+        gap: var(--sf-space-3);
+    }
+
+    // No oversized wordmark on phones; the panel closes with normal padding.
+    .sf-footer__signature {
+        display: none;
+    }
+
+    .sf-footer__panel {
+        padding-bottom: var(--sf-fp);
+    }
+}
+
 // --- Tablet: two-column composition --------------------------------------
 @media (min-width: 48rem) {
     .sf-footer {
         --sf-fg: 1.5rem;
         --sf-fp: 2rem;
+        // Card removed: spacing, not a border, sets the footer apart.
+        padding-top: var(--sf-space-6);
     }
 
     .sf-footer__legal {
@@ -514,6 +556,11 @@
     // Newsletter spans the full width under the brand/nav pair.
     .sf-footer__news {
         grid-column: 1 / -1;
+    }
+
+    // Wordmark grows back toward a full-bleed mark once there is room.
+    .sf-footer__signature {
+        font-size: 14.2vw;
     }
 
     .sf-footer__legal-inner {

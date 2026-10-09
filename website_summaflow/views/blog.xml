@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+      SummaFlow Resources — polish of the standard Odoo website_blog experience.
+
+      Pure QWeb inheritance of stable website_blog templates (Odoo 19.0 external
+      IDs, verified against the addon source). No numeric DB IDs, no controller
+      or Python changes, no replacement of the blog flow — editing/publishing/
+      routes stay native. Visual styling lives in static/src/scss/_blog.scss,
+      scoped under .website_blog. Odoo Online SaaS safe (Apps > Import Module).
+
+      1. Remove the blog search box (website_blog.blogs_nav).
+      2. Inject the "Resources" listing header when posts exist
+         (website_blog.blog_post_short).
+      3. Replace the default "No blog post yet." + editor alert with a polished
+         editorial empty state (website_blog.posts_loop).
+      4. Append one understated CTA at the end of each article
+         (website_blog.blog_post_complete).
+    -->
+
+    <!-- 1. Remove the search box from the blogs nav bar. -->
+    <template id="sf_blog_remove_search" inherit_id="website_blog.blogs_nav"
+              name="SummaFlow: remove blog search">
+        <xpath expr="//t[@t-call='website.website_search_box_input']" position="replace"/>
+    </template>
+
+    <!-- 2. Resources listing header (only when posts exist; the empty state owns
+         the H1 otherwise, so the page always has exactly one H1). -->
+    <template id="sf_blog_listing_header" inherit_id="website_blog.blog_post_short"
+              name="SummaFlow: resources listing header">
+        <xpath expr="//section[@id='o_wblog_index_content']" position="before">
+            <section t-if="posts and not tag and not date_begin and not search"
+                     class="sf-blog-head">
+                <div class="container">
+                    <p class="sf-blog-head__kicker">Resources</p>
+                    <h1 class="sf-blog-head__title">Insights for modern trade operations</h1>
+                    <p class="sf-blog-head__lead">Notes on AI-powered operations, trade
+                        workflows, data governance, and modern sourcing teams.</p>
+                </div>
+            </section>
+        </xpath>
+        <!-- Listing CTA after the grid/pagination (only when posts exist). -->
+        <xpath expr="//section[@id='o_wblog_index_content']" position="after">
+            <section t-if="posts and not tag and not date_begin and not search"
+                     class="sf-blog-cta">
+                <div class="container">
+                    <div class="sf-blog-cta__text">
+                        <h2>Ready to bring clarity to your trade operations?</h2>
+                    </div>
+                    <div class="sf-blog-cta__actions">
+                        <a href="/contactus" class="sf-button sf-button--primary">Request a Free Trial</a>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+
+    <!-- 2a. Inject the post cover before the card title. post_heading is the
+         card title template that reliably exists in this Odoo version (the
+         native opt_posts_loop_show_cover toggle is per-website and not flipped
+         by a data record). record_cover renders the post Cover; image-less
+         posts fall back to the branded frame via _blog.scss. -->
+    <template id="sf_blog_card_cover" inherit_id="website_blog.post_heading"
+              name="SummaFlow: blog card cover">
+        <xpath expr="//a[@t-field='blog_post.name']" position="before">
+            <t t-set="sf_cp" t-value="json.loads(blog_post.cover_properties or '{}')"/>
+            <a t-attf-href="/blog/#{slug(blog_post.blog_id)}/#{slug(blog_post)}"
+               class="sf-blog-card-cover d-block"
+               t-attf-style="#{('background-image:%s;' % sf_cp.get('background-image')) if sf_cp.get('background-image','none') != 'none' else ''}"/>
+        </xpath>
+    </template>
+
+    <!-- 2b. Activate native blog options so every post renders a cover image,
+         teaser and card chrome; _blog.scss restyles them into SummaFlow cards.
+         No markup copied: just flips the stock option views active. -->
+    <record id="website_blog.opt_blog_cards_design" model="ir.ui.view">
+        <field name="active" eval="True"/>
+    </record>
+    <record id="website_blog.opt_posts_loop_show_cover" model="ir.ui.view">
+        <field name="active" eval="True"/>
+    </record>
+    <record id="website_blog.opt_posts_loop_show_teaser" model="ir.ui.view">
+        <field name="active" eval="True"/>
+    </record>
+
+    <!-- 3. Editorial empty state, replacing the default "No blog post yet." block
+         and the designer-only instructional alert. Also force the post cover to
+         render in the card regardless of the opt_posts_loop_show_cover toggle, so
+         every published post with a Cover shows its image. -->
+    <template id="sf_blog_empty_state" inherit_id="website_blog.posts_loop"
+              name="SummaFlow: resources empty state">
+        <xpath expr="//div[@t-if='not posts']" position="replace">
+            <div t-if="not posts" class="col sf-blog-empty">
+                <div class="sf-blog-empty__inner">
+                    <t t-if="search">
+                        <p class="sf-blog-empty__kicker">Resources</p>
+                        <h1 class="sf-blog-empty__title">No results for "<span t-out="search"/>".</h1>
+                    </t>
+                    <t t-else="">
+                        <p class="sf-blog-empty__kicker">Resources</p>
+                        <h1 class="sf-blog-empty__title">No <span class="sf-text-gradient">insights</span> published yet.</h1>
+                        <p class="sf-blog-empty__lead">We're preparing practical notes on
+                            AI-powered operations, trade workflows, data governance, and
+                            cross-border communication.</p>
+                        <p class="sf-blog-empty__note">Check back soon.</p>
+                    </t>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- 4. One understated CTA at the end of the article body. -->
+    <template id="sf_blog_article_cta" inherit_id="website_blog.blog_post_complete"
+              name="SummaFlow: article CTA">
+        <xpath expr="//section[@id='o_wblog_post_main']" position="after">
+            <section class="sf-blog-cta">
+                <div class="container">
+                    <div class="sf-blog-cta__text">
+                        <h2>Ready to bring clarity to your trade operations?</h2>
+                    </div>
+                    <div class="sf-blog-cta__actions">
+                        <a href="/contactus" class="sf-button sf-button--primary">Request a Free Trial</a>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+</odoo>

@@ -40,7 +40,7 @@ section.sf-band {
 // .o_three_quarter_height forces a min-height on the builder section, which is
 // what left the band looking stretched and half-empty.
 section.sf-band.o_three_quarter_height {
-    min-height: 0;
+    min-height: 0 !important; // beat the builder's 75vh !important
 }
 
 .sf-band .sf-band__inner {
@@ -96,8 +96,8 @@ section.sf-band.o_three_quarter_height {
 // no grid cell because they are display:none.
 @media (min-width: 62rem) {
     section.sf-band {
-        padding-top: 4.5rem !important;    // 72px
-        padding-bottom: 4.5rem !important;
+        padding-top: var(--sf-space-7) !important;    // 48px
+        padding-bottom: var(--sf-space-7) !important;
     }
 
     .sf-band .sf-band__inner {
@@ -421,49 +421,33 @@ section.sf-trust {
     border-top: 0;
 }
 
-// The icons: Heroicons outline + solid, stacked in one 28px wrapper. No chip,
-// no rounded plate, no circle, no shadow, no glow. The wrapper owns the box,
-// so swapping variants can never move anything.
+// The icons: one fill-on-hover line icon in a 28px wrapper (shared .sf-ico
+// rules live in _utilities.scss). No chip, no plate, no shadow, no glow.
 .sf-trust .sf-trust__mark {
-    position: relative;
     display: block;
     width: 1.75rem;  // 28px
     height: 1.75rem;
     margin: 0 0 1.25rem; // 20px icon -> title
+    color: #5b8cc8; // rest: lighter tone of --sf-primary-ink
     // Transform is pre-declared so the hover lift cannot cause a layout shift.
     transform: translateY(0);
-    transition: transform 200ms ease;
+    transition: transform 200ms ease, color 200ms ease;
 }
 
-.sf-trust svg.sf-trust__icon {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    transition: opacity 200ms ease;
-}
-
-// Rest: the lighter outline brand blue.
-.sf-trust svg.sf-trust__icon--outline {
-    color: #5b8cc8; // lighter tone of --sf-primary-ink
-    opacity: 1;
-}
-
-// Hover: the solid variant in the stronger brand blue, crossfaded in.
-.sf-trust svg.sf-trust__icon--solid {
+// Hover: stronger brand blue + body shapes fill (details flip to white).
+.sf-trust .sf-trust__item:hover .sf-trust__mark,
+.sf-trust .sf-trust__item:focus-within .sf-trust__mark {
     color: var(--sf-primary-ink);
-    opacity: 0;
 }
 
-.sf-trust .sf-trust__item:hover .sf-trust__icon--outline,
-.sf-trust .sf-trust__item:focus-within .sf-trust__icon--outline {
-    opacity: 0;
+.sf-trust .sf-trust__item:hover .sf-ico__b,
+.sf-trust .sf-trust__item:focus-within .sf-ico__b {
+    fill: currentColor;
 }
 
-.sf-trust .sf-trust__item:hover .sf-trust__icon--solid,
-.sf-trust .sf-trust__item:focus-within .sf-trust__icon--solid {
-    opacity: 1;
+.sf-trust .sf-trust__item:hover .sf-ico__d,
+.sf-trust .sf-trust__item:focus-within .sf-ico__d {
+    stroke: #ffffff;
 }
 
 // The only motion on the block: a 2px lift of the icon wrapper itself.

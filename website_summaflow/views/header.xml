@@ -18,7 +18,7 @@
       Structure (desktop):
 
         logo | Platform Solutions Security Company Resources | spacer
-             | X LinkedIn YouTube | Sign In | Request a Free Trial
+             | AI summary marks | Sign In | Request a Free Trial
 
       Navigation links are NOT hardcoded: they render from the real Odoo
       website menu records (website.menu_id.child_id), so the header can never
@@ -77,27 +77,17 @@
                     <!-- Flexible space keeps the utility cluster right-aligned -->
                     <div class="sf-header__spacer"></div>
 
-                    <!-- Social utility area -->
-                    <ul class="sf-header__social d-none d-lg-flex" aria-label="SummaFlow social profiles">
-                        <li>
-                            <a href="https://www.twitter.com/your-page" target="_blank"
-                               rel="noopener" title="X" aria-label="SummaFlow on X">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/your-page" target="_blank"
-                               rel="noopener" title="LinkedIn" aria-label="SummaFlow on LinkedIn">
-                                <i class="fa fa-linkedin" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.youtube.com/your-page" target="_blank"
-                               rel="noopener" title="YouTube" aria-label="SummaFlow on YouTube">
-                                <i class="fa fa-youtube-play" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                    </ul>
+                    <!--
+                      Explore AI Summary utility area. The three social glyphs
+                      that used to sit here were removed on client instruction
+                      (the footer keeps its social icons). Markup, destinations
+                      and labels come from the shared
+                      website_summaflow.ai_marks component, so the header can
+                      never drift from the approved footer behaviour.
+                    -->
+                    <t t-set="sf_ai_class" t-value="'sf-header__ai d-none d-lg-flex'"/>
+                    <t t-set="sf_ai_size" t-value="20"/>
+                    <t t-call="website_summaflow.ai_marks"/>
 
                     <span class="sf-header__divider d-none d-lg-block" aria-hidden="true"></span>
 
@@ -145,26 +135,9 @@
                             <a class="sf-button sf-button--primary"
                                href="/contactus">Request a Free Trial</a>
                         </div>
-                        <ul class="sf-mobile-nav__social" aria-label="SummaFlow social profiles">
-                            <li>
-                                <a href="https://www.twitter.com/your-page" target="_blank"
-                                   rel="noopener" title="X" aria-label="SummaFlow on X">
-                                    <i class="fa fa-twitter" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/your-page" target="_blank"
-                                   rel="noopener" title="LinkedIn" aria-label="SummaFlow on LinkedIn">
-                                    <i class="fa fa-linkedin" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/your-page" target="_blank"
-                                   rel="noopener" title="YouTube" aria-label="SummaFlow on YouTube">
-                                    <i class="fa fa-youtube-play" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                        </ul>
+                        <t t-set="sf_ai_class" t-value="'sf-mobile-nav__ai'"/>
+                        <t t-set="sf_ai_size" t-value="22"/>
+                        <t t-call="website_summaflow.ai_marks"/>
                     </div>
                 </div>
             </header>

@@ -248,53 +248,42 @@
     // =====================================================================
     var TRUST_HEAD = 'Trust, Security';
 
-    // Heroicons v2.2.0 (MIT, Tailwind Labs), 24x24 outline + solid pairs.
-    // The official path data is transcribed verbatim from the published
-    // package and embedded here: nothing is fetched, no CDN, no sprite file,
-    // and no second icon library is mixed in. Earlier hand-drawn marks are
-    // gone; this is the only icon implementation in the module.
-    //
-    // Each block renders both variants stacked in one wrapper. Outline shows
-    // at rest, solid on hover — crossfaded with opacity, so neither variant
-    // ever affects layout.
+    // Fill-on-hover line icons, 24x24, 1.5 stroke, drawn for this module and
+    // matched to each block's heading. ONE svg per icon (no outline/solid
+    // crossfade): every icon has closed "body" shapes (.sf-ico__b) that fill
+    // with the brand blue on hover, and inner details (.sf-ico__d) that flip to
+    // white so they stay legible on the fill. Elements outside the body (pins,
+    // handles) carry no class and stay stroked. Nothing fetched, no CDN.
     var ICONS = {
-        // Ephemeral In-Memory Scanning — cpu-chip.
-        'cpu-chip': {
-            outline: '<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"/>',
-            solid: '<path d="M16.5 7.5h-9v9h9v-9Z"/><path fill-rule="evenodd" d="M8.25 2.25A.75.75 0 0 1 9 3v.75h2.25V3a.75.75 0 0 1 1.5 0v.75H15V3a.75.75 0 0 1 1.5 0v.75h.75a3 3 0 0 1 3 3v.75H21A.75.75 0 0 1 21 9h-.75v2.25H21a.75.75 0 0 1 0 1.5h-.75V15H21a.75.75 0 0 1 0 1.5h-.75v.75a3 3 0 0 1-3 3h-.75V21a.75.75 0 0 1-1.5 0v-.75h-2.25V21a.75.75 0 0 1-1.5 0v-.75H9V21a.75.75 0 0 1-1.5 0v-.75h-.75a3 3 0 0 1-3-3v-.75H3A.75.75 0 0 1 3 15h.75v-2.25H3a.75.75 0 0 1 0-1.5h.75V9H3a.75.75 0 0 1 0-1.5h.75v-.75a3 3 0 0 1 3-3h.75V3a.75.75 0 0 1 .75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h10.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V6.75Z" clip-rule="evenodd"/>'
-        },
+        // Ephemeral In-Memory Scanning — memory chip with a scan line.
+        'memory-scan': '<path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/>' +
+            '<rect class="sf-ico__b" x="6" y="6" width="12" height="12" rx="2"/>' +
+            '<path class="sf-ico__d" d="M9 12h6M9 9.5h2M13 14.5h2"/>',
         // Granular OAuth & 1-Click Revocation — key.
-        key: {
-            outline: '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z"/>',
-            solid: '<path fill-rule="evenodd" d="M15.75 1.5a6.75 6.75 0 0 0-6.651 7.906c.067.39-.032.717-.221.906l-6.5 6.499a3 3 0 0 0-.878 2.121v2.818c0 .414.336.75.75.75H6a.75.75 0 0 0 .75-.75v-1.5h1.5A.75.75 0 0 0 9 19.5V18h1.5a.75.75 0 0 0 .53-.22l2.658-2.658c.19-.189.517-.288.906-.22A6.75 6.75 0 1 0 15.75 1.5Zm0 3a.75.75 0 0 0 0 1.5A2.25 2.25 0 0 1 18 8.25a.75.75 0 0 0 1.5 0 3.75 3.75 0 0 0-3.75-3.75Z" clip-rule="evenodd"/>'
-        },
-        // Absolute Traceability & Zero Hallucinations — link.
-        link: {
-            outline: '<path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/>',
-            solid: '<path fill-rule="evenodd" d="M19.902 4.098a3.75 3.75 0 0 0-5.304 0l-4.5 4.5a3.75 3.75 0 0 0 1.035 6.037.75.75 0 0 1-.646 1.353 5.25 5.25 0 0 1-1.449-8.45l4.5-4.5a5.25 5.25 0 1 1 7.424 7.424l-1.757 1.757a.75.75 0 1 1-1.06-1.06l1.757-1.757a3.75 3.75 0 0 0 0-5.304Zm-7.389 4.267a.75.75 0 0 1 1-.353 5.25 5.25 0 0 1 1.449 8.45l-4.5 4.5a5.25 5.25 0 1 1-7.424-7.424l1.757-1.757a.75.75 0 1 1 1.06 1.06l-1.757 1.757a3.75 3.75 0 1 0 5.304 5.304l4.5-4.5a3.75 3.75 0 0 0-1.035-6.037.75.75 0 0 1-.354-1Z" clip-rule="evenodd"/>'
-        },
-        // Privacy Scrubbing & PDPO Compliance — shield-check.
-        'shield-check': {
-            outline: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/>',
-            solid: '<path fill-rule="evenodd" d="M12.516 2.17a.75.75 0 0 0-1.032 0 11.209 11.209 0 0 1-7.877 3.08.75.75 0 0 0-.722.515A12.74 12.74 0 0 0 2.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 0 0 .374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 0 0-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08Zm3.094 8.016a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd"/>'
-        }
+        'oauth-key': '<path d="M10.9 12.1 19.5 3.5M16.5 6.5l2.5 2.5M14 9l2 2"/>' +
+            '<circle class="sf-ico__b" cx="7.75" cy="15.25" r="4.75"/>' +
+            '<circle class="sf-ico__d" cx="7.75" cy="15.25" r="1.25"/>',
+        // Absolute Traceability & Zero Hallucinations — verified source document.
+        'source-check': '<path class="sf-ico__b" d="M6 2.75h8.25L19 7.5V20a1.25 1.25 0 0 1-1.25 1.25H6A1.25 1.25 0 0 1 4.75 20V4A1.25 1.25 0 0 1 6 2.75Z"/>' +
+            '<path class="sf-ico__d" d="M14 2.75V7.5h5M8 9.5h4M8.5 15l2 2 4-4.5"/>',
+        // Privacy Scrubbing & PDPO Compliance — shield with check.
+        'shield-check': '<path class="sf-ico__b" d="M12 2.75 4.75 5.6v5.65c0 4.55 3.05 8.45 7.25 9.75 4.2-1.3 7.25-5.2 7.25-9.75V5.6Z"/>' +
+            '<path class="sf-ico__d" d="m9 12 2 2 4-4.25"/>'
     };
 
-    var ICON_ORDER = ['cpu-chip', 'key', 'link', 'shield-check'];
+    var ICON_ORDER = ['memory-scan', 'oauth-key', 'source-check', 'shield-check'];
 
     // Built through innerHTML on a throwaway host, exactly like
     // operations_roles_viz.js: the HTML parser puts <svg> in the SVG namespace,
-    // so no namespace URL is needed anywhere in this module.
+    // so no namespace URL is needed anywhere in this module. Static markup
+    // only — no page or user content is interpolated.
     function svgIcon(name) {
-        var set = ICONS[name];
-        var head = ' viewBox="0 0 24 24" focusable="false" aria-hidden="true">';
         var host = document.createElement('div');
         host.innerHTML = '<span class="sf-trust__mark">' +
-            '<svg class="sf-trust__icon sf-trust__icon--outline" fill="none"' +
-            ' stroke="currentColor" stroke-width="1.5"' + head + set.outline + '</svg>' +
-            '<svg class="sf-trust__icon sf-trust__icon--solid" fill="currentColor"' +
-            head + set.solid + '</svg>' +
-            '</span>';
+            '<svg class="sf-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"' +
+            ' stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"' +
+            ' focusable="false" aria-hidden="true">' + (ICONS[name] || ICONS['shield-check']) +
+            '</svg></span>';
         return host.firstChild;
     }
 

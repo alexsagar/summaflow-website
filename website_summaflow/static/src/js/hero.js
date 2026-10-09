@@ -38,6 +38,15 @@
     var DEVICE = 'iphone_3d_portrait';
     var DEVICE_FALLBACK = 'image_shape';
 
+    // ONE product screenshot in the hero (client instruction: the 3-image
+    // sticky scrollytelling is removed). The grid overview is the shot that
+    // reads as the product at a glance.
+    var IMG_BASE = '/website_summaflow/static/src/img/hero/';
+    var SHOT = {
+        file: 'project-overview-grid.png',
+        alt: 'SummaFlow project overview, grid view'
+    };
+
     function isEditing() {
         var b = document.body;
         return /[?&](enable_editor|edit_translations)=/.test(window.location.search) ||
@@ -234,10 +243,37 @@
             // hero. Only the class is attached here; no sizing is touched.
             var visual = img.closest('.row > *');
             if (visual && visual !== content) { addClass(visual, 'sf-hero__visual'); }
+            buildShot(section, visual || content, img);
         }
 
         section.setAttribute(READY, '1');
         undo.push(function () { section.removeAttribute(READY); });
+    }
+
+    // --- product screenshot ----------------------------------------------
+    // Injects ONE screenshot into the right column and hides the builder's
+    // device mockup. Creates only NEW media (never clones or touches hero
+    // copy/CTA), adds no scroll/resize listeners. Idempotent; fully reverted
+    // from the undo log in the Website Editor.
+    function buildShot(section, visual, device) {
+        if (!visual) { return; }
+        if (visual.querySelector('.sf-hero-shot')) { return; } // idempotent
+
+        var frame = document.createElement('div');
+        frame.className = 'sf-hero-shot';
+        var im = document.createElement('img');
+        im.className = 'sf-hero-shot__img';
+        im.src = IMG_BASE + SHOT.file;
+        im.alt = SHOT.alt;
+        im.setAttribute('loading', 'eager');
+        im.setAttribute('decoding', 'async');
+        im.setAttribute('draggable', 'false');
+        frame.appendChild(im);
+        visual.appendChild(frame);
+        undo.push(function () { if (frame.parentNode) { frame.parentNode.removeChild(frame); } });
+
+        if (device) { addClass(device, 'sf-hero__device--hidden'); }
+        addClass(section, 'sf-hero--shot');
     }
 
     // If the Website Editor starts after decoration, undo everything so the

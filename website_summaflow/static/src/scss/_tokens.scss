@@ -79,10 +79,13 @@
     --sf-section-y: 4rem; // stepped up in _responsive.scss
 
     // --- Containers -------------------------------------------------------
-    --sf-container: 1240px;
-    --sf-container-narrow: 720px;
-    --sf-container-wide: 1440px;
-    --sf-gutter: 1rem; // stepped up in _responsive.scss
+    // Standard content container. Stepped UP on large monitors in
+    // _responsive.scss so content keeps a confident presence past ~1600px
+    // instead of becoming a small island in a sea of whitespace.
+    --sf-container: 1360px;       // standard content width
+    --sf-container-narrow: 800px; // reading measure (prose)
+    --sf-container-wide: 1520px;  // wide visual / product width
+    --sf-gutter: 1.25rem; // 20px mobile floor; stepped up in _responsive.scss
 
     // --- Primitives -------------------------------------------------------
     --sf-border-width: 1px;

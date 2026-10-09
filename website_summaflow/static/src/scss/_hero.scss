@@ -209,3 +209,56 @@ img.sf-hero__device {
         min-width: 200px;
     }
 }
+
+// =========================================================================
+// Product screenshot (hero.js adds .sf-hero--shot + injects .sf-hero-shot)
+// =========================================================================
+// ONE screenshot, no sticky section, no scroll-driven swapping (removed on
+// client instruction). The builder device image is hidden while the screenshot
+// is present (JS only; never in the Website Editor).
+.sf-hero--shot .sf-hero__device--hidden { display: none; }
+
+.sf-hero-shot {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--sf-surface);
+    border: 1px solid var(--sf-border);
+    box-shadow: var(--sf-shadow);
+}
+
+.sf-hero-shot__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain; // never crop the product UI
+}
+
+// Desktop: the media column takes a little more width than the copy, and the
+// screenshot fills it — so no awkward void around a small image.
+@media (min-width: 992px) {
+    .sf-hero--shot .sf-hero__grid {
+        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+        gap: var(--sf-space-7); // 48px
+        align-items: center;
+    }
+
+    .sf-hero--shot .sf-hero__visual {
+        display: flex;
+        align-items: center;
+    }
+}
+
+// Large monitors: the builder section wraps content in Bootstrap's .container
+// (capped ~1320px), so past ~1600px the whole hero floats as a small island in
+// the middle with large voids left and right. Widen the hero's own container so
+// the composition scales with the viewport. Typography is unchanged; only the
+// working width grows, which also lets the product frame render larger.
+@media (min-width: 100rem) {
+    .sf-hero .container {
+        max-width: var(--sf-container-wide); // 1600px
+    }
+    .sf-hero--shot .sf-hero__grid {
+        gap: var(--sf-space-8); // 64px — proportional to the wider frame
+    }
+}

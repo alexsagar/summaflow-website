@@ -31,3 +31,29 @@
 }
 
 .sf-muted { color: var(--sf-text-muted); }
+
+// Fill-on-hover line icons (homepage Trust + Platform Advantages). One svg per
+// icon: .sf-ico__b = closed body shapes (filled with currentColor on hover by
+// the page rules), .sf-ico__d = inner details (flip to white on hover).
+.sf-ico {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.sf-ico .sf-ico__b {
+    fill: transparent;
+    transition: fill 200ms ease;
+}
+
+.sf-ico .sf-ico__d {
+    transition: stroke 200ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sf-ico .sf-ico__b,
+    .sf-ico .sf-ico__d {
+        transition: none;
+    }
+}
