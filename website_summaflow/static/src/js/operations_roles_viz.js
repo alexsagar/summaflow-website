@@ -138,13 +138,17 @@
         { name: 'trace', match: /traceab/i, build: traceability }
     ];
 
+    // One shared observer: observing a stage twice is a no-op, so a repeated
+    // init can never stack observers.
+    var io = null;
+
     function play(stages) {
         var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (reduce || !('IntersectionObserver' in window)) {
             stages.forEach(function (s) { s.classList.add('is-playing'); });
             return;
         }
-        var io = new IntersectionObserver(function (entries) {
+        io = io || new IntersectionObserver(function (entries) {
             entries.forEach(function (en) { en.target.classList.toggle('is-playing', en.isIntersecting); });
         }, { threshold: 0.25 });
         stages.forEach(function (s) { io.observe(s); });
@@ -152,8 +156,11 @@
 
     // If the Website Builder starts after load, remove everything we injected
     // so it can never be saved into the database-stored page.
+    var guarded = false;
+
     function guardEditor(section) {
-        if (!window.MutationObserver || !document.body) { return; }
+        if (guarded || !window.MutationObserver || !document.body) { return; }
+        guarded = true;
         var mo = new MutationObserver(function () {
             if (document.body.classList.contains('editor_enable')) {
                 Array.prototype.forEach.call(section.querySelectorAll('.sf-viz'), function (n) {
@@ -176,7 +183,11 @@
 
         var stages = [];
         Array.prototype.forEach.call(cards, function (card, i) {
-            if (card.querySelector('.sf-viz')) { return; } // idempotent
+            // Idempotent: never inject twice. A stage that is already there
+            // (a repeated init, or one the Website Builder saved into the page
+            // arch) still has to be observed, or it stays paused forever.
+            var existing = card.querySelector('.sf-viz');
+            if (existing) { stages.push(existing); return; }
             var heading = card.querySelector('h1, h2, h3');
             var text = heading ? heading.textContent : '';
             // Title match first; card order as the fallback, so an emptied or
