@@ -145,6 +145,9 @@
                         <t t-call="website_summaflow.ai_marks"/>
                     </div>
                 </div>
+
+                <!-- Required by Odoo auto_hide_menu.js, which expects .top_menu inside header#top. -->
+                <div class="top_menu d-none"></div>
             </header>
         </xpath>
     </template>

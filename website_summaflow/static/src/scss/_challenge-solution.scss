@@ -122,6 +122,14 @@ h2.sf-cs-head__line {
     line-height: var(--sf-lh-snug);
 }
 
+// A title restored in the builder as a native <h3> is not the element the
+// script classed as .sf-cs__title, so it would keep the theme's 8px heading
+// margin. Same title-to-body gap for it; size, weight and colour stay the
+// builder's.
+.sf-cs .sf-cs__card h3 {
+    margin-bottom: var(--sf-space-4);
+}
+
 // --- Card body ------------------------------------------------------------
 // Identical typography in both cards, and one consistent gap between items
 // instead of <br> spacing.

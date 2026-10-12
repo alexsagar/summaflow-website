@@ -24,7 +24,7 @@ classes, so there is no visible redesign yet. Retains the harmless
     # Short 2-3 part semantic version on purpose. The saas~19.4 module loader
     # prefixes the current Odoo SaaS series automatically; do NOT hard-code
     # 19.0 / 19.4 here.
-    'version': '1.13.2',
+    'version': '1.13.3',
     'license': 'LGPL-3',
     # website_blog is required for the /blog Resources polish (QWeb inheritance
     # of its stable templates). It is a standard Odoo Online module, already
