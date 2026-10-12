@@ -94,7 +94,9 @@
                     <!-- Actions -->
                     <div class="sf-header__actions d-none d-lg-flex">
                         <a class="sf-button sf-button--secondary"
-                           href="https://app.summaflow.com/login">Sign In</a>
+                           href="https://app.summaflow.com/login"
+                           target="_blank"
+                           rel="noopener noreferrer">Sign In</a>
                         <a class="sf-button sf-button--primary"
                            href="/contactus">Request a Free Trial</a>
                     </div>
@@ -131,10 +133,13 @@
                         </ul>
                         <div class="sf-mobile-nav__actions">
                             <a class="sf-button sf-button--secondary"
-                               href="https://app.summaflow.com/login">Sign In</a>
+                               href="https://app.summaflow.com/login"
+                               target="_blank"
+                               rel="noopener noreferrer">Sign In</a>
                             <a class="sf-button sf-button--primary"
                                href="/contactus">Request a Free Trial</a>
                         </div>
+                        <div class="sf-mobile-nav__ai-label">Explore AI Summary</div>
                         <t t-set="sf_ai_class" t-value="'sf-mobile-nav__ai'"/>
                         <t t-set="sf_ai_size" t-value="22"/>
                         <t t-call="website_summaflow.ai_marks"/>

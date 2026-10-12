@@ -25,9 +25,9 @@
 
     // The three product screenshots already shipped in the module.
     var SHOTS = [
-        { file: 'project-overview-grid.png', alt: 'SummaFlow project overview, grid view' },
-        { file: 'project-overview-list.png', alt: 'SummaFlow project overview, list view' },
-        { file: 'email-providers.png', alt: 'SummaFlow connected email providers' }
+        { file: 'project-overview-grid.png', alt: 'SummaFlow Project Overview in grid view: a key alerts feed beside project cards showing ETA, price, quantity, MOQ, lead time and status' },
+        { file: 'project-overview-list.png', alt: 'SummaFlow Project Overview in list view: a key alerts feed beside project rows showing ETA, price, quantity, MOQ, lead time and status' },
+        { file: 'email-providers.png', alt: 'SummaFlow email providers screen: Microsoft, Google, Zoho, Yahoo, iCloud and IMAP mailboxes with connection status and sync preferences' }
     ];
 
     function el(tag, cls) {

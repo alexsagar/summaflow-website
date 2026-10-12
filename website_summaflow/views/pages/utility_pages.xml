@@ -160,6 +160,9 @@
         <field name="view_id" ref="page_privacy_policy"/>
         <field name="is_published">True</field>
         <field name="website_published">True</field>
+
+        <field name="website_meta_title">Privacy Policy | SummaFlow</field>
+        <field name="website_meta_description">Read how SummaFlow handles personal information, data processing, storage, privacy, and related data protection practices.</field>
     </record>
 
     <!-- ========================= TERMS & CONDITIONS ===================== -->
@@ -289,6 +292,9 @@
         <field name="view_id" ref="page_terms_and_conditions"/>
         <field name="is_published">True</field>
         <field name="website_published">True</field>
+
+        <field name="website_meta_title">Terms &amp; Conditions | SummaFlow</field>
+        <field name="website_meta_description">Review the terms and conditions governing access to and use of the SummaFlow platform and website.</field>
     </record>
 
     <!-- ============================= SUPPORT ============================ -->
@@ -325,6 +331,9 @@
         <field name="view_id" ref="page_support"/>
         <field name="is_published">True</field>
         <field name="website_published">True</field>
+
+        <field name="website_meta_title">Support | SummaFlow</field>
+        <field name="website_meta_description">Get support and guidance for using SummaFlow and managing your trade operations workflow.</field>
     </record>
 
     <!-- ========================== VERIFICATION ========================== -->
@@ -398,5 +407,10 @@
         <field name="view_id" ref="page_oauth_verification"/>
         <field name="is_published">True</field>
         <field name="website_published">True</field>
+
+        <field name="website_meta_title">OAuth and Security Details | SummaFlow</field>
+        <field name="website_meta_description">How SummaFlow requests, stores, and revokes OAuth access to connected accounts.</field>
+        <!-- Functional page: no search value. Noindex in source. -->
+        <field name="website_indexed" eval="False"/>
     </record>
 </odoo>

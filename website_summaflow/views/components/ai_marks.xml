@@ -57,7 +57,7 @@
                    t-att-title="sf_ai_mark['label']"
                    t-att-aria-label="sf_ai_mark['label']">
                     <img t-attf-src="/website_summaflow/static/src/icons/ai/#{sf_ai_mark['icon']}.svg"
-                         t-att-alt="sf_ai_mark['name']"
+                         alt=""
                          t-att-width="sf_ai_size or 22"
                          t-att-height="sf_ai_size or 22"/>
                 </a>

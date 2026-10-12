@@ -66,6 +66,7 @@
             <t t-set="sf_cp" t-value="json.loads(blog_post.cover_properties or '{}')"/>
             <a t-attf-href="/blog/#{slug(blog_post.blog_id)}/#{slug(blog_post)}"
                class="sf-blog-card-cover d-block"
+               aria-hidden="true" tabindex="-1"
                t-attf-style="#{('background-image:%s;' % sf_cp.get('background-image')) if sf_cp.get('background-image','none') != 'none' else ''}"/>
         </xpath>
     </template>

@@ -61,7 +61,9 @@
                             <div class="sf-footer__logotype">SummaFlow</div>
                             <div class="sf-footer__ctas">
                                 <a class="sf-button sf-button--primary"
-                                   href="https://app.summaflow.com/login">
+                                   href="https://app.summaflow.com/login"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
                                     Sign In
                                 </a>
                                 <a class="sf-button sf-button--secondary"

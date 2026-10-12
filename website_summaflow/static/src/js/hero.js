@@ -44,7 +44,7 @@
     var IMG_BASE = '/website_summaflow/static/src/img/hero/';
     var SHOT = {
         file: 'project-overview-grid.png',
-        alt: 'SummaFlow project overview, grid view'
+        alt: 'SummaFlow Project Overview in grid view: a key alerts feed beside project cards showing ETA, price, quantity, MOQ, lead time and status'
     };
 
     function isEditing() {
