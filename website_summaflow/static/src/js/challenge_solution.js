@@ -21,9 +21,9 @@
  * It creates nothing, removes nothing, rewrites no text, and never writes to
  * the database.
  *
- * - Scope: ONE verified heading section plus the card section that directly
- *   follows it (see find). Never every .s_three_columns - the Operations Role
- *   cards use that same snippet class and must stay untouched.
+ * - Scope: ONE verified heading section plus the two-card section that
+ *   directly follows it (see find). Never every .s_three_columns - the
+ *   Operations Role cards use that same snippet class and must stay untouched.
  * - Idempotent: guarded by the data-sf-cs-ready attribute, and every mutation
  *   is itself re-runnable.
  * - Website Builder safety: does nothing in edit mode, and if edit mode starts
@@ -36,8 +36,6 @@
     var READY = 'data-sf-cs-ready';
     var HEAD_LINE = 'Turn scattered trade conversations into';
     var HEAD_ACCENT = 'Auditable Project Control';
-    var CARD_LABELS = ['Challenge', 'Solution'];
-    var CARD_TITLES = ['Hidden Operational Friction', 'Complete Visibility into Every Project'];
 
     function isEditing() {
         var b = document.body;
@@ -76,8 +74,11 @@
     }
 
     // --- identification ---------------------------------------------------
-    // Four independent signals must agree: both heading lines, both card
-    // labels and both card titles.
+    // Section context and card structure, never the card copy: both lines of
+    // the homepage-only section heading, the s_three_columns section directly
+    // after it, and exactly two half-width columns each holding one card.
+    // The card titles are deliberately NOT a signal - the builder can leave
+    // them empty, and that must not switch the whole section off.
     function find() {
         var blocks = document.querySelectorAll('section.s_text_block');
         for (var i = 0; i < blocks.length; i++) {
@@ -86,11 +87,10 @@
             if (t.indexOf(HEAD_LINE) === -1 || t.indexOf(HEAD_ACCENT) === -1) { continue; }
             var cards = head.nextElementSibling;
             if (!cards || !cards.matches('section.s_three_columns')) { continue; }
-            var c = text(cards);
-            var ok = CARD_LABELS.concat(CARD_TITLES).every(function (s) {
-                return c.indexOf(s) !== -1;
-            });
-            if (ok) { return { head: head, cards: cards }; }
+            var cols = cards.querySelectorAll('.row > .col-lg-6');
+            if (cols.length !== 2 || cards.querySelectorAll('.row > *').length !== 2) { continue; }
+            if (cards.querySelectorAll('.row > .col-lg-6 > .h-100').length !== 2) { continue; }
+            return { head: head, cards: cards };
         }
         return null;
     }

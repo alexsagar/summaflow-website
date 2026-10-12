@@ -478,10 +478,37 @@
             converted++;
         });
 
-        // Two empty <h1> spacers the builder left inside the Challenge /
-        // Solution cards. They carry no text, so they are not headings at all;
-        // they become plain <div> and stay collapsed by CSS.
-        each(document.querySelectorAll('h1'), function (el) {
+        // "Turn scattered trade conversations into / Auditable Project
+        // Control." is ONE heading that the builder stores as two sibling
+        // <h2>. The second becomes a block <span> inside the first: same
+        // classes, same inline style, same children, still its own line
+        // (_challenge-solution.scss), one semantic H2.
+        var lines = document.querySelectorAll('.sf-cs-head h2.sf-cs-head__line');
+        if (lines.length === 2 && lines[0].parentNode === lines[1].parentNode) {
+            var first = lines[0];
+            var line = retag(lines[1], 'span');
+            var home = line.parentNode;
+            var after = line.nextSibling;
+            // Keeps the two halves apart in the heading's text; collapses
+            // visually before the block span.
+            var gap = document.createTextNode(' ');
+            first.appendChild(gap);
+            first.appendChild(line);
+            undo.push(function () {
+                if (gap.parentNode) { gap.parentNode.removeChild(gap); }
+                home.insertBefore(line, after);
+            });
+            converted++;
+        }
+
+        // Empty spacer headings the builder left behind (every stray <h1>,
+        // plus any card heading that still has no text). They carry no text,
+        // so they are not headings at all; they become plain <div> and stay
+        // collapsed by CSS.
+        each(document.querySelectorAll(
+            'h1, .sf-cs h2, .sf-cs h3, .sf-trust h3, ' +
+            'section.s_title.pt72.pb40 + section.s_three_columns h3'
+        ), function (el) {
             if (el.closest('.sf-hero')) { return; }  // the one real page H1
             if (el.textContent.replace(/[\s ]/g, '')) { return; }
             retag(el, 'div');

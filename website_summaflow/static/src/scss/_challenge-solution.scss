@@ -30,6 +30,12 @@ h2.sf-cs-head__line {
     line-height: var(--sf-lh-snug);
 }
 
+// homepage_sections.js folds the builder's second <h2> into the first as a
+// <span> (one semantic heading); it still sits on its own line.
+.sf-cs-head span.sf-cs-head__line {
+    display: block;
+}
+
 // The accent line reads as the second half of one sentence, so it sits tight
 // under the first.
 .sf-cs-head .sf-cs-head__accent {
