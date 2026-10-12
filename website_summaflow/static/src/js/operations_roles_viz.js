@@ -175,11 +175,14 @@
         if (cards.length !== 3) { return; }
 
         var stages = [];
-        Array.prototype.forEach.call(cards, function (card) {
+        Array.prototype.forEach.call(cards, function (card, i) {
             if (card.querySelector('.sf-viz')) { return; } // idempotent
             var heading = card.querySelector('h1, h2, h3');
             var text = heading ? heading.textContent : '';
-            var scene = SCENES.filter(function (s) { return s.match.test(text); })[0];
+            // Title match first; card order as the fallback, so an emptied or
+            // reworded builder heading can never leave a card without its
+            // stage (exactly three cards are guaranteed above).
+            var scene = SCENES.filter(function (s) { return s.match.test(text); })[0] || SCENES[i];
             if (!scene) { return; }
             var id = 'sf-viz-g-' + (++counter);
             var stage = document.createElement('div');
