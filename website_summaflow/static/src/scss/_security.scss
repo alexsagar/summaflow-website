@@ -1,0 +1,374 @@
+// SummaFlow /security page — POLISH LAYER, not a redesign.
+//
+//   .sf-sec-hero    hero: gradient title (left) + intro paragraph (right)
+//   .sf-sec-doc     two-column documentation band (sticky TOC + article)
+//   .sf-sec-toc     left table-of-contents (sticky on desktop, static below)
+//   .sf-sec-main    right article column (six .sf-sec-topic blocks)
+//   .sf-sec-topic   one of the six numbered security topics (H2 + copy)
+//   .sf-sec-cta     final gradient "Ready to Eliminate…" CTA band
+//
+// Markup stays DB-managed; security.js attaches these classes and clears the
+// inline declarations that beat the stylesheet. No copy rewrite, no DB write.
+// Odoo Online safe: no local @import/@use (listed in __manifest__.py), no
+// mixed-unit clamp()/min()/max(), single-unit values + stepped media queries.
+// sf-text-gradient (_utilities) and sf-button* (_buttons) are reused as-is.
+//
+// Sticky offset is the 62px sticky header (_header.scss --sf-header-h) + 24px.
+// That var is scoped to .sf-header, so the literal is restated here on purpose.
+
+// Builder spacer nodes / empty separators collapsed (never removed).
+.sf-sec-hero .sf-void,
+.sf-sec-main .sf-void,
+.sf-sec-cta .sf-void {
+    display: none;
+}
+
+// =========================================================================
+// 1. Hero
+// =========================================================================
+section.sf-sec-hero {
+    padding-top: var(--sf-space-8) !important;    // 64px
+    padding-bottom: var(--sf-space-7) !important; // 48px
+}
+
+// Hero shares the EXACT container of the documentation band below (same
+// max-width, same padding at every step) so the intro's right edge lines up
+// with the article column's right edge. Any divergence here is what made the
+// intro end too far left relative to the docs content.
+.sf-sec-hero .container {
+    width: 100%;
+    max-width: var(--sf-container);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+@media (min-width: 62rem) {
+    .sf-sec-hero .container { padding-left: 32px; padding-right: 32px; }
+}
+
+.sf-sec-hero .row {
+    align-items: center;
+}
+
+h1.sf-sec-hero__title {
+    margin: 0;
+    font-size: var(--sf-h-xl); // 32px, stepped in _responsive peers below
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+    letter-spacing: -0.01em;
+}
+
+// The builder wrapped the title text in a <span style="font-size:39px">; its
+// inline size is cleared by security.js so the rule above owns the scale.
+h1.sf-sec-hero__title span {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+h1.sf-sec-hero__title .sf-text-gradient {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+// Mobile/tablet: full-width stacked flow, no forced width.
+.sf-sec-hero__intro {
+    max-width: none;
+    margin: 0;
+}
+
+.sf-sec-hero__intro p {
+    margin: 0;
+    font-size: var(--sf-text-base); // 17px
+    line-height: 1.6;
+    color: var(--sf-text-muted);
+}
+
+@media (min-width: 62rem) {
+    h1.sf-sec-hero__title { font-size: var(--sf-display); } // 40px
+
+    // Desktop: wider editorial measure (longer lines, not a compact cube), its
+    // RIGHT edge pushed to the column/container right edge so it aligns with the
+    // article column below. Left edge floats further left via margin-left:auto.
+    // Column right padding zeroed so the right edge matches the article cell
+    // (which carries no side padding in the doc grid).
+    .sf-sec-hero__intro {
+        max-width: 46rem;
+        margin-left: auto;
+        padding-right: 0;
+    }
+}
+
+// =========================================================================
+// 2. Documentation band — centered container + two columns
+// =========================================================================
+.sf-sec-doc .container {
+    width: 100%;
+    max-width: var(--sf-container); // same token as the hero container above
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+@media (min-width: 62rem) {
+    .sf-sec-doc .container { padding-left: 32px; padding-right: 32px; }
+
+    // Replace the Bootstrap col widths with a fixed-TOC / fluid-article grid.
+    // Scoped to .sf-sec-doc so no global .row / .col-* override leaks out.
+    .sf-sec-doc .row {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 1fr);
+        gap: 72px; // more breathing room between TOC and article (was 64px)
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .sf-sec-doc .row > .sf-sec-toc,
+    .sf-sec-doc .row > .sf-sec-main {
+        width: auto;
+        max-width: none;
+        flex: none;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+// =========================================================================
+// 3. Left TOC
+// =========================================================================
+// security.js removes the builder's d-none/d-lg-block so the TOC shows at all
+// widths; position is owned here (static below lg, sticky at lg+).
+.sf-sec-toc {
+    margin-bottom: var(--sf-space-6);
+}
+
+.sf-sec-toc .s_table_of_content_navbar {
+    top: auto;
+    max-height: none;
+}
+
+.sf-sec-toc .table_of_content_link {
+    padding: 0.4rem 0;
+    border: 0;
+    border-radius: 0;
+    font-size: 0.9375rem; // 15px
+    line-height: 1.4;
+    color: var(--sf-text-muted);
+    background: transparent;
+}
+
+.sf-sec-toc .table_of_content_link:hover,
+.sf-sec-toc .table_of_content_link:focus {
+    color: var(--sf-text);
+    background: transparent;
+}
+
+.sf-sec-toc .table_of_content_link.active {
+    color: var(--sf-text);
+    font-weight: var(--sf-weight-semibold); // 600
+}
+
+@media (min-width: 62rem) {
+    // Whole block sticky, below the 62px sticky header + 24px breathing room.
+    .sf-sec-toc {
+        position: sticky;
+        top: 86px;
+        align-self: start;
+        margin-bottom: 0;
+    }
+    .sf-sec-toc .s_table_of_content_navbar {
+        position: static;
+    }
+}
+
+// =========================================================================
+// 4. Right article column + six topics
+// =========================================================================
+// Each topic carries a nested .container.s_allow_columns; neutralise its width
+// and padding so the article aligns flush under the grid cell.
+.sf-sec-main .container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+// Comfortable reading measure — not edge to edge at 1440px / 1920px.
+.sf-sec-main {
+    max-width: 760px;
+}
+
+section.sf-sec-topic {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-bottom: var(--sf-space-8); // 64px between topics
+}
+
+section.sf-sec-topic:last-of-type {
+    margin-bottom: 0;
+}
+
+h2.sf-sec-topic__title {
+    margin: 0 0 var(--sf-space-3);
+    font-size: var(--sf-h-lg); // 26px
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+    letter-spacing: -0.01em;
+    scroll-margin-top: 86px; // anchor jumps clear the sticky header
+}
+
+h2.sf-sec-topic__title span {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+@media (min-width: 62rem) {
+    // Documentation heading, not a landing hero. Fixed ~32px rather than
+    // var(--sf-h-xl), which steps to 48px at >=1200px and read far too large.
+    h2.sf-sec-topic__title { font-size: 2rem; } // 32px
+}
+
+// Subtle divider under each topic heading.
+.sf-sec-topic__hr {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin: 0 0 var(--sf-space-5);
+}
+
+.sf-sec-topic__hr hr {
+    margin: 0;
+    border: 0;
+    border-top: 1px solid var(--sf-border);
+    opacity: 1;
+}
+
+.sf-sec-topic__text {
+    margin: 0 0 var(--sf-space-4); // 12px between paragraphs
+    font-size: var(--sf-text-base); // 17px — readable body
+    line-height: 1.6;
+    color: var(--sf-text);
+}
+
+.sf-sec-topic__text:last-child {
+    margin-bottom: 0;
+}
+
+// Inline bold labels kept as-is; capped at 600 so paragraphs never read heavy.
+.sf-sec-topic__text b {
+    font-weight: var(--sf-weight-semibold); // 600
+}
+
+// =========================================================================
+// 5. Final CTA band
+// =========================================================================
+section.sf-sec-cta {
+    padding-top: var(--sf-space-8) !important;    // 64px
+    padding-bottom: var(--sf-space-8) !important;
+    background: var(--sf-gradient-brand) !important; // canonical, replaces inline
+}
+
+section.sf-sec-cta.o_three_quarter_height {
+    min-height: 0 !important; // builder forced 75vh; CTA is content-driven
+}
+
+.sf-sec-cta .container {
+    width: 100%;
+    max-width: var(--sf-container); // 1240px
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+// Flat builder children (h2, copy, button) laid out directly. Mobile: stacked.
+// Desktop: heading + copy left, button right — no DOM restructure needed.
+.sf-sec-cta .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sf-space-5);
+}
+
+.sf-sec-cta h2 {
+    margin: 0;
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-sec-cta h2 .h2-fs,
+.sf-sec-cta h2 font {
+    font-weight: inherit;
+    color: #ffffff;
+}
+
+.sf-sec-cta__copy {
+    margin: 0;
+    max-width: 60ch;
+}
+
+.sf-sec-cta__actions {
+    margin: 0;
+}
+
+.sf-sec-cta__copy font,
+.sf-sec-cta__copy .h5-fs {
+    font-size: 1rem; // 16px
+    line-height: 1.6;
+    color: #ffffff;
+}
+
+// Approved black / white button system (mirrors the homepage .sf-band CTA).
+.sf-sec-cta .sf-button {
+    min-height: 0;
+    margin: 0;
+    padding: 0.5rem 1.1rem;
+    border: 1px solid #000000;
+    border-radius: 0.5rem;
+    font-size: 0.9375rem; // 15px
+    font-weight: var(--sf-weight-medium);
+    line-height: 1.5;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.sf-sec-cta a.sf-button.sf-button--primary,
+.sf-sec-cta a.sf-button.sf-button--primary:link,
+.sf-sec-cta a.sf-button.sf-button--primary:visited,
+.sf-sec-cta a.sf-button.sf-button--primary:hover,
+.sf-sec-cta a.sf-button.sf-button--primary:focus,
+.sf-sec-cta a.sf-button.sf-button--primary:active {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.sf-sec-cta .sf-button font,
+.sf-sec-cta .sf-button span {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.sf-sec-cta a.sf-button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+@media (min-width: 62rem) {
+    .sf-sec-cta .container {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: var(--sf-space-3) var(--sf-space-7);
+    }
+    .sf-sec-cta h2 { grid-column: 1; grid-row: 1; }
+    .sf-sec-cta__copy { grid-column: 1; grid-row: 2; }
+    .sf-sec-cta__actions {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        align-self: center;
+        justify-self: end;
+        margin: 0;
+    }
+}

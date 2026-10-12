@@ -389,17 +389,26 @@ Color: `--sf-bg` `#ffffff`, `--sf-bg-subtle` `#f6f8fa`, `--sf-surface` `#ffffff`
 `--sf-text` `#1a2230`, `--sf-text-muted` `#5a6473`, `--sf-border` `#d9dee5`,
 `--sf-primary` `#2f80ed`, `--sf-primary-ink` `#4262ae`, `--sf-secondary` `#64beb5`,
 `--sf-accent` `#53b973`, `--sf-focus` `#2f80ed`,
-`--sf-gradient-brand` (`90deg #4262ae → #64beb5 → #53b973`).
+`--sf-gradient-brand` (`90deg #4262ae → #64beb5 → #53b973`),
+`--sf-gradient-heading` (`90deg #4262AE → #64BEB5 → #53B973`, canonical SummaFlow
+brand-heading gradient recovered from the original branded headings; deep
+blue→teal→green, matching the wordmark; same colors as `--sf-gradient-brand`).
 
 Typography: `--sf-font-body`/`--sf-font-heading` (both `inherit` in Phase 1 — no
-new font imposed); sizes `--sf-text-xs|sm|base|lg`; fluid headings
-`--sf-h-md|lg|xl` and `--sf-display` (clamp); line-heights
+new font imposed); sizes `--sf-text-xs|sm|base|lg`; headings
+`--sf-h-md|lg|xl` and `--sf-display`; line-heights
 `--sf-lh-tight|snug|body`; weights `--sf-weight-regular|medium|semibold|bold`.
 
-Spacing: `--sf-space-1..9` (0.25rem → 6rem) + fluid `--sf-section-y`.
+Spacing: `--sf-space-1..9` (0.25rem → 6rem) + `--sf-section-y`.
 
 Containers: `--sf-container` 1240px, `--sf-container-narrow` 720px,
-`--sf-container-wide` 1440px, fluid `--sf-gutter`.
+`--sf-container-wide` 1440px, `--sf-gutter`.
+
+Odoo Sass compatibility: Odoo Online evaluates `clamp()/min()/max()` and rejects
+mixed units. All tokens use single-unit (rem) base values; responsive scaling is
+stepped via `:root` `@media` overrides in `_responsive.scss` at 48rem and 75rem
+(headings, `--sf-display`, `--sf-section-y`, `--sf-gutter`). No mixed-unit Sass
+math anywhere. Enforced by `validate.ps1`.
 
 Primitives: `--sf-border-width`, `--sf-radius-sm|radius|lg`,
 `--sf-shadow-sm|shadow`, `--sf-focus-ring`, `--sf-transition|transition-slow`.

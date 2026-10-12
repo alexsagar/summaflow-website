@@ -1,0 +1,382 @@
+// Homepage role cards under "Purpose-built for Every Operations Role":
+// near-square cards with animated SVG explanatory scenes (TEST prototype).
+//
+// Layout rules apply only once operations_roles_viz.js has injected the
+// stages and marked the section `.sf-viz-ready`, so without JS (or in the
+// Website Builder) the cards keep their previous approved layout.
+//
+// Odoo Online / libsass safety: no local @import/@use, no mixed-unit
+// clamp()/min()/max(), `grid-column: span 2` instead of `1 / -1`, calc() only.
+
+$cards: 'section.s_title.pt72.pb40 + section.s_three_columns.sf-viz-ready';
+
+// --- Grid ---------------------------------------------------------------
+#{$cards} > .container {
+    max-width: 84rem; // ~1344px: 3 x ~424px cards + 2 x 24px gaps
+}
+
+#{$cards} .row {
+    --bs-gutter-x: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    max-width: 26.5rem; // mobile: single column, not stretched on wide phones
+    margin-inline: auto;
+}
+
+// Bootstrap column widths/gutters do not apply inside the grid.
+#{$cards} .row > .col-lg-4 {
+    width: auto;
+    max-width: none;
+    padding-inline: 0;
+}
+
+// --- Card composition: text on top, visualization stage below -------------
+#{$cards} .col-lg-4 > .h-100 {
+    display: flex;
+    flex-direction: column;
+}
+
+.sf-viz {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 12rem;
+    margin-top: var(--sf-space-2); // closer to the copy above
+}
+
+// Per-card startup offsets (added to every element's delay) so the three
+// scenes never hit their key events in lockstep.
+.sf-viz--anomaly { --sf-d: 0.3s; }
+.sf-viz--trace { --sf-d: 0.6s; }
+
+.sf-viz__svg {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+// Tablet: two near-square columns; the third card centered underneath.
+@media (min-width: 48rem) {
+    #{$cards} .row {
+        grid-template-columns: repeat(2, minmax(0, 26.5rem));
+        justify-content: center;
+        max-width: none;
+    }
+    #{$cards} .row > .col-lg-4:nth-child(3) {
+        grid-column: span 2;
+        justify-self: center;
+        width: calc((100% - 1.5rem) / 2);
+    }
+    // !important: Bootstrap's .h-100 utility is `height: 100% !important`,
+    // which would override the square aspect ratio.
+    #{$cards} .col-lg-4 > .h-100 {
+        height: auto !important;
+        aspect-ratio: 1;
+    }
+    // Two-line title reserve also in the 2-column tablet layout so body copy
+    // starts at the same position (desktop rule lives in _operations-roles).
+    #{$cards} .col-lg-4 h1.h3,
+    #{$cards} .col-lg-4 h3.h3 {
+        min-height: 4.2rem;
+        margin-bottom: 0;
+    }
+}
+
+// Desktop: three equal square cards, capped at ~424px each.
+@media (min-width: 75rem) {
+    #{$cards} .row {
+        grid-template-columns: repeat(3, minmax(0, 26.5rem));
+    }
+    #{$cards} .row > .col-lg-4:nth-child(3) {
+        grid-column: auto;
+        width: auto;
+    }
+}
+
+// --- Shared visual language ------------------------------------------------
+// Gradient stops are exactly those of --sf-gradient-heading
+// (90deg #3268B2 0%, #64BEB5 51%, #53B973 100%). Not a new gradient.
+.sf-viz__stop-1 { stop-color: #3268B2; }
+.sf-viz__stop-2 { stop-color: #64BEB5; }
+.sf-viz__stop-3 { stop-color: #53B973; }
+
+.sf-viz__track { fill: none; stroke: #dde3ea; stroke-width: 1.25; }
+.sf-viz__track--dash { stroke-dasharray: 3 4; }
+.sf-viz__orbit { fill: none; stroke: #e6ebf0; stroke-width: 1; stroke-dasharray: 2 5; }
+.sf-viz__node { fill: #ffffff; stroke: #cfd7e0; stroke-width: 1.5; }
+.sf-viz__frame { fill: none; stroke: #cfd7e0; stroke-width: 1.25; stroke-dasharray: 3 4; }
+.sf-viz__hi { fill: none; stroke-width: 1.5; opacity: 0; }
+.sf-viz__item { fill: #d3dae3; }
+
+.sf-viz__pulse {
+    fill: none;
+    stroke-width: 2.25;
+    stroke-linecap: round;
+    stroke-dasharray: 8 200;
+    stroke-dashoffset: 8;
+    opacity: 0;
+}
+
+.sf-viz__draw {
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 100 100;
+    stroke-dashoffset: 100;
+}
+
+.sf-viz__mark {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 100 100;
+    stroke-dashoffset: 100;
+}
+
+// Hidden-at-rest elements (revealed by their animation).
+.sf-c-src, .sf-c-core, .sf-c-result, .sf-c-rcheck, .sf-a-flag, .sf-a-flow, .sf-a-anom,
+.sf-a-sweep, .sf-t-result, .sf-t-origin {
+    opacity: 0;
+}
+
+.sf-c-core, .sf-c-result, .sf-a-anom, .sf-t-ripple {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.sf-c-sync {
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 151 151; // circumference of r=24
+    stroke-dashoffset: 151;
+}
+
+.sf-a-sweep { stroke-width: 1.5; stroke-linecap: round; }
+.sf-a-flag { fill: #3268B2; } // anomaly: strongest (blue) brand stop
+.sf-a-link { stroke-linejoin: round; }
+.sf-viz--trace .sf-viz__draw { stroke-width: 2.5; } // backward trace leads
+
+// --- Timelines (6s seamless cycle) ----------------------------------------
+$ease: cubic-bezier(0.45, 0, 0.25, 1);
+
+// Loop lengthened slightly from 6s to 6.6s to buy a calm completed-state hold
+// (~0.5s) before each scene resets.
+$dur: 6.6s;
+
+// 1. Consensus
+.sf-c-src    { animation: sf-c-src $dur $ease infinite both; }
+.sf-c-pulse  { animation: sf-c-pulse $dur $ease infinite both; }
+.sf-c-sync   { animation: sf-c-sync $dur $ease infinite both; }
+.sf-c-core   { animation: sf-c-core $dur $ease infinite both; }
+.sf-c-check  { animation: sf-c-check $dur $ease infinite both; }
+.sf-c-line   { animation: sf-c-line $dur $ease infinite both; }
+.sf-c-out    { animation: sf-c-out $dur $ease infinite both; }
+.sf-c-ring   { animation: sf-c-ring $dur $ease infinite both; }
+.sf-c-result { animation: sf-c-result $dur $ease infinite both; }
+.sf-c-rcheck { animation: sf-c-rcheck $dur $ease infinite both; }
+
+@keyframes sf-c-src {
+    0% { opacity: 0; }
+    7%, 94% { opacity: 1; }
+    97%, 100% { opacity: 0; }
+}
+@keyframes sf-c-pulse {
+    0%, 10% { stroke-dashoffset: 8; opacity: 0; }
+    11% { opacity: 1; }
+    30% { stroke-dashoffset: -100; opacity: 1; }
+    32%, 100% { stroke-dashoffset: -100; opacity: 0; }
+}
+@keyframes sf-c-sync {
+    0%, 36% { stroke-dashoffset: 151; opacity: 1; }
+    52%, 94% { stroke-dashoffset: 0; opacity: 1; }
+    97%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes sf-c-core {
+    0%, 50% { opacity: 0; transform: scale(0.6); }
+    58%, 94% { opacity: 1; transform: scale(1); }
+    97%, 100% { opacity: 0; transform: scale(1); }
+}
+@keyframes sf-c-check {
+    0%, 56% { stroke-dashoffset: 100; opacity: 1; }
+    65%, 94% { stroke-dashoffset: 0; opacity: 1; }
+    97%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+// Output connector resolves (line completes) ahead of the verification pulse.
+@keyframes sf-c-line {
+    0%, 66% { stroke-dashoffset: 100; opacity: 1; }
+    74%, 94% { stroke-dashoffset: 0; opacity: 1; }
+    97%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes sf-c-out {
+    0%, 68% { stroke-dashoffset: 8; opacity: 0; }
+    69% { opacity: 1; }
+    77% { stroke-dashoffset: -100; opacity: 1; }
+    79%, 100% { stroke-dashoffset: -100; opacity: 0; }
+}
+// Output border resolves, then the fill settles in, then the confirm mark:
+// a staged, unmistakably-completed result.
+@keyframes sf-c-ring {
+    0%, 76% { stroke-dashoffset: 100; opacity: 1; }
+    85%, 94% { stroke-dashoffset: 0; opacity: 1; }
+    97%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes sf-c-result {
+    0%, 80% { opacity: 0; transform: scale(0.72); }
+    88%, 94% { opacity: 1; transform: scale(1); }
+    97%, 100% { opacity: 0; transform: scale(1); }
+}
+@keyframes sf-c-rcheck {
+    0%, 86% { stroke-dashoffset: 100; opacity: 0; }
+    87% { opacity: 1; }
+    91%, 94% { stroke-dashoffset: 0; opacity: 1; }
+    97%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+// 2. Anomaly
+.sf-a-flow   { animation: sf-a-flow $dur linear infinite both; }
+.sf-a-anom   { animation: sf-a-anom $dur $ease infinite both; }
+.sf-a-flag   { animation: sf-a-flag $dur $ease infinite both; }
+.sf-a-detect { animation: sf-a-detect $dur $ease infinite both; }
+.sf-a-bay    { animation: sf-a-bay $dur $ease infinite both; }
+.sf-a-link   { animation: sf-a-link $dur $ease infinite both; }
+.sf-a-sweep  { animation: sf-a-sweep 2.2s ease-in-out infinite both; }
+
+@keyframes sf-a-flow {
+    0% { transform: translateX(0); opacity: 0; }
+    5%, 92% { opacity: 1; }
+    100% { transform: translateX(266px); opacity: 0; }
+}
+// Normal -> deviation -> detected at scanner -> routed straight down the
+// elbow -> settled in the isolation bay -> held.
+@keyframes sf-a-anom {
+    0% { transform: translate(0, 0); opacity: 0; }
+    4% { transform: translate(0, 0); opacity: 1; }
+    24% { transform: translate(146px, 0); }        // aligned up to the scanner
+    32% { transform: translate(182px, 0); }        // crossing scanner (detected)
+    44% { transform: translate(182px, 79px); }     // routed down the elbow
+    52%, 92% { transform: translate(226px, 79px); opacity: 1; } // in the bay, held
+    97%, 100% { transform: translate(226px, 79px); opacity: 0; }
+}
+@keyframes sf-a-flag {
+    0%, 30% { opacity: 0; }
+    36%, 92% { opacity: 1; }
+    97%, 100% { opacity: 0; }
+}
+@keyframes sf-a-detect {
+    0%, 22% { opacity: 0; }
+    26%, 42% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+@keyframes sf-a-bay {
+    0%, 46% { opacity: 0; }
+    52%, 92% { opacity: 1; }
+    97%, 100% { opacity: 0; }
+}
+@keyframes sf-a-link {
+    0%, 34% { stroke-dashoffset: 100; opacity: 1; }
+    44%, 92% { stroke-dashoffset: 0; opacity: 1; }
+    97%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes sf-a-sweep {
+    0% { transform: translateX(0); opacity: 0; }
+    10%, 90% { opacity: 0.45; }
+    50% { transform: translateX(32px); }
+    100% { transform: translateX(0); opacity: 0; }
+}
+
+// 3. Traceability
+.sf-t-fwd    { animation: sf-t-fwd $dur $ease infinite both; }
+.sf-t-result { animation: sf-t-result $dur $ease infinite both; }
+.sf-t-b1     { animation: sf-t-b1 $dur $ease infinite both; }
+.sf-t-b2     { animation: sf-t-b2 $dur $ease infinite both; }
+.sf-t-b3     { animation: sf-t-b3 $dur $ease infinite both; }
+.sf-t-n1     { animation: sf-t-n1 $dur $ease infinite both; }
+.sf-t-n2     { animation: sf-t-n2 $dur $ease infinite both; }
+.sf-t-n3     { animation: sf-t-n3 $dur $ease infinite both; }
+.sf-t-origin { animation: sf-t-origin $dur $ease infinite both; }
+.sf-t-ripple { animation: sf-t-ripple $dur $ease infinite both; }
+
+@keyframes sf-t-fwd {
+    0% { stroke-dashoffset: 8; opacity: 0; }
+    1% { opacity: 1; }
+    14% { stroke-dashoffset: -100; opacity: 1; }
+    16%, 100% { stroke-dashoffset: -100; opacity: 0; }
+}
+@keyframes sf-t-result {
+    0%, 44% { opacity: 0; }
+    50%, 88% { opacity: 1; }
+    96%, 100% { opacity: 0; }
+}
+// Backward draw: dashoffset -100 -> 0 reveals each edge from its END to its
+// START, i.e. result -> aggregator -> P1 -> source.
+@keyframes sf-t-b1 {
+    0%, 50% { stroke-dashoffset: -100; opacity: 1; }
+    58%, 88% { stroke-dashoffset: 0; opacity: 1; }
+    96%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes sf-t-b2 {
+    0%, 58% { stroke-dashoffset: -100; opacity: 1; }
+    66%, 88% { stroke-dashoffset: 0; opacity: 1; }
+    96%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes sf-t-b3 {
+    0%, 66% { stroke-dashoffset: -100; opacity: 1; }
+    74%, 88% { stroke-dashoffset: 0; opacity: 1; }
+    96%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes sf-t-n1 {
+    0%, 56% { opacity: 0; }
+    60%, 88% { opacity: 1; }
+    96%, 100% { opacity: 0; }
+}
+@keyframes sf-t-n2 {
+    0%, 64% { opacity: 0; }
+    68%, 88% { opacity: 1; }
+    96%, 100% { opacity: 0; }
+}
+@keyframes sf-t-n3 {
+    0%, 72% { opacity: 0; }
+    76%, 88% { opacity: 1; }
+    96%, 100% { opacity: 0; }
+}
+@keyframes sf-t-origin {
+    0%, 74% { opacity: 0; }
+    80%, 88% { opacity: 1; }
+    96%, 100% { opacity: 0; }
+}
+@keyframes sf-t-ripple {
+    0%, 76% { opacity: 0; transform: scale(1); }
+    77% { opacity: 0.7; transform: scale(1); }
+    90%, 100% { opacity: 0; transform: scale(2.4); }
+}
+
+// --- Playback control: paused until on-screen (JS adds .is-playing) --------
+.sf-viz:not(.is-playing) * {
+    animation-play-state: paused;
+}
+
+// --- Reduced motion: static, polished final state (no empty card) ---------
+// Kept last so it wins over the animation rules above at equal specificity.
+@media (prefers-reduced-motion: reduce) {
+    .sf-viz * { animation: none; }
+
+    .sf-c-src, .sf-c-core, .sf-c-result, .sf-c-rcheck,
+    .sf-a-flag, .sf-a-bay,
+    .sf-t-result, .sf-t-n1, .sf-t-n2, .sf-t-n3, .sf-t-origin {
+        opacity: 1;
+    }
+    .sf-c-core, .sf-c-result { transform: none; }
+    .sf-c-sync, .sf-c-check, .sf-c-line, .sf-c-ring, .sf-c-rcheck,
+    .sf-a-link, .sf-t-b1, .sf-t-b2, .sf-t-b3 {
+        stroke-dashoffset: 0;
+    }
+    // Anomaly: item resolved inside the isolation bay, away from normal lanes.
+    .sf-a-anom { opacity: 1; transform: translate(226px, 79px); }
+    .sf-a-flow { opacity: 1; transform: translateX(var(--sf-x)); }
+}

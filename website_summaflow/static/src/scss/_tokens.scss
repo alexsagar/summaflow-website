@@ -22,7 +22,22 @@
     --sf-accent: #53b973;    // green-blue accent
     --sf-focus: #2f80ed;
 
-    --sf-gradient-brand: linear-gradient(90deg, #4262ae 0%, #64beb5 60%, #53b973 100%);
+    // THE canonical SummaFlow brand gradient — one definition, supplied by the
+    // client from the design source. These exact values are the single source
+    // of truth for every brand-gradient TEXT treatment on the site.
+    //
+    // They supersede both earlier sets: the pixel-sampled logo values
+    // (#326BB3 / #63BDB6 / #50BA74) and the original markup's inline values
+    // (#4262AE / #64BEB5 / #53B973). Neither is a design source; this is.
+    // Note the midpoint is 51%, not 50%. Every brand-gradient token below
+    // aliases this one; do not re-introduce a second set of stops, and do not
+    // re-sample the logo.
+    --sf-gradient-brand: linear-gradient(90deg, #3268B2 0%, #64BEB5 51%, #53B973 100%);
+
+    // Aliases kept so existing call sites keep working. They are deliberately
+    // not separate definitions.
+    --sf-gradient-heading: var(--sf-gradient-brand);
+    --sf-gradient-logo: var(--sf-gradient-brand);
 
     // --- Typography -------------------------------------------------------
     // Inherit the site's font stack by default; do not impose a new face.
@@ -34,10 +49,13 @@
     --sf-text-base: 1.0625rem; // 17px
     --sf-text-lg: 1.25rem;     // 20px
 
-    --sf-h-md: clamp(1.25rem, 1.05rem + 1vw, 1.625rem);
-    --sf-h-lg: clamp(1.625rem, 1.3rem + 1.6vw, 2.25rem);
-    --sf-h-xl: clamp(2rem, 1.5rem + 2.5vw, 3rem);
-    --sf-display: clamp(2.5rem, 1.8rem + 3.5vw, 4rem);
+    // Odoo Sass evaluates clamp()/min()/max() and rejects mixed units
+    // (rem+vw). Tokens hold safe single-unit (rem) base values; stepped
+    // responsive bumps live in _responsive.scss (:root @media overrides).
+    --sf-h-md: 1.25rem;
+    --sf-h-lg: 1.625rem;
+    --sf-h-xl: 2rem;
+    --sf-display: 2.5rem;
 
     --sf-lh-tight: 1.15;
     --sf-lh-snug: 1.3;
@@ -58,13 +76,16 @@
     --sf-space-7: 3rem;
     --sf-space-8: 4rem;
     --sf-space-9: 6rem;
-    --sf-section-y: clamp(4rem, 2.5rem + 6vw, 9rem);
+    --sf-section-y: 4rem; // stepped up in _responsive.scss
 
     // --- Containers -------------------------------------------------------
-    --sf-container: 1240px;
-    --sf-container-narrow: 720px;
-    --sf-container-wide: 1440px;
-    --sf-gutter: clamp(1rem, 0.5rem + 2vw, 2rem);
+    // Standard content container. Stepped UP on large monitors in
+    // _responsive.scss so content keeps a confident presence past ~1600px
+    // instead of becoming a small island in a sea of whitespace.
+    --sf-container: 1360px;       // standard content width
+    --sf-container-narrow: 800px; // reading measure (prose)
+    --sf-container-wide: 1520px;  // wide visual / product width
+    --sf-gutter: 1.25rem; // 20px mobile floor; stepped up in _responsive.scss
 
     // --- Primitives -------------------------------------------------------
     --sf-border-width: 1px;

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+      SummaFlow header - compact segmented product navbar.
+
+      Source-controlled and self-applying: inherits website.layout and replaces
+      the whole //header node at high priority (99) so this definition wins on
+      import with no manual Website Builder step.
+
+      Why the whole <header> and not //header//nav: the live database already
+      carries website.template_header_default, which itself inherits
+      website.layout and REPLACES //header//nav with a t-call chain. That nav
+      node no longer exists in the combined arch, so an xpath on it would fail.
+      Replacing the header element is stable regardless of which Odoo header
+      template variant is active, and the priority guarantees this view is
+      applied last.
+
+      Structure (desktop):
+
+        logo | Platform Solutions Security Company Resources | spacer
+             | AI summary marks | Sign In | Request a Free Trial
+
+      Navigation links are NOT hardcoded: they render from the real Odoo
+      website menu records (website.menu_id.child_id), so the header can never
+      drift from the live menu or invent a destination.
+
+      Sign In points at https://app.summaflow.com, the app host the client asked
+      for directly; the old marketing-side /login path in
+      docs/original-site/header/header-call-to-action.xml is deliberately
+      dropped.
+
+      Request a Free Trial keeps the existing real form route, /contactus, taken
+      from that same original CTA view. The label changed on client instruction;
+      the destination did not. CRM lead handling and the form redesign are
+      separate tasks, not implemented here.
+
+      Mobile uses Bootstrap's own offcanvas (data-bs-toggle="offcanvas"), which
+      is already in web.assets_frontend. No custom JavaScript: focus handling,
+      Escape, and aria-expanded come from Bootstrap.
+
+      t-ignore="true" keeps the Website Builder from treating the header as
+      editable content and persisting a divergent copy into the database arch.
+      Non-void elements carry explicit closing tags on purpose: a self-closed
+      <span/> is parsed by HTML as an open tag and swallows its siblings.
+    -->
+    <template id="summaflow_header" inherit_id="website.layout"
+              name="SummaFlow Header" priority="99">
+
+        <xpath expr="//header" position="replace">
+            <header id="top" t-ignore="true" t-if="not no_header" class="sf-header">
+                <nav class="sf-header__bar" aria-label="Main">
+
+                    <!-- Brand: the real website logo asset, never a text rebuild -->
+                    <a class="sf-header__brand" href="/">
+                        <t t-set="sf_logo_options" t-value="{'widget': 'image'}"/>
+                        <span t-field="website.logo"
+                              t-options="sf_logo_options if editable else dict(sf_logo_options, width=95, height=40)"
+                              role="img"
+                              t-att-aria-label="'Logo of %s' % website.name"
+                              t-att-title="website.name"></span>
+                    </a>
+
+                    <span class="sf-header__divider d-none d-lg-block" aria-hidden="true"></span>
+
+                    <!-- Main navigation, from the live Odoo menu records -->
+                    <ul class="sf-header__nav d-none d-lg-flex">
+                        <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                            <li class="sf-header__nav-item">
+                                <a class="sf-header__nav-link"
+                                   t-att-href="submenu.url"
+                                   t-att-aria-current="'page' if submenu.url == request.httprequest.path else None"
+                                   t-out="submenu.name"></a>
+                            </li>
+                        </t>
+                    </ul>
+
+                    <!-- Flexible space keeps the utility cluster right-aligned -->
+                    <div class="sf-header__spacer"></div>
+
+                    <!--
+                      Explore AI Summary utility area. The three social glyphs
+                      that used to sit here were removed on client instruction
+                      (the footer keeps its social icons). Markup, destinations
+                      and labels come from the shared
+                      website_summaflow.ai_marks component, so the header can
+                      never drift from the approved footer behaviour.
+                    -->
+                    <t t-set="sf_ai_class" t-value="'sf-header__ai d-none d-lg-flex'"/>
+                    <t t-set="sf_ai_size" t-value="20"/>
+                    <t t-call="website_summaflow.ai_marks"/>
+
+                    <span class="sf-header__divider d-none d-lg-block" aria-hidden="true"></span>
+
+                    <!-- Actions -->
+                    <div class="sf-header__actions d-none d-lg-flex">
+                        <a class="sf-button sf-button--secondary"
+                           href="https://app.summaflow.com/login"
+                           target="_blank"
+                           rel="noopener noreferrer">Sign In</a>
+                        <a class="sf-button sf-button--primary"
+                           href="/contactus">Request a Free Trial</a>
+                    </div>
+
+                    <!-- Mobile trigger (Bootstrap offcanvas, no custom JS) -->
+                    <button class="sf-header__toggle d-lg-none" type="button"
+                            data-bs-toggle="offcanvas" data-bs-target="#sf_mobile_nav"
+                            aria-controls="sf_mobile_nav" aria-label="Open menu">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                        <span class="sf-header__toggle-label">Menu</span>
+                    </button>
+                </nav>
+
+                <!-- Mobile navigation panel -->
+                <div class="offcanvas offcanvas-end sf-mobile-nav" tabindex="-1"
+                     id="sf_mobile_nav" aria-label="Site navigation">
+                    <div class="offcanvas-header">
+                        <a class="sf-header__brand" href="/">
+                            <span t-field="website.logo"
+                                  t-options="{'widget': 'image'}"
+                                  role="img"
+                                  t-att-aria-label="'Logo of %s' % website.name"></span>
+                        </a>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                aria-label="Close menu"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="sf-mobile-nav__list">
+                            <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                <li>
+                                    <a t-att-href="submenu.url" t-out="submenu.name"></a>
+                                </li>
+                            </t>
+                        </ul>
+                        <div class="sf-mobile-nav__actions">
+                            <a class="sf-button sf-button--secondary"
+                               href="https://app.summaflow.com/login"
+                               target="_blank"
+                               rel="noopener noreferrer">Sign In</a>
+                            <a class="sf-button sf-button--primary"
+                               href="/contactus">Request a Free Trial</a>
+                        </div>
+                        <div class="sf-mobile-nav__ai-label">Explore AI Summary</div>
+                        <t t-set="sf_ai_class" t-value="'sf-mobile-nav__ai'"/>
+                        <t t-set="sf_ai_size" t-value="22"/>
+                        <t t-call="website_summaflow.ai_marks"/>
+                    </div>
+                </div>
+            </header>
+        </xpath>
+    </template>
+</odoo>

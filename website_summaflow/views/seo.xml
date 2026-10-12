@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+      SummaFlow site-wide structured data.
+
+      Frontend-only: inherits website.layout and appends one JSON-LD block to
+      <head>. Search engines read it to identify the organisation, the site and
+      the product. Per-page titles and descriptions live on the website.page
+      records (see views/pages/utility_pages.xml) and in the Website Builder's
+      SEO dialog for builder-made pages. Nothing here sets robots, sitemap,
+      canonical or Open Graph tags: Odoo emits those itself.
+
+      Odoo (saas~19.4) also emits its own JSON-LD block with an Organization
+      node whose @id is "<main domain>/#organization" and whose logo is the
+      website logo. On production that @id equals the one below, so both
+      blocks describe ONE entity and this block only adds the contact fields.
+      Keep the @id below in step with the production main domain.
+
+      sameAs is deliberately omitted until the real social profile URLs exist
+      (the footer still points at placeholder /your-page).
+      logo is omitted here: the module ships no logo file, and Odoo's own
+      block already supplies the website logo.
+      legalName is omitted: the registered legal name is not verified.
+      The SoftwareApplication description is the approved homepage meta
+      description, word for word. No offers, ratings or version: none exist.
+    -->
+    <template id="sf_seo_structured_data" inherit_id="website.layout"
+              name="SummaFlow: structured data" priority="99">
+        <xpath expr="//head" position="inside">
+            <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://summaflow.com/#organization",
+      "name": "SummaFlow",
+      "url": "https://summaflow.com/",
+      "email": "info@summaflow.com",
+      "telephone": "+852 9220 9701",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "GF, Koon Nam House, 12-14 Shing Wong Street",
+        "addressLocality": "Hong Kong",
+        "addressCountry": "HK"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://summaflow.com/#website",
+      "url": "https://summaflow.com/",
+      "name": "SummaFlow",
+      "publisher": { "@id": "https://summaflow.com/#organization" },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://summaflow.com/#software",
+      "name": "SummaFlow",
+      "url": "https://summaflow.com/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Bring scattered trade communications into one operational workspace with AI-powered visibility, traceability, alerts, and actionable project intelligence.",
+      "publisher": { "@id": "https://summaflow.com/#organization" }
+    }
+  ]
+}</script>
+        </xpath>
+    </template>
+</odoo>

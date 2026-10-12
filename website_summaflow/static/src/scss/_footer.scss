@@ -1,0 +1,625 @@
+// SummaFlow footer — compact wide editorial composition.
+//
+// Short, wide and dense: one near edge-to-edge white panel, two tight content
+// rows, then an oversized brand signature that spans nearly the full panel
+// width and supplies all of the footer's breathing room.
+//
+ //   grid    brand + CTAs + contact + socials | EXPLORE | COMPANY | STAY UPDATED
+//           (asymmetric; STAY UPDATED also carries the newsletter form, its
+//            inline success state, EXPLORE AI SUMMARY and the social icons)
+//   then    oversized SummaFlow wordmark, full-bleed
+//
+// Scoped entirely under `.sf-footer` / `.sf-footer__legal`; touches no other
+// page selectors. Buttons mirror the header's Bootstrap .btn values.
+//
+// Odoo Online / libsass safe: no local @import/@use, no mixed-unit
+// clamp()/min()/max(), single-unit values and stepped media queries only.
+
+/* Odoo already renders the newsletter success state inside the footer.
+   Suppress only the duplicate global newsletter-success notification. */
+.o_notification:has(.o_notification_content[title="Thanks for subscribing!"]) {
+    display: none !important;
+}
+
+#footer .sf-footer__ctas a.sf-button.sf-button--primary,
+#footer .sf-footer__ctas a.sf-button.sf-button--primary:visited,
+#footer .sf-footer__ctas a.sf-button.sf-button--primary:hover,
+#footer .sf-footer__ctas a.sf-button.sf-button--primary:focus,
+#footer .sf-footer__ctas a.sf-button.sf-button--primary:active {
+    color: #fff;
+}
+
+#footer .sf-footer__ctas a.sf-button.sf-button--secondary,
+#footer .sf-footer__ctas a.sf-button.sf-button--secondary:visited {
+    color: #000;
+}
+
+#footer .sf-footer__ctas a.sf-button.sf-button--secondary:hover,
+#footer .sf-footer__ctas a.sf-button.sf-button--secondary:focus,
+#footer .sf-footer__ctas a.sf-button.sf-button--secondary:active {
+    color: #fff;
+}
+
+.sf-footer {
+    // --sf-fg: outer gutter. --sf-fp: the panel's inner padding; the oversized
+    // wordmark cancels it with a negative margin to run full-bleed.
+    --sf-fg: 1.25rem; // 20px mobile gutter (site-wide floor)
+    --sf-fp: 1.25rem;
+    background-color: #f5f7f9;
+    color: var(--sf-text);
+    font-size: var(--sf-text-sm);
+    line-height: 1.55;
+    padding: var(--sf-space-4) var(--sf-fg) var(--sf-space-3);
+}
+
+// --- Panel: nearly full viewport width, compact vertical padding ----------
+// No centred max-width container: the panel is the viewport minus the gutter,
+// which is what lets the signature read as a full-width brand mark. No card
+// treatment -- it inherits the footer background so the footer reads as one
+// continuous full-width section.
+.sf-footer__panel {
+    position: relative;
+    padding: var(--sf-space-4) var(--sf-fp) 0;
+    overflow: hidden; // lets the signature crop against the panel boundary
+}
+
+// --- Row 1 ----------------------------------------------------------------
+.sf-footer__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sf-space-5);
+}
+
+// --- Contact metadata, inside the brand column ----------------------------
+.sf-footer__details {
+    margin-top: var(--sf-space-4);
+    font-size: var(--sf-text-xs);
+    line-height: 1.5;
+}
+
+// --- AI providers, inside the Stay-updated column -------------------------
+// 24px clear of the newsletter block (form + its inline success), so the
+// confirmation reads as part of the form and this reads as a new block.
+.sf-footer__ai {
+    margin-top: var(--sf-space-5); // 24px
+}
+
+// --- Brand lead -----------------------------------------------------------
+.sf-footer__logotype {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    background-image: var(--sf-gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.sf-footer__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sf-space-3);
+    margin-top: var(--sf-space-4);
+}
+
+// --- Footer button system: a copy of the header's buttons ------------------
+// Read off the live header's compiled Bootstrap variables
+// (summaflow.com, a.btn.btn-sm.btn-primary / .btn-secondary):
+//   .btn      --btn-border-radius 0.5rem, --btn-font-weight 400,
+//             --btn-line-height 1.5, border 1px solid, transition
+//             color/background-color/border-color/box-shadow .15s ease-in-out
+//   .btn-sm   --btn-padding-y 0.3rem, --btn-padding-x 0.9rem
+//   primary   bg #000, label #FFF, border #000; hover identical (black)
+//   secondary bg transparent, label #000, border #000;
+//             hover bg #000, label #FFF, border #000
+// No gradient, no fill layer, no pointer-origin animation: the only motion is
+// Bootstrap's own 0.15s colour transition, reproduced verbatim.
+.sf-footer__ctas .sf-button,
+.sf-footer__field .sf-button {
+    min-height: 0; // the header button is 32px tall, not 44px
+    padding: 0.3rem 0.9rem;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    font-size: 0.875rem; // 14px, as the header
+    font-weight: 400; // as the header
+    line-height: 1.5;
+    letter-spacing: 0;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+// Primary (Sign In, Subscribe): black, white label, unchanged on hover.
+.sf-footer .sf-button--primary {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.sf-footer .sf-button--primary:hover,
+.sf-footer .sf-button--primary:focus,
+.sf-footer .sf-button--primary:active {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+// Secondary (Contact): white surface, black label and border; inverts to the
+// black fill on hover exactly like the header's Sign In.
+.sf-footer .sf-button--secondary {
+    background-color: #ffffff;
+    border-color: #000000;
+    color: #000000;
+}
+
+.sf-footer .sf-button--secondary:hover,
+.sf-footer .sf-button--secondary:focus,
+.sf-footer .sf-button--secondary:active {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+// Header focus ring (Bootstrap --btn-focus-box-shadow) rather than the
+// module's own --sf-focus-ring, so focus feels identical too.
+.sf-footer .sf-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+}
+
+// --- Contact details (tight) ---------------------------------------------
+.sf-footer__contact {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        margin-bottom: var(--sf-space-2);
+    }
+
+    a {
+        color: var(--sf-text);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--sf-primary-ink);
+    }
+}
+
+.sf-footer__contact-key {
+    color: var(--sf-text-muted);
+    margin-right: var(--sf-space-2);
+}
+
+.sf-footer__address {
+    margin: 0;
+    color: var(--sf-text-muted);
+    max-width: 20rem;
+}
+
+// --- Explore AI Summary: compact provider row ----------------------------
+.sf-footer__ai-marks {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sf-space-4);
+    margin: 0;
+    padding: 0;
+
+    li {
+        display: inline-flex;
+    }
+
+    // Each mark is a real external link to that provider (see footer.xml).
+    // Comfortable ~32px click target around a 22px glyph, matching the social
+    // icons' touch-target-to-glyph ratio; no visual chip or background.
+    a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        text-decoration: none;
+    }
+
+    a:focus-visible {
+        outline: none;
+        box-shadow: var(--sf-focus-ring);
+    }
+
+    // 22px glyph box, the same visual size as the social icons (X, LinkedIn,
+    // YouTube), aspect ratio preserved.
+    img {
+        display: block;
+        width: 22px;
+        height: 22px;
+        // Official marks are monochrome glyphs; held back slightly at rest so
+        // the row stays editorial rather than becoming colourful stickers.
+        opacity: 0.55;
+        transition: opacity 180ms ease;
+    }
+
+    a:hover img,
+    a:focus-visible img,
+    img:hover {
+        opacity: 1;
+    }
+}
+
+// Icons only — the network names are carried by aria-label/title. Sits in the
+// brand column under the contact metadata; the negative inline offset lines
+// the first glyph up with the column's text edge despite the touch target.
+.sf-footer__social {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px; // 2px + 2 x 7px of padding inside each target = 16px apart
+    margin: var(--sf-space-4) 0 0 -7px;
+    padding: 0;
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px; // touch-friendly without an icon background
+        height: 36px;
+        color: var(--sf-text-muted);
+        font-size: 22px; // glyph size, not the target size
+        line-height: 1;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--sf-primary-ink);
+    }
+}
+
+// --- Navigation (compact, secondary) --------------------------------------
+.sf-footer__head {
+    font-size: var(--sf-text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--sf-text-muted);
+    margin: 0 0 var(--sf-space-3);
+}
+
+.sf-footer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--sf-text-sm);
+
+    li {
+        margin-bottom: var(--sf-space-2);
+    }
+
+    a {
+        color: var(--sf-text);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--sf-primary-ink);
+    }
+}
+
+// --- Newsletter: compact, no card padding bloat --------------------------
+.sf-footer__news-copy {
+    margin: 0 0 var(--sf-space-3);
+    color: var(--sf-text-muted);
+    max-width: 26rem;
+}
+
+.sf-footer__form {
+    min-height: 52px; // reserved so the success state cannot reflow the column
+}
+
+// Odoo's js_subscribe widget swaps the two wrappers by toggling .d-none, which
+// would REPLACE the form with the confirmation. The client asked for the form
+// to stay and the confirmation to appear directly below it, so the subscribe
+// wrapper is kept visible in this footer only. The widget's own state classes
+// are untouched, so its behaviour and validation are unchanged.
+.sf-footer__form .js_subscribe_wrap.d-none {
+    display: block !important;
+}
+
+// Input + action read as one unified control. Deliberately a small rounded
+// rectangle (12px), NOT a hero pill: 52px tall, 420px wide at most, so the
+// form sits under the newsletter copy without competing with the footer.
+.sf-footer__field {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    padding: 4px;
+    border: var(--sf-border-width) solid var(--sf-border);
+    border-radius: 8px;
+    background-color: var(--sf-surface);
+    max-width: 26.25rem; // 420px
+}
+
+.sf-footer__field .form-control,
+.sf-footer__field .s_newsletter_subscribe_form_input {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 42px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 0 1.125rem; // 18px
+    font-size: var(--sf-text-sm);
+    line-height: 1.2;
+    color: var(--sf-text);
+}
+
+.sf-footer__field .form-control:focus {
+    border: 0;
+    box-shadow: none;
+    outline: none;
+}
+
+.sf-footer__field:focus-within {
+    border-color: var(--sf-primary-ink);
+}
+
+// Subscribe: the same black primary button, sized to sit inside the unified
+// field. 42px + 2 x 4px field padding + 2 x 1px border = 52px total form
+// height, which is the approved newsletter control height; only the height is
+// dictated by the field, every other value stays the header button's.
+.sf-footer__field .sf-button {
+    flex: 0 0 auto;
+    height: 42px;
+    min-width: 7.375rem; // 118px
+    border-radius: 6px; // nested inside the 8px field (8 - 2 x padding)
+    border-width: 0;
+}
+
+// Success: a light white confirmation chip. Intentionally NOT a filled green
+// block, not button-like, and no extra vertical padding.
+.sf-footer__news-done p {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sf-space-2);
+    margin: 9px 0 0; // sits directly below the form, ~9px clear of it
+    padding: 5px var(--sf-space-3);
+    border: var(--sf-border-width) solid var(--sf-border);
+    border-radius: 8px;
+    background-color: var(--sf-bg-subtle);
+    font-size: var(--sf-text-xs);
+    font-weight: 400;
+    color: var(--sf-text);
+}
+
+// Small green accent only: a light ring around a thin check.
+.sf-footer__news-done .fa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border: var(--sf-border-width) solid #53b973;
+    border-radius: 50%;
+    color: #53b973;
+    font-size: 9px;
+}
+
+// Error: equally restrained.
+.sf-footer__news .alert {
+    margin: var(--sf-space-2) 0 0;
+    padding: var(--sf-space-2) var(--sf-space-4);
+    border-radius: var(--sf-radius);
+    font-size: var(--sf-text-xs);
+    max-width: 26rem;
+}
+
+// Avoids :has() on purpose — Odoo Online's Sass compiler is not guaranteed to
+// parse it. Odoo flags the wrapper/field with .o_has_error instead.
+.sf-footer__news .o_has_error .form-control,
+.sf-footer__news .form-control.is-invalid {
+    color: #9b2c2c;
+}
+
+.sf-footer__news .o_has_error .sf-footer__field,
+.sf-footer__news .sf-footer__field.o_has_error {
+    border-color: #c75c5c;
+}
+
+// --- Oversized SummaFlow brand signature ---------------------------------
+// Plain HTML text with a brand-gradient background clipped to the glyphs: the
+// same technique as .sf-footer__logotype, which is known to render on this
+// stack. No SVG fragment reference, so Odoo's CSS url() rewriting cannot
+// break it.
+//
+// Full width without an SVG: the panel has no max-width, so its inner width
+// tracks the viewport, and a viewport-relative font-size therefore keeps the
+// word at a near-constant proportion of the panel at every screen size.
+// 14.2vw (mobile) to 15.6vw (desktop) x the measured ~5.67em advance of
+// "SummaFlow" lands the word at 87% to 93% of the available panel width. Single-unit value, so no
+// unsafe Sass function is involved. The negative inline margin cancels the
+// panel padding so the glyphs start and end close to the panel edges.
+.sf-footer__signature {
+    margin: var(--sf-space-3) calc(var(--sf-fp) * -1) 0;
+    font-family: var(--sf-font-heading);
+    // Mobile: scaled down so the wordmark stays recognisable without dominating
+    // the small-screen footer. Grows back to a full-bleed mark at tablet/desktop
+    // steps below.
+    font-size: 10.5vw;
+    font-weight: 800;
+    line-height: 0.86;
+    letter-spacing: -0.035em;
+    text-align: center;
+    white-space: nowrap;
+    background-image: var(--sf-gradient-brand); // canonical logo gradient
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    // Lightness comes from opacity applied AFTER the canonical gradient, never
+    // from a washed-out second gradient, so the blue -> teal -> green
+    // transition reads as the same ramp as the small logotype above it.
+    opacity: 0.4;
+    user-select: none;
+    pointer-events: none;
+}
+
+// --- Single legal strip (outside the panel) -------------------------------
+.sf-footer__legal {
+    background-color: #f5f7f9;
+    padding: var(--sf-space-4) var(--sf-fg, 1rem);
+}
+
+.sf-footer__legal-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sf-space-2);
+    padding: 0 var(--sf-space-2);
+    font-size: var(--sf-text-xs);
+    color: var(--sf-text-muted);
+}
+
+.sf-footer__legal-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sf-space-4);
+
+    a {
+        color: var(--sf-text-muted);
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--sf-primary-ink);
+    }
+}
+
+// --- Mobile: compact stack ------------------------------------------------
+// Brand block and newsletter span the width; Explore + Company sit side by
+// side instead of each eating a full row. CTAs become an equal-width pair.
+@media (max-width: 47.98rem) {
+    .sf-footer__top {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: var(--sf-space-5);
+        row-gap: var(--sf-space-6);
+    }
+
+    .sf-footer__lead,
+    .sf-footer__news {
+        grid-column: 1 / -1;
+    }
+
+    .sf-footer__ctas .sf-button {
+        flex: 1 1 auto;
+        white-space: nowrap;
+        justify-content: center;
+        text-align: center;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .sf-footer__legal-inner {
+        gap: var(--sf-space-3);
+    }
+
+    // No oversized wordmark on phones; the panel closes with normal padding.
+    .sf-footer__signature {
+        display: none;
+    }
+
+    .sf-footer__panel {
+        padding-bottom: var(--sf-fp);
+    }
+}
+
+// --- Tablet: two-column composition --------------------------------------
+@media (min-width: 48rem) {
+    .sf-footer {
+        --sf-fg: 1.5rem;
+        --sf-fp: 2rem;
+        // Card removed: spacing, not a border, sets the footer apart.
+        padding-top: var(--sf-space-6);
+    }
+
+    .sf-footer__legal {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .sf-footer__top {
+        grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: var(--sf-space-6);
+        row-gap: var(--sf-space-5);
+    }
+
+    // Newsletter spans the full width under the brand/nav pair.
+    .sf-footer__news {
+        grid-column: 1 / -1;
+    }
+
+    // Wordmark grows back toward a full-bleed mark once there is room.
+    .sf-footer__signature {
+        font-size: 14.2vw;
+    }
+
+    .sf-footer__legal-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+// --- Desktop: the four-column asymmetric grid ----------------------------
+@media (min-width: 62rem) {
+    .sf-footer {
+        --sf-fg: 2rem;
+        --sf-fp: 2.5rem;
+        padding: var(--sf-space-5) var(--sf-fg) var(--sf-space-4);
+    }
+
+    .sf-footer__legal {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .sf-footer__panel {
+        padding-top: var(--sf-space-5);
+    }
+
+    // ~35% brand / 15% / 15% / ~30% + gaps: intentionally unequal.
+    .sf-footer__top {
+        grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr);
+        column-gap: var(--sf-space-6);
+    }
+
+    .sf-footer__news {
+        grid-column: auto;
+    }
+
+    .sf-footer__logotype {
+        font-size: 2.25rem;
+    }
+
+    .sf-footer__signature {
+        margin-top: var(--sf-space-3);
+        font-size: 15.6vw; // ~93% of the panel width
+    }
+}
+
+// --- Large desktop: ~48px gutter -----------------------------------------
+@media (min-width: 100rem) {
+    .sf-footer {
+        --sf-fg: 3rem;
+        --sf-fp: 3rem;
+    }
+
+    .sf-footer__legal {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+
+    .sf-footer__logotype {
+        font-size: 2.5rem;
+    }
+}

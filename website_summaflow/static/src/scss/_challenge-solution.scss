@@ -1,0 +1,163 @@
+// SummaFlow — "Auditable Project Control." heading + Challenge / Solution
+// cards. POLISH LAYER, not a redesign.
+//
+// The markup stays DB-managed Website Builder content; challenge_solution.js
+// attaches the .sf-cs* classes below to the existing elements and creates
+// nothing. Only the spacing, alignment, typography consistency and the
+// canonical gradient change.
+//
+// SCALE RULE: no heading font-size, no card width, no min-height, no new radius
+// and no section padding growth. The builder's own values (h2 scale, .col-lg-6,
+// .rounded-3, .pt0/.pb56) stay in charge; this file only removes dead space and
+// makes the two cards agree with each other.
+//
+// Specificity note: Odoo's spacing utilities (.pt32, .pb16, .pt16) and the
+// builder's inline styles are what this file must out-rank, so selectors are
+// element+class or two-class on purpose. No !important.
+//
+// No local @import / @use (forbidden on Odoo Online SaaS): this file is listed
+// explicitly in web.assets_frontend. No mixed-unit clamp()/min()/max().
+
+// --- Heading --------------------------------------------------------------
+// Size and the light weight come from the builder (h2 + inline
+// font-weight: normal). Only the rhythm and the gradient are touched.
+.sf-cs-head {
+    padding-bottom: 0; // the section carries .pb24; the card gap owns it now
+}
+
+h2.sf-cs-head__line {
+    margin: 0;
+    line-height: var(--sf-lh-snug);
+}
+
+// The accent line reads as the second half of one sentence, so it sits tight
+// under the first.
+.sf-cs-head .sf-cs-head__accent {
+    // Colour only: the gradient is the shared canonical token, applied by
+    // .sf-text-gradient in _utilities.scss. Weight and size inherit, so it can
+    // never read heavier than the line above it.
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+// --- Card grid ------------------------------------------------------------
+// The decorated element is Odoo's .row; its columns keep their Bootstrap
+// widths, so the two-column desktop layout and the site container are
+// untouched. Only the vertical padding the builder put on the columns is
+// replaced by a single gap, which is what closes the heading-to-cards gulf.
+.sf-cs .sf-cs__grid {
+    row-gap: var(--sf-space-4);
+}
+
+.sf-cs .sf-cs__col {
+    padding-top: var(--sf-space-5); // was .pt32 (32px)
+    padding-bottom: 0;              // was .pb16 (16px)
+}
+
+// --- Card -----------------------------------------------------------------
+// Same thin gradient border, same technique (white padding-box layer over a
+// gradient border-box layer), but painted from the canonical brand token
+// instead of the builder's off-canon inline stops. Radius still comes from the
+// builder's .rounded-3; no shadow, no glow, no fill, no glass.
+.sf-cs .sf-cs__card {
+    border: var(--sf-border-width) solid transparent;
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        var(--sf-gradient-brand) border-box;
+    // Height is content-driven: .h-100 still makes the two desktop cards match
+    // the taller one, but nothing here adds a min-height, and the bottom
+    // padding is explicit rather than left to empty spacer nodes.
+    padding: var(--sf-space-5);
+    display: flex;
+    flex-direction: column;
+}
+
+// Both cards' inner wrapper, so the label starts at the same vertical position
+// in each.
+.sf-cs .sf-cs__card > div {
+    min-width: 0;
+}
+
+// Collapse the builder's empty spacer nodes (<p><br></p>, <h1><br></h1>, the
+// empty .text-center.pt16 footer div). They are marked, never removed - this
+// is what cleared the dead area at the bottom of each card.
+.sf-cs .sf-cs__void {
+    display: none;
+}
+
+// --- Card label (Challenge / Solution) ------------------------------------
+// One typography for both: "Challenge" ships as <strong>, "Solution" as an
+// inline font-weight: bolder. The inline value is cleared by the script; this
+// sets the single shared weight.
+.sf-cs .sf-cs__label {
+    margin: 0 0 var(--sf-space-2);
+    color: var(--sf-text-muted);
+    font-size: var(--sf-text-xs); // 13px, smaller than the card title
+    font-weight: var(--sf-weight-semibold); // 600
+    letter-spacing: 0.01em;
+}
+
+.sf-cs .sf-cs__label strong,
+.sf-cs .sf-cs__label b,
+.sf-cs .sf-cs__label span,
+.sf-cs .sf-cs__label font {
+    font-weight: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+// --- Card title -----------------------------------------------------------
+// Size stays the builder's inline 28px span; only the rhythm and the light
+// weight are stated, so both titles share one baseline.
+.sf-cs .sf-cs__title {
+    margin: 0 0 var(--sf-space-4);
+    color: #111111;
+    font-weight: 400;
+    line-height: var(--sf-lh-snug);
+}
+
+// --- Card body ------------------------------------------------------------
+// Identical typography in both cards, and one consistent gap between items
+// instead of <br> spacing.
+.sf-cs .sf-cs__item {
+    margin: 0 0 var(--sf-space-3);
+    color: var(--sf-text);
+    font-size: var(--sf-text-sm); // 15px
+    line-height: var(--sf-lh-body); // 1.6
+}
+
+.sf-cs .sf-cs__item:last-child {
+    margin-bottom: 0;
+}
+
+.sf-cs .sf-cs__item span,
+.sf-cs .sf-cs__item font {
+    font-size: inherit;
+    line-height: inherit;
+}
+
+// Lead phrases stay emphasised, at the same moderate weight as the hero
+// paragraph rather than the browser's default <b> bold.
+.sf-cs .sf-cs__item b,
+.sf-cs .sf-cs__item strong {
+    font-weight: var(--sf-weight-semibold); // 600
+    color: #111111;
+}
+
+// --- Responsive -----------------------------------------------------------
+// Mobile: cards take their natural height; nothing forces them to match.
+@media (max-width: 991.98px) {
+    .sf-cs .sf-cs__card {
+        height: auto; // neutralises .h-100 while stacked
+        padding: var(--sf-space-4);
+    }
+    .sf-cs .sf-cs__col {
+        padding-top: var(--sf-space-4);
+    }
+}
+
+@media (min-width: 1200px) {
+    .sf-cs .sf-cs__card {
+        padding: var(--sf-space-6); // 32px, matching the builder's .p-4 rhythm
+    }
+}

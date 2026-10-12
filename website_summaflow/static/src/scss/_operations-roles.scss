@@ -1,0 +1,99 @@
+// Homepage section: "Purpose-built for Every Operations Role".
+//
+// Targets the EXISTING database markup directly so importing the module is
+// enough — no Website Builder step, no DB arch edit. Scope is one section only.
+//
+// Existing markup (docs/original-site/pages/homepage.xml:50-53), unchanged:
+//   <section class="s_title pb40 o_colored_level pt72" data-snippet="s_title"
+//            data-name="Title">
+//     <div class="s_allow_columns container">
+//       <h2 class="display-3-fs" style="text-align:center; font-weight:normal;">
+//         <span style="font-size:39px;">Purpose-built for
+//           <font class="text-gradient"
+//                 style="background-image: linear-gradient(135deg,
+//                 rgb(47,128,237) 0%, rgb(178,255,218) 100%);">Every Operations
+//                 Role</font></span></h2></div></section>
+//
+// `section.s_title.pt72.pb40` is unique on the homepage (verified: 1 match),
+// and the only `.text-gradient` inside it is this heading's accent. No local
+// @import/@use; no min()/max() mixed units.
+//
+// `.sf-op-roles*` are kept as a future reusable alias for clean markup.
+
+$sec: 'section.s_title.pt72.pb40';
+
+// --- Section: tame blank space, center. Compound selector beats Odoo's
+//     single-class .pt72/.pb40 utilities on specificity (no !important). ------
+#{$sec},
+.sf-op-roles {
+    padding-top: 2.5rem; // stepped below; no mixed-unit clamp (Odoo Sass)
+    // !important: Odoo's .pb40 spacing utility is declared !important, so a
+    // compound selector alone is not enough to tighten the bottom gap.
+    padding-bottom: var(--sf-space-4) !important; // tight: cards join heading
+    text-align: center;
+}
+@media (min-width: 48rem) {
+    #{$sec},
+    .sf-op-roles { padding-top: 3.25rem; }
+}
+@media (min-width: 75rem) {
+    #{$sec},
+    .sf-op-roles { padding-top: 4rem; }
+}
+
+// Pull the three role cards up to the heading. Adjacent-sibling of the unique
+// title section only (compound selector beats Odoo's .pt48; no !important).
+// Other s_three_columns sections are untouched. Card `pt16` / `pb48` kept.
+#{$sec} + section.s_three_columns {
+    // !important: Odoo's .pt48 spacing utility is declared !important.
+    // Zeroed: the title section's own padding-bottom + the cards' pt16 already
+    // give a clean ~56-64px gap; this residual top padding was the excess.
+    padding-top: 0 !important;
+}
+
+// --- Role cards (three columns under this heading) ------------------------
+// Scoped to the unique title section's adjacent s_three_columns ONLY. No
+// global .card/.col/.s_three_columns change. Border/radius/bg/text untouched.
+
+// Remove the empty trailing filler block (&nbsp;<br/>) that inflated card
+// height and left blank space below the copy.
+#{$sec} + section.s_three_columns .col-lg-4 .text-start + .text-center {
+    display: none;
+}
+
+// Consistent body start: reserve two title lines on desktop so 1-line and
+// 2-line titles align their body copy. Mobile/tablet (stacked) keep natural
+// height — no reserved space, no blank areas.
+@media (min-width: 62rem) {
+    #{$sec} + section.s_three_columns .col-lg-4 h1.h3,
+    #{$sec} + section.s_three_columns .col-lg-4 h3.h3 {
+        min-height: 4.2rem; // ~2 lines of the 28px title
+        margin-bottom: 0;
+    }
+}
+
+// --- Heading hierarchy. The inline `font-size:39px` lives on the inner span,
+//     so overriding the SIZE needs !important (inline wins over sheets);
+//     weight/line-height have no inline value and need none. ------------------
+#{$sec} h2.display-3-fs > span,
+.sf-op-roles__heading {
+    font-size: var(--sf-h-xl) !important; // inline `font-size:39px` on the span
+    // Light editorial weight on client instruction: the accent line is
+    // emphasised by the brand gradient, never by boldness.
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-tight);
+    letter-spacing: -0.015em;
+}
+
+// --- Accent = second line. `display:block` forces the deliberate break
+//     (needs no !important — no inline `display`). The restrained readable
+//     blue->teal gradient must override the inline `background-image`, so that
+//     one property uses !important. ------------------------------------------
+#{$sec} .text-gradient,
+.sf-op-roles__accent {
+    display: block;
+    background-image: var(--sf-gradient-heading) !important; // inline gradient
+}
+
+// Mobile: no change required; fluid sizing above handles 320px+ without
+// horizontal overflow (short lines, centered).

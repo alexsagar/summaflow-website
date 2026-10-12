@@ -1,0 +1,641 @@
+// SummaFlow homepage — remaining sections POLISH LAYER, not a redesign.
+//
+//   .sf-band   "Ready to Eliminate Manual Trade Tracking?" gradient CTA band
+//   .sf-cmp    "Traditional Operational Workflow vs. SummaFlow Intelligence"
+//   .sf-trust  "Trust, Security & Control." four feature blocks
+//   .sf-faq    "Integrates in minutes..." gradient CTA + FAQ accordion
+//
+// The markup stays DB-managed Website Builder content. homepage_sections.js
+// attaches the classes below to those existing elements. Every selector here
+// is a SummaFlow class, except the few Odoo/Bootstrap classes this file must
+// deliberately neutralise, each paired with a SummaFlow class so nothing
+// global is affected.
+//
+// Odoo Online SaaS safety: no local @import / @use (this file is listed
+// explicitly in __manifest__.py web.assets_frontend), no mixed-unit
+// clamp()/min()/max(), no CSS features libsass cannot parse.
+
+// Builder spacer nodes (<p><br></p>, lone <br>, empty divs, the per-column
+// <hr> separators, the stray "." paragraph). Collapsed, never removed —
+// the rhythm comes from the margins below.
+.sf-band .sf-void,
+.sf-cmp .sf-void,
+.sf-trust .sf-void,
+.sf-faq .sf-void {
+    display: none;
+}
+
+// =========================================================================
+// 1. Gradient CTA band
+// =========================================================================
+// The builder's inline 135deg gradient is cleared by the JS; this repaints the
+// canonical token. Compound selector beats Odoo's .pt112/.pb112 utilities for
+// the tightened band height, which are declared !important.
+section.sf-band {
+    background-image: var(--sf-gradient-brand);
+    padding-top: var(--sf-space-7) !important;    // 48px
+    padding-bottom: var(--sf-space-7) !important;
+}
+
+// .o_three_quarter_height forces a min-height on the builder section, which is
+// what left the band looking stretched and half-empty.
+section.sf-band.o_three_quarter_height {
+    min-height: 0 !important; // beat the builder's 75vh !important
+}
+
+.sf-band .sf-band__inner {
+    max-width: var(--sf-container);
+    text-align: left;
+}
+
+.sf-band h2.sf-band__title {
+    margin: 0 0 var(--sf-space-3);
+    max-width: 48rem; // ~768px
+    color: #ffffff;
+    font-weight: var(--sf-weight-regular); // 400, light editorial
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-band p.sf-band__lead {
+    margin: 0;
+    max-width: 44rem; // ~704px, readable measure on white-on-gradient copy
+    color: #ffffff;
+    line-height: var(--sf-lh-body);
+}
+
+// The copy is wrapped in <span class="h2-fs"> / <span class="h5-fs"> / <font>,
+// whose size comes from a class rather than the inline style the JS clears.
+.sf-band .sf-band__title span,
+.sf-band .sf-band__title font {
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+}
+
+.sf-band .sf-band__lead span,
+.sf-band .sf-band__lead font {
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+
+.sf-band p.sf-band__actions {
+    margin: var(--sf-space-5) 0 0;
+}
+
+@media (min-width: 48rem) {
+    section.sf-band {
+        padding-top: var(--sf-space-7) !important;    // 48px tablet
+        padding-bottom: var(--sf-space-7) !important;
+    }
+}
+
+// Desktop: two zones on one line — copy left, CTA right, both optically
+// centred. The three decorated children are siblings inside the builder's
+// .container, so they are placed explicitly; the collapsed spacer nodes take
+// no grid cell because they are display:none.
+@media (min-width: 62rem) {
+    section.sf-band {
+        padding-top: var(--sf-space-7) !important;    // 48px
+        padding-bottom: var(--sf-space-7) !important;
+    }
+
+    .sf-band .sf-band__inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        column-gap: var(--sf-space-7);
+        align-items: center;
+    }
+
+    .sf-band h2.sf-band__title {
+        grid-column: 1;
+        grid-row: 1;
+        font-size: var(--sf-h-xl);
+    }
+
+    .sf-band p.sf-band__lead {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .sf-band p.sf-band__actions {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        align-self: center;
+        margin: 0;
+    }
+}
+
+// =========================================================================
+// Shared button treatment for the two gradient bands
+// =========================================================================
+// Same metrics and the same black/white language as the header, footer and
+// hero. Element+two-class selectors so they outrank the theme's bare-<a>
+// colour rules once the JS has dropped .btn, without !important.
+.sf-band .sf-button,
+.sf-faq .sf-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    margin: 0;
+    padding: 0.5rem 1.1rem;
+    border: 1px solid transparent;
+    border-radius: 0.5rem; // 8px, as the header and footer
+    font-size: 0.9375rem;  // 15px
+    font-weight: var(--sf-weight-medium);
+    line-height: 1.5;
+    letter-spacing: 0;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background-color var(--sf-transition),
+                border-color var(--sf-transition),
+                color var(--sf-transition);
+}
+
+.sf-band a.sf-button.sf-button--primary,
+.sf-band a.sf-button.sf-button--primary:link,
+.sf-band a.sf-button.sf-button--primary:visited,
+.sf-band a.sf-button.sf-button--primary:hover,
+.sf-band a.sf-button.sf-button--primary:focus,
+.sf-band a.sf-button.sf-button--primary:active,
+.sf-faq a.sf-button.sf-button--primary,
+.sf-faq a.sf-button.sf-button--primary:link,
+.sf-faq a.sf-button.sf-button--primary:visited,
+.sf-faq a.sf-button.sf-button--primary:hover,
+.sf-faq a.sf-button.sf-button--primary:focus,
+.sf-faq a.sf-button.sf-button--primary:active {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+// The builder wrapped the labels in <font>/<span>; inherit so the button rules
+// own the colour and size in every state.
+.sf-band .sf-button font,
+.sf-band .sf-button span,
+.sf-faq .sf-button font,
+.sf-faq .sf-button span {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.sf-band a:focus-visible,
+.sf-faq a.sf-button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+// =========================================================================
+// 2. Comparison table
+// =========================================================================
+section.sf-cmp {
+    padding-top: var(--sf-space-8) !important;    // 64px, matches the band
+    padding-bottom: var(--sf-space-8) !important;
+}
+
+.sf-cmp h2.sf-cmp__title {
+    margin: 0 0 var(--sf-space-6);
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+    letter-spacing: -0.01em;
+}
+
+// The heading's wrapper carries .pb48; the margin above owns the gap instead.
+.sf-cmp .text-center.pb48 {
+    padding-bottom: 0 !important;
+}
+
+// The accent inherits size and weight, so it can never read bolder than the
+// words around it. Colour comes from .sf-text-gradient (canonical token).
+.sf-cmp .sf-cmp__accent {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+// Horizontal scroll is the deliberate small-screen behaviour: the three-column
+// comparison does not survive stacking. .table-responsive already provides it;
+// a min-width keeps the columns readable instead of crushed.
+.sf-cmp .sf-cmp__scroll {
+    -webkit-overflow-scrolling: touch;
+}
+
+.sf-cmp table.sf-cmp__table {
+    width: 100%;
+    min-width: 46rem;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: transparent;
+    // Bootstrap's .table sets these via custom properties; neutralised so the
+    // striping the JS removed cannot come back through the variable.
+    --bs-table-bg: transparent;
+    --bs-table-striped-bg: transparent;
+    --bs-table-accent-bg: transparent;
+}
+
+.sf-cmp .sf-cmp__table tr.sf-cmp__row > .sf-cmp__cell {
+    padding: var(--sf-space-4) var(--sf-space-5);
+    border: 0;
+    border-bottom: 1px solid var(--sf-border);
+    background-color: transparent;
+    color: var(--sf-text);
+    font-size: var(--sf-text-sm);
+    line-height: var(--sf-lh-body);
+    text-align: left;
+    vertical-align: top;
+}
+
+// Header row: no heavy fill, just a firmer rule and a quiet label.
+.sf-cmp .sf-cmp__table tr.sf-cmp__row > th.sf-cmp__cell {
+    padding-top: 0;
+    border-bottom: 2px solid var(--sf-text);
+    color: var(--sf-text);
+    font-size: var(--sf-text-xs);
+    font-weight: var(--sf-weight-semibold);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.sf-cmp .sf-cmp__table tr.sf-cmp__row:last-child > .sf-cmp__cell {
+    border-bottom: 0;
+}
+
+// First column reads as the row's subject.
+.sf-cmp .sf-cmp__table td.sf-cmp__cell--label {
+    width: 22%;
+    color: var(--sf-text);
+    font-weight: var(--sf-weight-semibold);
+}
+
+.sf-cmp .sf-cmp__table td.sf-cmp__cell--label strong {
+    font-weight: inherit;
+}
+
+// "With SummaFlow": emphasised with one tint and one left rule, nothing more.
+.sf-cmp .sf-cmp__table .sf-cmp__cell--sf {
+    width: 39%;
+    background-color: var(--sf-bg-subtle);
+    box-shadow: inset 1px 0 0 var(--sf-border);
+}
+
+.sf-cmp .sf-cmp__table th.sf-cmp__cell--sf {
+    background-color: var(--sf-bg-subtle);
+}
+
+.sf-cmp .sf-cmp__table th.sf-cmp__cell--sf u {
+    text-decoration: none; // the builder underlined the header label
+}
+
+// The ✓ and the emphasised lead-in: one size, one colour, aligned.
+.sf-cmp .sf-cmp__table .sf-cmp__cell--sf strong {
+    color: var(--sf-text);
+    font-weight: var(--sf-weight-semibold);
+}
+
+.sf-cmp .sf-cmp__table .sf-cmp__cell--sf span {
+    color: var(--sf-accent);
+    font-size: inherit;
+    font-weight: var(--sf-weight-semibold);
+}
+
+.sf-cmp .sf-cmp__table .sf-cmp__cell--label span {
+    font-size: inherit;
+}
+
+@media (max-width: 47.9375rem) {
+    .sf-cmp .sf-cmp__table tr.sf-cmp__row > .sf-cmp__cell {
+        padding: var(--sf-space-3) var(--sf-space-4);
+    }
+}
+
+// =========================================================================
+// 3. "Trust, Security & Control."
+// =========================================================================
+section.sf-trust {
+    padding-top: var(--sf-space-8) !important;    // 64px
+    // Bottom padding is the break before the "Integrates in minutes" band:
+    // 48px mobile, stepped up below. Odoo's .pb48 utility is !important, so
+    // this one must be too.
+    padding-bottom: var(--sf-space-7) !important; // 48px
+}
+
+@media (min-width: 48rem) {
+    section.sf-trust {
+        padding-bottom: 3.5rem !important; // 56px tablet
+    }
+}
+
+@media (min-width: 62rem) {
+    section.sf-trust {
+        padding-bottom: 5rem !important;   // 80px desktop
+    }
+}
+
+.sf-trust h2.sf-trust__title {
+    margin: 0 0 var(--sf-space-6);
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+    text-align: center;
+}
+
+.sf-trust .sf-trust__title span {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+// Two by two on tablet and desktop, one column on phones. Four columns made
+// the long titles wrap awkwardly and squeezed the body copy, so the wider
+// 2x2 composition is the final layout at every desktop width. The decorated
+// element is Odoo's .row, so Bootstrap's column widths and gutters are reset
+// inside the grid.
+// The grid is Odoo's .row. Bootstrap gives .row negative side margins
+// (calc(-.5 * var(--bs-gutter-x))) and its children matching side padding,
+// which pushed the four blocks off the container's own edges. Both are
+// neutralised below, scoped to this section only, and CSS grid — not the
+// Bootstrap gutter — does the spacing.
+.sf-trust .sf-trust__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sf-space-6);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+}
+
+// One centred container for the heading AND the grid, so both share a single
+// width reference. The builder's .container is the decorated element, so its
+// own Bootstrap max-width and gutters are restated here.
+.sf-trust > .container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 80rem; // 1280px
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;  // 20px mobile
+    padding-right: 1.25rem;
+}
+
+@media (min-width: 48rem) {
+    .sf-trust > .container {
+        padding-left: 1.5rem;  // 24px tablet
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 62rem) {
+    .sf-trust > .container {
+        padding-left: var(--sf-space-6);  // 32px desktop
+        padding-right: var(--sf-space-6);
+    }
+}
+
+// Direct grid children: the Bootstrap column width, gutter padding and any
+// margin are dropped, so each block fills exactly one grid track.
+.sf-trust .sf-trust__grid > * {
+    box-sizing: border-box;
+    flex: none;
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.sf-trust .sf-trust__grid > .sf-trust__item {
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    // No rule above the blocks: separation comes from the grid gaps, the
+    // whitespace and the type scale alone. The builder's four <hr> separators
+    // stay collapsed (marked .sf-void), and nothing replaces them.
+    padding-top: 0;
+    border-top: 0;
+}
+
+// The icons: one fill-on-hover line icon in a 28px wrapper (shared .sf-ico
+// rules live in _utilities.scss). No chip, no plate, no shadow, no glow.
+.sf-trust .sf-trust__mark {
+    display: block;
+    width: 1.75rem;  // 28px
+    height: 1.75rem;
+    margin: 0 0 1.25rem; // 20px icon -> title
+    color: #5b8cc8; // rest: lighter tone of --sf-primary-ink
+    // Transform is pre-declared so the hover lift cannot cause a layout shift.
+    transform: translateY(0);
+    transition: transform 200ms ease, color 200ms ease;
+}
+
+// Hover: stronger brand blue + body shapes fill (details flip to white).
+.sf-trust .sf-trust__item:hover .sf-trust__mark,
+.sf-trust .sf-trust__item:focus-within .sf-trust__mark {
+    color: var(--sf-primary-ink);
+}
+
+.sf-trust .sf-trust__item:hover .sf-ico__b,
+.sf-trust .sf-trust__item:focus-within .sf-ico__b {
+    fill: currentColor;
+}
+
+.sf-trust .sf-trust__item:hover .sf-ico__d,
+.sf-trust .sf-trust__item:focus-within .sf-ico__d {
+    stroke: #ffffff;
+}
+
+// The only motion on the block: a 2px lift of the icon wrapper itself.
+.sf-trust .sf-trust__item:hover .sf-trust__mark,
+.sf-trust .sf-trust__item:focus-within .sf-trust__mark {
+    transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sf-trust .sf-trust__item:hover .sf-trust__mark,
+    .sf-trust .sf-trust__item:focus-within .sf-trust__mark {
+        transform: translateY(0);
+    }
+}
+
+// Hierarchy from size, spacing, icon and layout — not from weight. The tag is
+// H3 after the heading-semantics pass; H1/H2 stay listed so the rule still
+// holds in the Website Editor, where the runtime decoration is reverted.
+.sf-trust h1.sf-trust__item-title,
+.sf-trust h2.sf-trust__item-title,
+.sf-trust h3.sf-trust__item-title {
+    margin: 0 0 var(--sf-space-4); // 16px rule->icon->title->body rhythm
+    color: var(--sf-text);
+    font-size: 1.625rem; // 26px, now that each block has half the row
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-trust .sf-trust__item-title span {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.sf-trust p.sf-trust__item-text {
+    margin: 0;
+    color: var(--sf-text-muted);
+    font-size: 1.0625rem; // 17px
+    line-height: var(--sf-lh-body); // 1.6
+}
+
+@media (min-width: 48rem) {
+    .sf-trust .sf-trust__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: var(--sf-space-7); // 48px
+        row-gap: var(--sf-space-7);    // 48px
+        justify-content: stretch;
+    }
+}
+
+@media (min-width: 62rem) {
+    .sf-trust .sf-trust__grid {
+        column-gap: 4rem;   // 64px
+        row-gap: 3.5rem;    // 56px
+    }
+}
+
+// =========================================================================
+// 4. Gradient CTA + FAQ accordion
+// =========================================================================
+section.sf-faq {
+    background-image: var(--sf-gradient-brand);
+    padding-top: var(--sf-space-7) !important;    // 48px
+    padding-bottom: var(--sf-space-7) !important;
+}
+
+section.sf-faq.o_three_quarter_height {
+    min-height: 0;
+}
+
+// One composed column at every width: heading, then the accordion, then the
+// CTA underneath it. The builder's .col-lg-3 CTA column follows .col-lg-9 in
+// the DOM, so forcing the row to stack puts the button below the accordion and
+// on the accordion's own left edge — no isolated top-right float, and no
+// markup had to be moved.
+.sf-faq .sf-faq__grid {
+    display: block;
+}
+
+.sf-faq .sf-faq__grid > .sf-faq__main,
+.sf-faq .sf-faq__grid > .sf-faq__aside {
+    width: 100%;
+    max-width: none;
+    flex: none;
+}
+
+.sf-faq .sf-faq__aside {
+    padding-top: var(--sf-space-5); // ~24px below the accordion
+}
+
+.sf-faq h2.sf-faq__title {
+    margin: 0 0 var(--sf-space-5);
+    max-width: 38ch;
+    color: #ffffff;
+    font-weight: var(--sf-weight-regular); // 400
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-faq .sf-faq__title span,
+.sf-faq .sf-faq__title font {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+// Left-aligned with the accordion container at every width.
+.sf-faq p.sf-faq__actions {
+    margin: 0;
+    text-align: left;
+}
+
+// --- Accordion ------------------------------------------------------------
+.sf-faq .sf-faq__accordion .accordion {
+    --bs-accordion-border-width: 0;
+    --bs-accordion-border-radius: 0;
+    --bs-accordion-btn-focus-box-shadow: none;
+    gap: var(--sf-space-3);
+    display: grid;
+}
+
+.sf-faq .sf-faq__item {
+    border: 0;
+    border-radius: var(--sf-radius-sm);
+    background-color: #ffffff;
+    box-shadow: var(--sf-shadow-sm);
+    overflow: hidden;
+}
+
+.sf-faq button.sf-faq__question {
+    align-items: flex-start;
+    padding: var(--sf-space-4) var(--sf-space-5);
+    border: 0;
+    box-shadow: none;
+    background-color: transparent;
+    color: var(--sf-text);
+    font-size: var(--sf-text-base);
+    font-weight: var(--sf-weight-semibold);
+    line-height: var(--sf-lh-snug);
+    text-align: left;
+}
+
+// The question text is wrapped in a <p> inside the button; it must not carry
+// paragraph margins or its own size.
+.sf-faq .sf-faq__question p {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+.sf-faq .sf-faq__question span {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+// Plus/minus mark: a fixed square aligned with the first text line, so the
+// four marks sit on one optical column.
+.sf-faq .sf-faq__question .o_custom_icons_wrap {
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.3rem;
+    flex: 0 0 auto;
+    color: var(--sf-text-muted);
+}
+
+.sf-faq .sf-faq__question:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+.sf-faq .sf-faq__answer {
+    padding: 0 var(--sf-space-5) var(--sf-space-4);
+    color: var(--sf-text-muted);
+    font-size: var(--sf-text-sm);
+    line-height: var(--sf-lh-body);
+}
+
+.sf-faq .sf-faq__answer p {
+    margin: 0;
+    max-width: 78ch;
+}
+
+@media (min-width: 62rem) {
+    section.sf-faq {
+        padding-top: var(--sf-space-8) !important;    // 64px
+        padding-bottom: var(--sf-space-8) !important;
+    }
+    .sf-faq h2.sf-faq__title {
+        font-size: var(--sf-h-xl);
+    }
+}

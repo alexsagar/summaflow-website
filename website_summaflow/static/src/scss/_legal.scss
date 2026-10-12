@@ -1,0 +1,294 @@
+// SummaFlow utility / legal pages — restrained reading layout.
+//
+// Shared by the four source-controlled utility pages (Privacy, Terms, Support,
+// OAuth verification). Deliberately plain: one centred reading column, light
+// heading weights, comfortable line length. No cards, gradients, animation or
+// decorative visuals behind the text — these are legal/utility documents, not
+// marketing landing pages.
+//
+// Scoped entirely under `.sf-legal`; touches no homepage or component styles.
+// Odoo Online / libsass safe: no local @import/@use, single-unit values,
+// stepped media queries only.
+
+.sf-legal {
+    padding: var(--sf-space-8) var(--sf-gutter) var(--sf-space-9);
+    color: var(--sf-text);
+    font-size: var(--sf-text-base);
+    line-height: var(--sf-lh-body);
+}
+
+// Centred reading column: a comfortable measure for long-form legal text.
+.sf-legal__inner {
+    max-width: var(--sf-container-narrow); // 720px
+    margin: 0 auto;
+}
+
+.sf-legal__eyebrow {
+    margin: 0 0 var(--sf-space-3);
+    font-size: var(--sf-text-xs);
+    font-weight: var(--sf-weight-medium);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sf-text-muted);
+}
+
+// One H1, light weight — not a bold marketing headline.
+.sf-legal__title {
+    margin: 0 0 var(--sf-space-5);
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-xl);
+    font-weight: var(--sf-weight-regular);
+    line-height: var(--sf-lh-tight);
+    letter-spacing: -0.01em;
+}
+
+// Short intro paragraph(s) above the first H2.
+.sf-legal__lead {
+    margin: 0 0 var(--sf-space-6);
+    color: var(--sf-text-muted);
+}
+
+.sf-legal h2 {
+    margin: var(--sf-space-7) 0 var(--sf-space-3);
+    font-family: var(--sf-font-heading);
+    font-size: var(--sf-h-lg);
+    font-weight: var(--sf-weight-regular);
+    line-height: var(--sf-lh-snug);
+    letter-spacing: -0.005em;
+}
+
+.sf-legal h3 {
+    margin: var(--sf-space-5) 0 var(--sf-space-2);
+    font-size: var(--sf-h-md);
+    font-weight: var(--sf-weight-medium);
+    line-height: var(--sf-lh-snug);
+}
+
+.sf-legal p {
+    margin: 0 0 var(--sf-space-4);
+}
+
+.sf-legal ul {
+    margin: 0 0 var(--sf-space-4);
+    padding-left: var(--sf-space-5);
+}
+
+.sf-legal li {
+    margin-bottom: var(--sf-space-2);
+}
+
+.sf-legal a {
+    color: var(--sf-primary-ink);
+    text-decoration: underline;
+}
+
+.sf-legal a:hover {
+    color: var(--sf-primary);
+}
+
+// Simple responsive table (used by the verification scopes table). No card
+// chrome, just a readable ruled grid.
+.sf-legal__table-wrap {
+    overflow-x: auto;
+    margin: 0 0 var(--sf-space-4);
+}
+
+.sf-legal table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--sf-text-sm);
+}
+
+.sf-legal th,
+.sf-legal td {
+    padding: var(--sf-space-3);
+    border: var(--sf-border-width) solid var(--sf-border);
+    text-align: left;
+    vertical-align: top;
+}
+
+.sf-legal th {
+    font-weight: var(--sf-weight-medium);
+    background-color: var(--sf-bg-subtle);
+}
+
+// --- Tablet+ : a little more top/side breathing room ----------------------
+@media (min-width: 48rem) {
+    .sf-legal {
+        padding-top: var(--sf-space-9);
+    }
+}
+
+// =========================================================================
+// Legal documentation layout — SHARED by Privacy Policy and Terms and
+// Conditions (both carry .sf-legal--doc). Support and OAuth verification do
+// not, so they keep the plain single-column reading layout above. One
+// implementation, two pages: container, column proportions, typography, TOC
+// style, divider treatment and sticky offset are identical by construction.
+// 63px = the sticky header height (_header.scss --sf-header-h).
+// =========================================================================
+.sf-legal--doc {
+    padding: 0 0 var(--sf-space-9); // own spacing per block; bottom clears footer
+}
+
+@media (min-width: 48rem) {
+    .sf-legal--doc { padding-top: 0; }
+}
+
+// --- Hero: compact, left-aligned -----------------------------------------
+.sf-legal--doc .sf-legal__hero {
+    padding: var(--sf-space-8) 0 var(--sf-space-6); // 64px / 32px
+    margin-bottom: var(--sf-space-6);
+    border-bottom: 1px solid var(--sf-border);
+}
+
+.sf-legal--doc .sf-legal__hero-inner,
+.sf-legal--doc .sf-legal__inner {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.sf-legal--doc .sf-legal__title {
+    margin: 0;
+    font-size: 2.5rem; // 40px mobile
+    line-height: var(--sf-lh-tight);
+}
+
+@media (min-width: 62rem) {
+    .sf-legal--doc .sf-legal__hero-inner,
+    .sf-legal--doc .sf-legal__inner { padding-left: 32px; padding-right: 32px; }
+    .sf-legal--doc .sf-legal__title { font-size: 3.25rem; } // 52px
+}
+
+// --- Two-column documentation body ---------------------------------------
+@media (min-width: 62rem) {
+    .sf-legal--doc .sf-legal__inner {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 1fr);
+        gap: 56px;
+        align-items: start;
+    }
+}
+
+// --- Table of contents ----------------------------------------------------
+.sf-legal--doc .sf-legal__toc {
+    margin-bottom: var(--sf-space-6);
+}
+
+.sf-legal--doc .sf-legal__toc-title {
+    margin: 0 0 var(--sf-space-3);
+    font-size: var(--sf-text-xs); // 13px
+    font-weight: var(--sf-weight-medium);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sf-text-muted);
+}
+
+.sf-legal--doc .sf-legal__toc ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sf-legal--doc .sf-legal__toc li {
+    margin: 0;
+}
+
+.sf-legal--doc .sf-legal__toc a {
+    display: block;
+    padding: var(--sf-space-2) 0; // ~8px
+    font-size: 0.9375rem; // 15px
+    line-height: 1.4;
+    color: var(--sf-text-muted);
+    text-decoration: none;
+}
+
+.sf-legal--doc .sf-legal__toc a:hover,
+.sf-legal--doc .sf-legal__toc a:focus {
+    color: var(--sf-text);
+}
+
+@media (min-width: 62rem) {
+    .sf-legal--doc .sf-legal__toc {
+        position: sticky;
+        top: 79px; // 63px header + 16px — never top: 0, the navbar is sticky
+        margin-bottom: 0;
+        // Root cause of "the contents list starts at 2": a sticky element that
+        // is TALLER than the space left under the header cannot pin its top —
+        // the browser scrolls past it until its bottom is reached, so the
+        // first entry ends up above the viewport and the list appears to begin
+        // at the second section. Capping the height to the visible band keeps
+        // entry 1 pinned and scrolls the list inside itself instead.
+        max-height: calc(100vh - 95px); // 79px offset + 16px bottom breathing
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+}
+
+// Tablet / mobile: no sticky, TOC sits above the content in normal flow
+// (declared by omission above — the sticky block is desktop-only).
+
+// --- Article --------------------------------------------------------------
+.sf-legal--doc .sf-legal__article {
+    max-width: 820px;
+}
+
+.sf-legal--doc .sf-legal__article h2 {
+    margin: var(--sf-space-8) 0 var(--sf-space-4); // 64px above, 16px below
+    padding-bottom: var(--sf-space-3);
+    border-bottom: 1px solid var(--sf-border);
+    font-size: 1.75rem; // 28px
+    line-height: var(--sf-lh-snug);
+    scroll-margin-top: 79px; // anchor jumps clear the sticky header
+}
+
+.sf-legal--doc .sf-legal__article h2:first-child {
+    margin-top: 0;
+}
+
+.sf-legal--doc .sf-legal__article h3 {
+    margin: var(--sf-space-6) 0 var(--sf-space-2);
+    font-size: var(--sf-text-lg); // 20px
+    font-weight: var(--sf-weight-medium);
+}
+
+.sf-legal--doc .sf-legal__article p,
+.sf-legal--doc .sf-legal__article li {
+    font-size: 1rem; // 16px — comfortable legal body
+    line-height: 1.7;
+}
+
+.sf-legal--doc .sf-legal__article p { margin: 0 0 var(--sf-space-4); }
+.sf-legal--doc .sf-legal__article ul { margin: 0 0 var(--sf-space-4); padding-left: var(--sf-space-5); }
+.sf-legal--doc .sf-legal__article li { margin-bottom: var(--sf-space-2); }
+
+// =========================================================================
+// Website-Builder table-of-contents pages (s_table_of_content snippet).
+//
+// VERIFIED ON THE TEST DB: /privacy-policy is served from a Builder page copy
+// (ir.ui.view key "website.privacy-policy", website_id=1), not from the
+// module's own Privacy template, so its contents list is the builder snippet.
+// That snippet pins its navbar with an INLINE style="top: 20px", which sits
+// under the 63px sticky SummaFlow header: measured at scrollY 1200, entry 1
+// rendered at y=20..53, completely behind the header, so the list appeared to
+// start at "2. How We Process & Store Data". That is the root cause — the
+// entry was always in the DOM, it was covered.
+//
+// Re-pinning below the header puts entry 1 back at y=79 (measured). !important
+// is required to beat the snippet's inline top. .sf-sec-toc is excluded: the
+// /security TOC is already repositioned by security.js + _security.scss.
+// =========================================================================
+.s_table_of_content_navbar_wrap:not(.sf-sec-toc) .s_table_of_content_navbar {
+    top: 79px !important;                       // 63px header + 16px
+    max-height: calc(100vh - 95px) !important;  // never taller than the band
+    overflow-y: auto;
+}
+
+// Anchor jumps from that TOC must clear the sticky header too.
+.s_table_of_content .s_table_of_content_main h2,
+.s_table_of_content .s_table_of_content_main h3 {
+    scroll-margin-top: 79px;
+}

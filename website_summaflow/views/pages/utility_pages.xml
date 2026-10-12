@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+      SummaFlow utility / legal pages — source-controlled, public, published.
+
+      Four pages migrated faithfully from the official app.summaflow.com source
+      of truth (a client-rendered SPA; content captured on 2026-10-05):
+
+        /privacy-policy       Privacy   <- app /privacy-policy
+        /terms-and-conditions Terms     <- app /terms-and-conditions
+        /support              Support   <- app /support
+        /oauth-verification   Verification <- app /oauth-verification
+
+      Routes mirror the official app slugs exactly rather than inventing new
+      ones. Each page is a primary QWeb view wrapped in website.layout (so it
+      inherits the SummaFlow header/footer and design system) plus a
+      website.page record that owns the public URL and is published, so the
+      pages are reachable by logged-out visitors. No controllers, no Python,
+      no numeric DB IDs: stable module External IDs only.
+
+      Content is preserved in meaning and structure (headings, section order,
+      lists, contact details). No legal wording was paraphrased, improved or
+      invented. The app's presentational SPA wrappers are dropped; the body is
+      restrained per the utility-page brief (one H1, H2/H3 beneath, light
+      heading weights, no marketing decoration), styled in _legal.scss.
+    -->
+
+    <!-- ============================= PRIVACY ============================= -->
+    <template id="page_privacy_policy" name="Privacy Policy">
+        <t t-call="website.layout">
+            <div id="wrap" class="sf-legal sf-legal--doc">
+                <header class="sf-legal__hero">
+                    <div class="sf-legal__hero-inner">
+                        <p class="sf-legal__eyebrow">Legal</p>
+                        <h1 class="sf-legal__title">Privacy Policy</h1>
+                    </div>
+                </header>
+                <main class="sf-legal__inner">
+                    <nav class="sf-legal__toc" aria-label="Privacy Policy sections">
+                        <p class="sf-legal__toc-title">Contents</p>
+                        <ul>
+                            <li><a href="#priv-1">1. Introduction</a></li>
+                            <li><a href="#priv-2">2. Information We Collect</a></li>
+                            <li><a href="#priv-3">3. How We Process and Store Your Data</a></li>
+                            <li><a href="#priv-4">4. Artificial Intelligence &amp; Third-Party Processors</a></li>
+                            <li><a href="#priv-5">5. Google API Services Disclosure</a></li>
+                            <li><a href="#priv-6">6. How We Share Your Information</a></li>
+                            <li><a href="#priv-7">7. Data Retention and Deletion</a></li>
+                            <li><a href="#priv-8">8. International Data Transfers</a></li>
+                            <li><a href="#priv-9">9. Your Privacy Rights</a></li>
+                            <li><a href="#priv-10">10. Changes to This Policy</a></li>
+                            <li><a href="#priv-11">11. Contact Us</a></li>
+                        </ul>
+                    </nav>
+                    <article class="sf-legal__article">
+                    <h2 id="priv-1">1. Introduction</h2>
+                    <p class="sf-legal__lead">Welcome to Summa Flow Ltd. ("Summa Flow," "we," "us," or "our"). We are registered in Hong Kong and operate an AI-powered platform designed to extract, organize, and present logistics and project intelligence from authorized email and messaging communications.</p>
+                    <p>Protecting your privacy and the confidentiality of your communications is our highest priority. This Privacy Policy details how we collect, use, process, and protect your information when you access our website, use our application, and connect your email, Microsoft Graph, Google Gmail, IMAP, or WhatsApp accounts to our service.</p>
+                    <p>By using Summa Flow, you agree to the data practices described in this policy.</p>
+
+                    <h2 id="priv-2">2. Information We Collect</h2>
+                    <p>To provide our service, we collect different categories of information, ranging from your basic account details to the data processed by our AI.</p>
+                    <h3>2.1 Account and Registration Data</h3>
+                    <p>When you create an account or subscribe to our service, we collect personal details necessary to manage your profile and billing.</p>
+                    <ul>
+                        <li><strong>Contact Information:</strong> First name, last name, and email address.</li>
+                        <li><strong>Billing Information:</strong> Payment processing details (handled securely via our third-party payment processors; we do not store your full credit card numbers).</li>
+                    </ul>
+                    <h3>2.2 Email Data (OAuth Integration)</h3>
+                    <p>To extract logistics and project intelligence, you must grant us access to your email account via OAuth (for example, Google Workspace/Gmail or Microsoft 365).</p>
+                    <ul>
+                        <li><strong>Authentication Tokens:</strong> We store OAuth access and refresh tokens that allow SummaFlow to keep syncing authorized accounts until you disconnect the provider. We never request, view, or store your email password for OAuth providers.</li>
+                        <li><strong>Google Gmail Data:</strong> When you connect Google, SummaFlow requests https://www.googleapis.com/auth/gmail.readonly to view Gmail messages and settings needed to import inbox and sent email, including sender, recipients, subject, timestamps, labels, message identifiers, message body content, and supported attachments.</li>
+                        <li><strong>Microsoft Graph Data:</strong> When you connect Microsoft, SummaFlow requests offline_access, User.Read, and Mail.Read to read your profile and authorized mailbox messages and to continue syncing while the connection remains enabled.</li>
+                        <li><strong>Email Content:</strong> We access and may store sender, recipient, subject line, timestamps, message IDs, folder/label data, supported attachment metadata, and extracted project intelligence. Raw email body text/HTML is used for processing and is not retained in production storage.</li>
+                    </ul>
+                    <h3>2.3 Automatically Collected Data</h3>
+                    <p>Like most SaaS platforms, we automatically collect basic technical information when you interact with our website to ensure security and monitor performance.</p>
+                    <ul>
+                        <li><strong>Device and Usage Data:</strong> IP addresses, browser types, operating systems, and timestamp data.</li>
+                        <li><strong>Cookies:</strong> Small data files stored on your device to keep you logged in and track basic platform performance.</li>
+                    </ul>
+
+                    <h2 id="priv-3">3. How We Process and Store Your Data</h2>
+                    <p>Because we handle sensitive communications, we limit connected-account data to the information needed to provide sync, classification, project matching, summaries, support, security, and deletion workflows.</p>
+                    <h3>3.1 Connected Communication Processing</h3>
+                    <p>When our system accesses an email or message from a connected account, raw message body content is processed for classification, project linking, and summary generation. In production, SummaFlow does not retain raw email body text or raw email HTML after this processing step.</p>
+                    <ul>
+                        <li>Email records retained by SummaFlow can include sender, recipients, subject, timestamps, message IDs, folder/label data, provider account identifiers, and generated AI metadata.</li>
+                        <li>Project outputs retained by SummaFlow can include summaries, status labels, project links, structured attributes, and reference snippets generated from the processing step.</li>
+                        <li>We use connected-account data only to provide SummaFlow's project intelligence, operational ledger, sync, support, security, and compliance functions.</li>
+                    </ul>
+                    <h3>3.2 Storage of Tokens, Metadata, and Extracted Intelligence</h3>
+                    <p>We store OAuth tokens, message metadata, AI classification responses, project links, structured project intelligence, and generated summaries for as long as needed to provide the service or satisfy verified deletion requests. Provider disconnect clears stored OAuth tokens and stops future sync, but it does not automatically delete generated summaries that were previously created.</p>
+                    <p>Production deployments should use HTTPS, access controls, infrastructure-level encryption at rest, credential isolation, and database backup controls appropriate for sensitive communication data.</p>
+
+                    <h2 id="priv-4">4. Artificial Intelligence &amp; Third-Party Processors</h2>
+                    <p>We utilize advanced third-party language models to perform the extraction of logistics data.</p>
+                    <h3>4.1 Use of Gemini API</h3>
+                    <p>Selected communication text, metadata, and extracted attachment text may be sent securely via API to Gemini, an AI model provided by Google. The data is analyzed for logistics intelligence, and the results are returned to our system.</p>
+                    <h3>4.2 Strict Prohibition on AI Training</h3>
+                    <p>We use AI providers to process data only for the SummaFlow service. SummaFlow does not use your email data to train, fine-tune, or improve generalized AI models. We configure third-party AI processing according to the applicable API terms and data-processing controls available for those services.</p>
+
+                    <h2 id="priv-5">5. Google API Services Disclosure</h2>
+                    <p>Summa Flow's use and transfer to any other app of information received from Google APIs will adhere to the Google API Services User Data Policy, including the Limited Use requirements. We explicitly affirm that:</p>
+                    <ul>
+                        <li>We only use access to read your emails to provide the core extraction features of the platform.</li>
+                        <li>We do not use your email data for serving advertisements.</li>
+                        <li>We do not sell Google user data, Microsoft Graph data, or derived project intelligence.</li>
+                        <li>We do not allow humans to read your data unless we have your affirmative agreement for specific support messages, doing so is necessary for security purposes, or it is required to comply with applicable law.</li>
+                    </ul>
+
+                    <h2 id="priv-6">6. How We Share Your Information</h2>
+                    <p>We do not sell, rent, or trade your personal information, raw emails, or extracted logistics data to data brokers, advertisers, or any unauthorized third parties. In production, raw email body text/HTML is processed but not retained. We only share information under the following limited circumstances:</p>
+                    <ul>
+                        <li><strong>Service Providers:</strong> We share necessary data with trusted vendors who support our platform (e.g., cloud hosting providers like AWS/Google Cloud, payment processors, and the Gemini API). These providers are bound by strict confidentiality agreements.</li>
+                        <li><strong>Legal Compliance:</strong> We may disclose data if required to do so by law, or in response to a valid request by public authorities (e.g., a court order or subpoena) within our jurisdiction of Hong Kong.</li>
+                        <li><strong>Business Transfers:</strong> If Summa Flow Ltd. is involved in a merger, acquisition, or asset sale, your data may be transferred, provided the receiving party agrees to uphold the privacy standards set in this policy.</li>
+                    </ul>
+
+                    <h2 id="priv-7">7. Data Retention and Deletion</h2>
+                    <p>You have complete control over your data.</p>
+                    <ul>
+                        <li><strong>Active Accounts:</strong> We retain your account information and extracted logistics data, message metadata, and generated summaries for as long as your account or workspace is active, unless a shorter retention period is configured or a verified deletion request is completed.</li>
+                        <li><strong>Account Deletion:</strong> You may delete your account and revoke our OAuth tokens at any time through your account settings or by contacting support.</li>
+                        <li><strong>30-Day Backup Cycle:</strong> After a verified deletion request is completed, production records are removed according to our operational process. Encrypted system backups may retain deleted data for up to 30 days before backup expiration.</li>
+                    </ul>
+
+                    <h2 id="priv-8">8. International Data Transfers</h2>
+                    <p>Summa Flow Ltd. is headquartered in Hong Kong. By using our service, you acknowledge that your information may be transferred to, processed, and stored in jurisdictions outside of your home country (including where our cloud servers and AI APIs are hosted). We employ industry-standard encryption and legal safeguards to ensure your data remains protected regardless of where it is processed.</p>
+
+                    <h2 id="priv-9">9. Your Privacy Rights</h2>
+                    <p>Depending on your location, you may have specific rights regarding your personal data:</p>
+                    <ul>
+                        <li><strong>Access:</strong> You may request a copy of the personal data we hold about you.</li>
+                        <li><strong>Correction:</strong> You may update or correct inaccurate data via your dashboard.</li>
+                        <li><strong>Revocation of Consent:</strong> You can revoke our access to your inbox at any time by disconnecting the provider inside SummaFlow or by navigating to your email provider's security settings, such as Google Account permissions or Microsoft app consent settings.</li>
+                        <li><strong>Deletion:</strong> You can request the total erasure of your account and associated data.</li>
+                    </ul>
+                    <p>To exercise any of these rights, please contact us using the information below.</p>
+
+                    <h2 id="priv-10">10. Changes to This Policy</h2>
+                    <p>We may update this Privacy Policy periodically to reflect changes in our technology, legal requirements, or business operations. If we make material changes, we will notify you by email or by posting a prominent notice on our platform prior to the change becoming effective.</p>
+
+                    <h2 id="priv-11">11. Contact Us</h2>
+                    <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us at:</p>
+                    <p>Summaflow Ltd.<br/>
+                    Address: Shop A, G/F, Koon Nam House, No.14 Shing Wong Street, Hong Kong,<br/>
+                    Email: <a href="mailto:sever@summaflow.com">sever@summaflow.com</a><br/>
+                    Website: summaflow.com</p>
+                    </article>
+                </main>
+            </div>
+        </t>
+    </template>
+
+    <record id="page_privacy_policy_record" model="website.page">
+        <field name="name">Privacy Policy</field>
+        <field name="url">/privacy-policy</field>
+        <field name="view_id" ref="page_privacy_policy"/>
+        <field name="is_published">True</field>
+        <field name="website_published">True</field>
+
+        <field name="website_meta_title">Privacy Policy | SummaFlow</field>
+        <field name="website_meta_description">Read how SummaFlow handles personal information, data processing, storage, privacy, and related data protection practices.</field>
+    </record>
+
+    <!-- ========================= TERMS & CONDITIONS ===================== -->
+    <template id="page_terms_and_conditions" name="Terms and Conditions">
+        <t t-call="website.layout">
+            <div id="wrap" class="sf-legal sf-legal--doc">
+                <header class="sf-legal__hero">
+                    <div class="sf-legal__hero-inner">
+                        <p class="sf-legal__eyebrow">Legal</p>
+                        <h1 class="sf-legal__title">Terms and Conditions for Summaflow LTD</h1>
+                    </div>
+                </header>
+                <main class="sf-legal__inner">
+                    <nav class="sf-legal__toc" aria-label="Terms and Conditions sections">
+                        <p class="sf-legal__toc-title">Contents</p>
+                        <ul>
+                            <li><a href="#terms-1">1. Definitions</a></li>
+                            <li><a href="#terms-2">2. Description of the Service</a></li>
+                            <li><a href="#terms-3">3. Account Registration and Connections</a></li>
+                            <li><a href="#terms-4">4. User Responsibilities and Acceptable Use</a></li>
+                            <li><a href="#terms-5">5. Data Privacy, Processing, and Ledger Retention</a></li>
+                            <li><a href="#terms-6">6. Intellectual Property Rights</a></li>
+                            <li><a href="#terms-7">7. Fees and Payment</a></li>
+                            <li><a href="#terms-8">8. Disclaimers and Limitation of Liability</a></li>
+                            <li><a href="#terms-9">9. Termination and Suspension</a></li>
+                            <li><a href="#terms-10">10. Governing Law and Jurisdiction</a></li>
+                            <li><a href="#terms-11">11. Amendments to Terms</a></li>
+                            <li><a href="#terms-12">12. Contact Information</a></li>
+                        </ul>
+                    </nav>
+                    <article class="sf-legal__article">
+                    <p class="sf-legal__lead">These Terms and Conditions ("Terms") govern your access to and use of the online software platform, features, artificial intelligence ledger tools, and related services (collectively, the "Service" or "Platform") provided by Summaflow LTD ("Company," "we," "our," or "us"), a company incorporated under the laws of Hong Kong, with its registered address at Shop A, G/F, Koon Nam House, No.14 Shing Wong Street, Hong Kong.</p>
+                    <p>By accessing, registering for, or using the Service, you ("User," "you," or "your") agree to be bound by these Terms. If you do not agree to these Terms, you may not access or use the Service.</p>
+
+                    <h2 id="terms-1">1. Definitions</h2>
+                    <ul>
+                        <li><strong>"Account"</strong> means the secure user profile created by a User to access and use Summa Flow.</li>
+                        <li><strong>"Connected Accounts"</strong> means third-party communication channels, specifically email mailboxes (via OAuth 2.0) and messaging accounts (via Meta WhatsApp Business API), that a User intentionally links to the Platform.</li>
+                        <li><strong>"Raw Communication Data"</strong> means the unstructured raw text, email body copy, WhatsApp messages, and incoming/outgoing metadata passing through Connected Accounts before automated filtering occurs.</li>
+                        <li><strong>"Project Ledger"</strong> means the secure, timestamped, chronological online repository within the Platform where project updates and AI-generated event summaries are permanently recorded for designated workspace participants.</li>
+                        <li><strong>"Ledger Entries"</strong> means the final structured summaries, action items, and milestone updates generated by the Platform's AI and permanently saved to a Project Ledger.</li>
+                    </ul>
+
+                    <h2 id="terms-2">2. Description of the Service</h2>
+                    <p>Summa Flow provides an artificial intelligence-driven software-as-a-service (SaaS) platform designed to consolidate multi-channel communication streams into a secure, timestamped online Project Ledger.</p>
+                    <p>With your explicit authorization, the Service connects to your designated email providers and WhatsApp accounts to scan incoming and outgoing text content. The Platform utilizes proprietary artificial intelligence filtering mechanisms—powered in part by the Google Gemini API—to identify communications involving designated project contacts. The Platform processes imported source records and matching conversations to generate structured event summaries, action items, and project timelines directly within your Project Ledger.</p>
+
+                    <h2 id="terms-3">3. Account Registration and Connections</h2>
+                    <h3>3.1 Account Security</h3>
+                    <p>To access the Service, you must create a secure Account. You agree to provide accurate, current, and complete information during registration and to keep this information updated. You are entirely responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your Account.</p>
+                    <h3>3.2 Authorization of Connected Accounts</h3>
+                    <p>By connecting an email inbox (via OAuth 2.0 authentication) or a WhatsApp messaging channel to Summa Flow, you explicitly warrant and represent that:</p>
+                    <ul>
+                        <li>You are the legal owner, administrator, or authorized user of that specific email address or phone number.</li>
+                        <li>You have the legal authority to grant Summaflow LTD permission to access, monitor, and process the communications within those accounts.</li>
+                        <li>You have obtained all necessary consents from third-party individuals (including external project clients, contractors, or contacts) with whom you communicate via WhatsApp or email, ensuring that their message text may be securely processed through your automated platform integrations in compliance with applicable local data protection laws.</li>
+                    </ul>
+                    <h3>3.3 No Password Access</h3>
+                    <p>The Platform utilizes OAuth 2.0 frameworks and secure API integrations to connect to your communication streams. Summaflow LTD will never request, view, or store your actual OAuth-provider email passwords. Access is maintained through provider tokens which you may revoke at any time.</p>
+
+                    <h2 id="terms-4">4. User Responsibilities and Acceptable Use</h2>
+                    <p>You agree to use the Service only for lawful business purposes and in compliance with these Terms. You shall not:</p>
+                    <ul>
+                        <li>Connect communication accounts or process data containing information that violates third-party privacy, intellectual property, or proprietary rights.</li>
+                        <li>Attempt to bypass, disable, or reverse-engineer the Platform's AI filtering engine, security protocols, or ledger infrastructure.</li>
+                        <li>Use the Service to monitor or log communications of individuals without their knowledge or necessary legal consent.</li>
+                    </ul>
+
+                    <h2 id="terms-5">5. Data Privacy, Processing, and Ledger Retention</h2>
+                    <h3>5.1 Privacy Policy Alignment</h3>
+                    <p>Our collection, handling, and use of data through your Connected Accounts are strictly governed by the Summaflow LTD Privacy Policy, which is incorporated into these Terms by reference.</p>
+                    <h3>5.2 Source Data Processing Pipeline</h3>
+                    <p>You acknowledge and agree to the technical operational reality of the Summa Flow pipeline:</p>
+                    <ul>
+                        <li><strong>Source Processing:</strong> Raw Communication Data pulled from your connected email streams is used to classify, match, and summarize project activity. Raw email body text/HTML is not retained in production storage after processing.</li>
+                        <li><strong>Provider Tokens:</strong> OAuth access and refresh tokens are stored while the provider connection remains enabled and are cleared when you disconnect the provider.</li>
+                        <li><strong>Ledger Commitment:</strong> AI-generated summaries, extracted milestones, source references, project metadata, and project links may be written to secure storage databases as Ledger Entries.</li>
+                    </ul>
+                    <h3>5.3 Model Training Prohibition</h3>
+                    <p>SummaFlow does not use your Raw Communication Data, metadata, or generated Ledger Entries to train generalized large language models or advertising systems. Third-party AI processors are used only to provide the Service, subject to their applicable API terms and data-processing controls.</p>
+                    <h3>5.4 Permanence of the Project Ledger</h3>
+                    <p>Because the Service provides a collaborative, timestamped chronological ledger designed to protect project history integrity for teams, you acknowledge that Ledger Entries differ legally from Raw Communication Data:</p>
+                    <ul>
+                        <li>If you disconnect an email or WhatsApp stream, or terminate your individual Account, future syncing will cease, and stored OAuth access tokens for that provider will be cleared.</li>
+                        <li>However, generated AI summaries and entries already committed to a shared, multi-user Project Ledger may be retained within that workspace to preserve chronological project history for remaining authorized project participants, subject to applicable deletion rights and legal requirements.</li>
+                    </ul>
+
+                    <h2 id="terms-6">6. Intellectual Property Rights</h2>
+                    <p>As between you and Summaflow LTD, you retain all ownership, intellectual property rights, and title to the raw text, communications, and data pulled from your Connected Accounts.</p>
+                    <p>Summaflow LTD retains all right, title, interest, and intellectual property rights in and to the Platform, including the software architecture, user interfaces, proprietary AI filtering logic, logos, documentation, and the visual format of the timestamped ledgers. We grant you a limited, non-exclusive, non-transferable, and revocable license to access and use the Service during your active subscription.</p>
+
+                    <h2 id="terms-7">7. Fees and Payment</h2>
+                    <p>Certain access tiers of the Platform require a paid subscription. You agree to pay all applicable fees in accordance with the pricing plan selected during checkout. All fees are non-refundable unless explicitly stated otherwise or required by law. Summaflow LTD reserves the right to modify subscription fees upon thirty (30) days' notice, which will apply to your next billing cycle.</p>
+
+                    <h2 id="terms-8">8. Disclaimers and Limitation of Liability</h2>
+                    <h3>8.1 AI Accuracy and Reliance Disclaimer</h3>
+                    <p>Summa Flow utilizes advanced artificial intelligence engines (including the Google Gemini API) to filter and summarize heavy data streams. While we strive for maximum platform accuracy, artificial intelligence processing is subject to occasional limitations, omissions, misinterpretations, or errors.</p>
+                    <p>You acknowledge that Summa Flow is an internal productivity tool, not an official legal repository, financial accounting platform, or safety-critical tracking system. You assume full operational responsibility for independently verifying critical project actions, deadlines, contract agreements, or technical updates generated within the Ledger Entries before executing business decisions or relying on them for compliance.</p>
+                    <h3>8.2 Third-Party API Dependencies</h3>
+                    <p>The continuous availability and operational performance of Summa Flow rely heavily on third-party application programming interfaces (APIs), including but not limited to Google Cloud Workspace APIs, Microsoft Graph APIs, and Meta WhatsApp Business APIs. Summaflow LTD shall not be held liable for any Service interruptions, data transmission delays, sync failures, or data loss resulting directly from service outages, API modifications, or policy restrictions imposed by Google, Microsoft, Meta, or any other external platform provider.</p>
+                    <h3>8.3 Limitation of Liability</h3>
+                    <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL SUMMAFLOW LTD, ITS DIRECTORS, EMPLOYEES, OR AFFILIATES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA LOSS, LOSS OF USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, ARISING OUT OF OR RELATING TO YOUR USE OF OR INABILITY TO USE THE SERVICE. OUR TOTAL LIABILITY FOR ANY CLAIMS ARISING UNDER THESE TERMS SHALL NOT EXCEED THE TOTAL AMOUNT PAID BY YOU TO US FOR THE SERVICE IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.</p>
+
+                    <h2 id="terms-9">9. Termination and Suspension</h2>
+                    <p>We reserve the right to suspend or terminate your Account and block access to the Service immediately, without prior notice or liability, if you violate any provision of these Terms, engage in fraudulent behavior, or fail to pay outstanding subscription fees. Upon termination, your right to use the Service ceases instantly, and stored OAuth tokens will be cleared from active connection settings.</p>
+
+                    <h2 id="terms-10">10. Governing Law and Jurisdiction</h2>
+                    <p>These Terms and any dispute arising out of or in connection with them shall be governed by, interpreted, and enforced in accordance with the laws of Hong Kong, without regard to its conflict of law principles. Any legal action, suit, or proceeding arising directly out of these Terms shall be brought exclusively in the courts located in Hong Kong.</p>
+
+                    <h2 id="terms-11">11. Amendments to Terms</h2>
+                    <p>Summaflow LTD reserves the right to update or modify these Terms at any time. We will notify you of any material changes by posting the revised Terms within the platform dashboard or by sending an email to your registered address. Your continued use of the Platform after the effective date of any updates constitutes your explicit acceptance of the revised Terms.</p>
+
+                    <h2 id="terms-12">12. Contact Information</h2>
+                    <p>If you have any questions, legal inquiries, or concerns regarding these Terms, please contact us at:</p>
+                    <p>Summaflow LTD<br/>
+                    Physical Address: Shop A, G/F, Koon Nam House, No.14 Shing Wong Street, Hong Kong.<br/>
+                    Contact Email: <a href="mailto:sever@summaflow.com">sever@summaflow.com</a></p>
+                    </article>
+                </main>
+            </div>
+        </t>
+    </template>
+
+    <record id="page_terms_and_conditions_record" model="website.page">
+        <field name="name">Terms and Conditions</field>
+        <field name="url">/terms-and-conditions</field>
+        <field name="view_id" ref="page_terms_and_conditions"/>
+        <field name="is_published">True</field>
+        <field name="website_published">True</field>
+
+        <field name="website_meta_title">Terms &amp; Conditions | SummaFlow</field>
+        <field name="website_meta_description">Review the terms and conditions governing access to and use of the SummaFlow platform and website.</field>
+    </record>
+
+    <!-- ============================= SUPPORT ============================ -->
+    <template id="page_support" name="Support">
+        <t t-call="website.layout">
+            <div id="wrap" class="sf-legal">
+                <main class="sf-legal__inner">
+                    <p class="sf-legal__eyebrow">Support</p>
+                    <h1 class="sf-legal__title">SummaFlow Support</h1>
+                    <p class="sf-legal__lead">Contact SummaFlow for account access, connected-account support, OAuth revocation, data deletion, or privacy requests.</p>
+
+                    <h2>Contact</h2>
+                    <p>Email: <a href="mailto:sever@summaflow.com">sever@summaflow.com</a><br/>
+                    Company: Summaflow LTD<br/>
+                    Address: Shop A, G/F, Koon Nam House, No.14 Shing Wong Street, Hong Kong.</p>
+
+                    <h2>Provider Revocation</h2>
+                    <ul>
+                        <li>In SummaFlow, open Email settings and use Disconnect for Google or Microsoft to clear stored OAuth tokens.</li>
+                        <li>In Google Account settings, remove SummaFlow from third-party access to revoke Google authorization.</li>
+                        <li>In Microsoft account or organization app settings, revoke SummaFlow's app consent when required.</li>
+                    </ul>
+
+                    <h2>Privacy and Deletion Requests</h2>
+                    <p>To request account deletion, exported data, correction, or removal of provider metadata and generated project intelligence, email support from the address associated with your SummaFlow account. Include the workspace, provider, and account address involved so the team can verify ownership before acting.</p>
+                </main>
+            </div>
+        </t>
+    </template>
+
+    <record id="page_support_record" model="website.page">
+        <field name="name">Support</field>
+        <field name="url">/support</field>
+        <field name="view_id" ref="page_support"/>
+        <field name="is_published">True</field>
+        <field name="website_published">True</field>
+
+        <field name="website_meta_title">Support | SummaFlow</field>
+        <field name="website_meta_description">Get support and guidance for using SummaFlow and managing your trade operations workflow.</field>
+    </record>
+
+    <!-- ========================== VERIFICATION ========================== -->
+    <template id="page_oauth_verification" name="OAuth Verification">
+        <t t-call="website.layout">
+            <div id="wrap" class="sf-legal">
+                <main class="sf-legal__inner">
+                    <p class="sf-legal__eyebrow">OAuth Review Information</p>
+                    <h1 class="sf-legal__title">OAuth and Security Details</h1>
+                    <p class="sf-legal__lead">This page summarizes the public URLs, requested OAuth scopes, data lifecycle, and support contacts for SummaFlow's Google and Microsoft email integrations.</p>
+
+                    <h2>Public URLs for Provider Configuration</h2>
+                    <ul>
+                        <li>Privacy policy: <a href="/privacy-policy">/privacy-policy</a></li>
+                        <li>Terms of service: <a href="/terms-and-conditions">/terms-and-conditions</a></li>
+                        <li>Support URL: <a href="/support">/support</a></li>
+                    </ul>
+
+                    <h2>Requested OAuth Scopes</h2>
+                    <div class="sf-legal__table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Provider</th>
+                                    <th>Scopes</th>
+                                    <th>Use in SummaFlow</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Google Gmail</td>
+                                    <td>https://www.googleapis.com/auth/gmail.readonly</td>
+                                    <td>Read authorized Gmail messages and settings needed to import inbox and sent email for project classification and summaries.</td>
+                                </tr>
+                                <tr>
+                                    <td>Microsoft Graph</td>
+                                    <td>offline_access, User.Read, Mail.Read</td>
+                                    <td>Read the signed-in user's profile and authorized mailbox messages, and keep syncing while the connection remains enabled.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>Data Lifecycle</h2>
+                    <ul>
+                        <li>A user signs in to SummaFlow and starts the provider connection from the Email settings page.</li>
+                        <li>The provider consent screen grants SummaFlow the requested scopes, then returns an authorization code to the backend callback URL.</li>
+                        <li>The backend exchanges the code for provider tokens and stores those tokens with the user's connection settings.</li>
+                        <li>Sync jobs fetch inbox and sent messages within configured provider limits so content can be processed for project intelligence.</li>
+                        <li>Raw email body text and raw email HTML are processed for classification, project linking, AI summaries, and timeline entries, but are not retained in production storage.</li>
+                        <li>Users can disconnect a provider to clear tokens and stop future sync. Account, metadata, generated-summary, or deletion requests are handled through support.</li>
+                    </ul>
+
+                    <h2>Security and Use Commitments</h2>
+                    <ul>
+                        <li>Provider data is used only to provide project intelligence, summaries, ledgers, sync status, and support.</li>
+                        <li>Raw email body text and raw email HTML are not retained in production storage.</li>
+                        <li>Connected-account data is not sold, rented, traded, or used for advertising.</li>
+                        <li>Human access is limited to support requested by the user, security investigation, legal compliance, or abuse prevention.</li>
+                        <li>OAuth tokens are cleared when a user disconnects the provider from SummaFlow.</li>
+                        <li>Deletion and privacy requests can be sent to <a href="mailto:sever@summaflow.com">sever@summaflow.com</a>.</li>
+                    </ul>
+                </main>
+            </div>
+        </t>
+    </template>
+
+    <record id="page_oauth_verification_record" model="website.page">
+        <field name="name">OAuth Verification</field>
+        <field name="url">/oauth-verification</field>
+        <field name="view_id" ref="page_oauth_verification"/>
+        <field name="is_published">True</field>
+        <field name="website_published">True</field>
+
+        <field name="website_meta_title">OAuth and Security Details | SummaFlow</field>
+        <field name="website_meta_description">How SummaFlow requests, stores, and revokes OAuth access to connected accounts.</field>
+        <!-- Functional page: no search value. Noindex in source. -->
+        <field name="website_indexed" eval="False"/>
+    </record>
+</odoo>
