@@ -24,17 +24,21 @@
       The SoftwareApplication description is the approved homepage meta
       description, word for word. No offers, ratings or version: none exist.
     -->
-    <template id="sf_seo_structured_data" inherit_id="website.layout"
-              name="SummaFlow: structured data" priority="99">
+    <template
+        id="sf_seo_structured_data"
+        inherit_id="website.layout"
+        name="SummaFlow: structured data"
+        priority="99"
+    >
         <xpath expr="//head" position="inside">
             <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://summaflow.com/#organization",
+      "@id": "https://www.summaflow.com/#organization",
       "name": "SummaFlow",
-      "url": "https://summaflow.com/",
+      "url": "https://www.summaflow.com/",
       "email": "info@summaflow.com",
       "telephone": "+852 9220 9701",
       "address": {
@@ -46,21 +50,25 @@
     },
     {
       "@type": "WebSite",
-      "@id": "https://summaflow.com/#website",
-      "url": "https://summaflow.com/",
+      "@id": "https://www.summaflow.com/#website",
+      "url": "https://www.summaflow.com/",
       "name": "SummaFlow",
-      "publisher": { "@id": "https://summaflow.com/#organization" },
+      "publisher": {
+        "@id": "https://www.summaflow.com/#organization"
+      },
       "inLanguage": "en-US"
     },
     {
       "@type": "SoftwareApplication",
-      "@id": "https://summaflow.com/#software",
+      "@id": "https://www.summaflow.com/#software",
       "name": "SummaFlow",
-      "url": "https://summaflow.com/",
+      "url": "https://www.summaflow.com/",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
       "description": "Bring scattered trade communications into one operational workspace with AI-powered visibility, traceability, alerts, and actionable project intelligence.",
-      "publisher": { "@id": "https://summaflow.com/#organization" }
+      "publisher": {
+        "@id": "https://www.summaflow.com/#organization"
+      }
     }
   ]
 }</script>
